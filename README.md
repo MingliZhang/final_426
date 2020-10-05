@@ -35,4 +35,12 @@ To merge branches:
 2. In terminal, make sure you are at the main branch (or the branch you want the new git commit to be at).
 3. Type in: git merge --no-ff branchName.
 4. Commit and then do what ever you need.
-5. Note: The none-fastforward merge does not "destroy" the branch being merged. However, the fastforward merge does!
+5. Note: The none-fastforward merge does not "destroy" the branch being merged.
+
+To check the branches:
+1. In your terminal, type in: git branch --all
+2. This will show all the local branches as well as which branch you are currently working on. It will be indecated using * sign.
+
+To delete a branch:
+1. Note: Deleting a branch locally does not mean the branch is also deleted remotely.
+2. To delete a branch locally, in the terminal type in: git branch -d branchName.
