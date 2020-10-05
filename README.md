@@ -30,3 +30,9 @@ To creat a new branch:
 3. Now you should be switched to the new branch.
 4. You can type in: git checkout main(or other branch name) to get to other branches. However, save all files, commit them before switching.
 
+To merge branches:
+1. There are two types of merges, one is the fast-forward merge and the other that is not. In our situation, we will be using the not fast-forward merge.
+2. In terminal, make sure you are at the main branch (or the branch you want the new git commit to be at).
+3. Type in: git merge --no-ff branchName.
+4. Commit and then do what ever you need.
+5. Note: The none-fastforward merge does not "destroy" the branch being merged. However, the fastforward merge does!
