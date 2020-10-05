@@ -46,3 +46,8 @@
 2. To delete a branch locally, in the terminal type in: git branch -d branchName.
 3. To delete a branch in the remoterepository, in ther terminal type in: git push origin --delete branchName.
 4. Note: Deleting a branch locally does not mean the branch is also deleted remotely. In our case, we will need to delete a branch remotely everytime since this is a remote repository.
+
+## TO rebase a branch:
+1. This is used when the master branch is updated and the other branch are behind in versions. So should be run locally everytime when the master/main brach is changed.
+2. In the the terminal (and in the branch that needs an update), type: git rebase branchName(most likely main)
+3. push to github, there is not need for git add . or git commit
