@@ -30,16 +30,16 @@
 3. Now you should be switched to the new branch.
 4. You can type in: git checkout main(or other branch name) to get to other branches. However, save all files, commit them before switching.
 
+## To check the branches:
+1. In your terminal, type in: git branch --all
+2. This will show all the local branches as well as which branch you are currently working on. It will be indecated using * sign.
+
 ## To merge branches:
 1. There are two types of merges, one is the fast-forward merge and the other that is not. In our situation, we will be using the not fast-forward merge.
 2. In terminal, make sure you are at the main branch (or the branch you want the new git commit to be at).
 3. Type in: git merge --no-ff branchName.
 4. Commit and then do what ever you need.
 5. Note: The none-fastforward merge does not "destroy" the branch being merged.
-
-## To check the branches:
-1. In your terminal, type in: git branch --all
-2. This will show all the local branches as well as which branch you are currently working on. It will be indecated using * sign.
 
 ## To delete a branch:
 1. Before deleting a branch, make sure to merge the branch first. Unless this new code in this branch is no longer needed.
