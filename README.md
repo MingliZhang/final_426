@@ -1,68 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## To clone the repositorie:
+1. copy the HTTPS address.
+2. Open VScode, click on View, command palette
+3. type in git:clone and hit enter. Then copy the HTTPS address into the text bar and hit enter.
+4. click on open or open in new window.
 
-## Available Scripts
+## To commit the repositorie 
+1. save all files.
+2. open terminal and type in the following commands:
+3. git add . (with the .)
+4. git sommit -m "PUT SOME MESSAGE HERE." 
+5. Now your code have been commited.
 
-In the project directory, you can run:
 
-### `npm start`
+## To push the repositorie to github
+1. Make sure you saved all your files and commited before doing the following.
+2. Open terminal if not already opened.
+3. Type in: git push.
+4. You may need to login to github, if you need to, the window will pop up.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## To pull the repositorie from github:
+1. Make sure to do this before you start working or all work will be gone.
+2. open terminal and type: git pull.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## To creat a new branch:
+1. Open terminal
+2. type in: git checkout -b branchName.
+3. Now you should be switched to the new branch.
+4. You can type in: git checkout main(or other branch name) to get to other branches. However, save all files, commit them before switching.
 
-### `npm test`
+## To check the branches:
+1. In your terminal, type in: git branch --all
+2. This will show all the local branches as well as which branch you are currently working on. It will be indecated using * sign.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## To merge branches:
+1. There are two types of merges, one is the fast-forward merge and the other that is not. In our situation, we will be using the not fast-forward merge.
+2. In terminal, make sure you are at the main branch (or the branch you want the new git commit to be at).
+3. Type in: git merge --no-ff branchName.
+4. Commit and then do what ever you need.
+5. Note: The none-fastforward merge does not "destroy" the branch being merged.
 
-### `npm run build`
+## To delete a branch:
+1. Before deleting a branch, make sure to merge the branch first. Unless this new code in this branch is no longer needed.
+2. To delete a branch locally, in the terminal type in: git branch -d branchName.
+3. To delete a branch in the remoterepository, in ther terminal type in: git push origin --delete branchName.
+4. Note: Deleting a branch locally does not mean the branch is also deleted remotely. In our case, we will need to delete a branch remotely everytime since this is a remote repository.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## TO rebase a branch:
+1. This is used when the master branch is updated and the other branch are behind in versions. So should be run locally everytime when the master/main brach is changed.
+2. In the the terminal (and in the branch that needs an update), type: git rebase branchName(most likely main)
+3. push to github, there is not need for git add . or git commit
