@@ -6,12 +6,13 @@
 5. Open terminal and run npm install.
 6. You should now be able to run: npm start. This will run the code and open the web window in your browser.
 
-## To commit the repositorie 
+## To commit the repositorie
 1. save all files.
 2. open terminal and type in the following commands:
 3. git add . (with the .)
-4. git sommit -m "PUT SOME MESSAGE HERE." 
+4. git sommit -m "PUT SOME MESSAGE HERE."
 5. Now your code have been commited.
+6. Note: Commit does not mean push the repositorie to github. It simply creates a new git "frame". This frame stores a snapshot of the current saved folder and all the files in it. Beware that only rebase will change the history timeline of git commits.
 
 
 ## To push the repositorie to github
@@ -19,10 +20,12 @@
 2. Open terminal if not already opened.
 3. Type in: git push.
 4. You may need to login to github, if you need to, the window will pop up.
+5. If there is a newer version of the current branch you worked on on github, you might run into some conflects. You will need to follow the command prompt suggested (I remember it was like git push origin something something). And you will need to manually change files that caused the conflict. Google it if needed.
 
 ## To pull the repositorie from github:
 1. Make sure to do this before you start working or all work will be gone.
 2. open terminal and type: git pull.
+3. If your current repositorie is up to date, the terminal will tell you. Else, it will pull the latest version of codes from github.
 
 ## To creat a new branch:
 1. Open terminal
@@ -47,7 +50,7 @@
 3. To delete a branch in the remoterepository, in ther terminal type in: git push origin --delete branchName.
 4. Note: Deleting a branch locally does not mean the branch is also deleted remotely. In our case, we will need to delete a branch remotely everytime since this is a remote repository.
 
-## TO rebase a branch:
+## To rebase a branch:
 1. This is used when the master branch is updated and the other branch are behind in versions. So should be run locally everytime when the master/main brach is changed.
 2. In the the terminal (and in the branch that needs an update), type: git rebase branchName(most likely main)
 3. push to github, there is not need for git add . or git commit
