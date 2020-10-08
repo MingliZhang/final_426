@@ -30,14 +30,7 @@ class App extends Component {
                   placeholder="First Name" 
                   onChange={this.handleChange} 
               />
-              <br />
-              <input 
-                  type="text" 
-                  value={this.state.lastName} 
-                  name="lastName" 
-                  placeholder="Last Name" 
-                  onChange={this.handleChange} 
-              />
+              
               
               {
                   /**
