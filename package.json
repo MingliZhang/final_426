@@ -1,0 +1,23 @@
+{
+  "name": "final_426",
+  "version": "1.0.0",
+  "description": "1. copy the HTTPS address.\r 2. Open VScode, click on View, command palette\r 3. type in git:clone and hit enter. Then copy the HTTPS address into the text bar and hit enter.\r 4. click on open or open in new window.",
+  "main": "index.js",
+  "dependencies": {
+    "browser-sync": "^2.26.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lkh9908/final_426.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lkh9908/final_426/issues"
+  },
+  "homepage": "https://github.com/lkh9908/final_426#readme"
+}
