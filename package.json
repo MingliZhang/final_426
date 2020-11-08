@@ -4,6 +4,7 @@
   "description": "1. copy the HTTPS address.\r 2. Open VScode, click on View, command palette\r 3. type in git:clone and hit enter. Then copy the HTTPS address into the text bar and hit enter.\r 4. click on open or open in new window.",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.21.0",
     "browser-sync": "^2.26.13"
   },
   "devDependencies": {},
