@@ -1,4 +1,9 @@
 # COMP426 final project
+
+# Structure
+The index.html and its script and style sheet are all for the signin page, which is the first page that loads. All other pages are in their own folders (like the sign up page is in the signUp folder.)
+
+
 ## To clone the repositorie:
 1. copy the HTTPS address.
 2. Open VScode, click on View, command palette
