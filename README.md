@@ -17,7 +17,7 @@
 1. save all files.
 2. open terminal and type in the following commands:
 3. git add . (with the .)
-4. git sommit -m "PUT SOME MESSAGE HERE."
+4. git commit -m "PUT SOME MESSAGE HERE."
 5. Now your code have been commited.
 6. Note: Commit does not mean push the repositorie to github. It simply creates a new git "frame". This frame stores a snapshot of the current saved folder and all the files in it. Beware that only rebase will change the history timeline of git commits.
 
