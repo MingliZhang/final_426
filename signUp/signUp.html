@@ -9,11 +9,10 @@
         <!-- Include links to CSS stylesheets below -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-        <link rel="stylesheet" href="indexStyle.css" />
     </head>
 
     <body>
-        <section class="hero is-fullheight" style="background-color: #ecf5ff;">
+        <section class="hero is-fullheight" style="background-color: #333;">
             <div class="hero-body">
               <div class="container">
                 <div class="columns is-centered">
@@ -22,7 +21,7 @@
                       <div class="field">
                         <label for="" class="label">Email</label>
                         <div class="control has-icons-left">
-                          <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" required>
+                          <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" id = "email" required>
                           <span class="icon is-small is-left">
                             <i class="fa fa-envelope"></i>
                           </span>
@@ -31,12 +30,25 @@
                       <div class="field">
                         <label for="" class="label">Password</label>
                         <div class="control has-icons-left">
-                          <input type="password" placeholder="**********" class="input" required>
+                          <input type="password" placeholder="**********" class="input" id = "password1" required>
                           <span class="icon is-small is-left">
                             <i class="fa fa-lock"></i>
                           </span>
                         </div>
                       </div>
+                      <div class="field">
+                        <label for="" class="label">Re-Enter Password</label>
+                        <div class="control has-icons-left">
+                          <input type="password" placeholder="**********" class="input" id = "password2" required>
+                          <span class="icon is-small is-left">
+                            <i class="fa fa-lock"></i>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div class = "field content" id = "message">
+                      </div>
+
                       <div class="field">
                         <button class="button is-success" id = "signUpButton">
                           Sign Up
@@ -56,6 +68,6 @@
 
         <!-- Include links to JavaScript files below -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="script.js"></script>
+        <script src="./signUp.js"></script>
     </body>
 </html>
