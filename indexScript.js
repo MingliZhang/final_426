@@ -1,13 +1,8 @@
-export const handleSignUpButtonPress = function () {
-
+export const handelLoginButtonPress = function(){
+    let email = $("#email").val();
+    let password = $("#password").val();
 }
 
 $(function () {
-  const $form = $('#login-form');
-  const $message = $('#message');
-
-  const $signUp = $(".signUp");
-  
+    $("#loginButton").on("click",)
 });
-
-

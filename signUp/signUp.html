@@ -8,38 +8,51 @@
 
         <!-- Include links to CSS stylesheets below -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <link rel="stylesheet" href="indexStyle.css" />
     </head>
 
     <body>
-        <div id="login">
-            <div class="login-card">
-                <div class="card-title">
-                    <h1>Login</h1>
-                </div>
-
-                <div class="content">
-                    <form id="login-form">
-                        <input id="userName" type="userName" name="userName" title="userName" placeholder="UserName" required autofocus>
-                        <input id="password" type="password" name="password" title="password" placeholder="Password" required autofocus>
-
-                        <div class="field">
-                            <div class="control">
-                                <button type="submit" class="btn btn-primary">Sign Up</button>
-                                <br>
-                                <button type = "login" class = "login" onclick="window.location.href='../index.html';"> Login</button>
-                            </div>
+        <section class="hero is-fullheight" style="background-color: #ecf5ff;">
+            <div class="hero-body">
+              <div class="container">
+                <div class="columns is-centered">
+                  <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    <form action="" class="box">
+                      <div class="field">
+                        <label for="" class="label">Email</label>
+                        <div class="control has-icons-left">
+                          <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" required>
+                          <span class="icon is-small is-left">
+                            <i class="fa fa-envelope"></i>
+                          </span>
                         </div>
-
-                        <div class="field">
-                            <div class="control">
-                                <p id="message"></p>
-                            </div>
+                      </div>
+                      <div class="field">
+                        <label for="" class="label">Password</label>
+                        <div class="control has-icons-left">
+                          <input type="password" placeholder="**********" class="input" required>
+                          <span class="icon is-small is-left">
+                            <i class="fa fa-lock"></i>
+                          </span>
                         </div>
+                      </div>
+                      <div class="field">
+                        <button class="button is-success" id = "signUpButton">
+                          Sign Up
+                        </button>
+                      </div>
+                      <div class = "field">
+                          <button class="button" id = "loginButton" onclick="window.location.href='../index.html';">
+                              Login
+                          </button>
+                      </div>
                     </form>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+          </section>
 
         <!-- Include links to JavaScript files below -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
