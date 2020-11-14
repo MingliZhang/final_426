@@ -19,7 +19,7 @@ const handelLoginButtonPress = function (event) {
     
 
     if (email.length !== 0 && password.length !== 0 && ValidateEmail(email)) {
-        window.location.href = "test.html?email=" + email + "&password=" + password;
+        window.location.href = "./main_interface/main_interface.html?email=" + email;
     }else {
         let message = "";
         if(email.length === 0 || password.length === 0){

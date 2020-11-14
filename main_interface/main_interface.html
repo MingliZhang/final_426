@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Main Interface</title>
+
+        <!-- Include links to CSS stylesheets below -->
+        <!-- <link rel="stylesheet" href="MI_style.css" /> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+        <link rel="stylesheet" href="MI_style.css" />
+    </head>
+
+    <body>
+        <div id="main" >
+            <div class="columns" style="margin: auto;">
+                <div id = 'main1' class="column is-2" style="background-color:rgb(18, 135, 189);height: 768px;">
+                    <div style="position: relative; left:45px;">
+                        <img id = "icon" src="./icon/icon.png">
+                        <div><button class='nav' onclick="alert('a')"><b>nav bar1</b></button></div>
+                        <div><button class='nav' onclick="alert('b')"><b>nav bar2</b></button></div>
+                        
+                    </div>
+                </div>
+                <!-- used to append chat window -->
+                
+                    <div id = "chatWindow"style="background: white url(./background/2.png);border: black solid 1px;width: 500px;height: 550px;position: absolute; left: 30%; top: 10%; visibility: hidden; z-index: 2; border-radius: 15px">
+                        
+                        <div id = "leave"style="font-size: 30px;width: max-content;margin: auto;text-align: center;border-bottom: black solid 1px;">Other User<button style="position:relative; left: 160px" onclick="leave()"><i class="fas fa-times"></i></button></div>
+                        <br>
+                        <ul id = "chat-ul">
+                            <li class="him">Sample By anOther User</li>
+                            <li class="me">Sample By Me</li>
+                            <li class="him">Sample By anOther User</li>
+                            <li class="me">Sample By Me</li><li class="him">Sample By anOther User</li>
+                            <li class="me">Sample By Me</li><li class="him">Sample By anOther User</li>
+                            <li class="me">Sample By Me</li><li class="him">Sample By anOther User</li>
+                            <li class="me">Sample By Me</li><li class="him">Sample By anOther User</li>
+                            <li class="me">Sample By Me</li><li class="him">Sample By anOther User</li>
+                            <li class="me">Sample By Me</li><li class="him">Sample By anOther User</li>
+                            <li class="me">Sample By Me</li>
+                        </ul>
+                        <div class="field" style="position: absolute; bottom: 0; width: 498px;">
+                            <div class="control">
+                              <textarea class="textarea is-primary" placeholder="Press Ctrl + Enter to send" rows="2" style="border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;resize:none"></textarea>
+                            </div>
+                          </div>
+                    </div>
+                
+
+                <div id = 'main2' class="column is-7" style="min-height: 722px; background-color: lightskyblue;">
+                    <div id="head">
+                        <b id="home" style="position: relative;left: 350px;font-size: 30px;">Home</b>
+                        <div class="columns">
+                            <div class="column is-one-fifth">
+                                <p style="text-align: center center;position: relative;left: 20px;">User info and img</p>
+                            </div>
+                            <div class="column" >
+                                <textarea  placeholder="Type your content here"></textarea>
+                                <button class="button is-primary" style="float: right; position: relative;left: -80px;top: 20px;font-size: larger;height: 32px;">post</button>
+                            </div>
+                        </div>
+                        <br>
+                    </div>                    
+                </div>
+                <div id = 'main3' class="column is-3" style="background-color:rgb(28, 196, 50);height: 768px;">
+                    <h1 style="text-align: center;">Friend List</h1>
+                    <br>
+                    <input type="text" placeholder="search"><button id="add_fri" data-toggle="tooltip" data-placement="bottom" title="add friend"><i class="fas fa-user-friends fa-2x"></i></button>
+                    <br><br>
+                    <div id="friend_column" style="height: 320px; overflow: auto;">
+                        <div id = "1" class="individual">
+                            <p>Sam <button ><i class="fas fa-info"></i></button></p>
+                            <p>status: online</p><button id="chat1" onclick="showChat()" class="friend"><i class="fas fa-comment"></i></button><button class="friend"><i class="fas fa-user-slash"></i></button>
+                            <br>
+                        </div>
+                        <div id = "1" class="individual">
+                            <p>Jack <button ><i class="fas fa-info"></i></button></p>
+                            <p>status: online</p><button id="chat1" onclick="showChat()" class="friend"><i class="fas fa-comment"></i></button><button class="friend"><i class="fas fa-user-slash"></i></button>
+                            <br>
+                        </div><div id = "1" class="individual">
+                            <p>Alice <button><i class="fas fa-info"></i></button></p>
+                            <p>status: online</p><button id="chat1" onclick="showChat()" class="friend"><i class="fas fa-comment"></i></button><button class="friend"><i class="fas fa-user-slash"></i></button>
+                            <br>
+                        </div>
+                    </div>
+                    <div style="position: relative;; border-top: darkslategray solid 1px;">
+                        <br>
+                        <h1 style="text-align: center;">Recommendation</h1>
+                        <div id="friend_column">
+                            <div class="individual">
+                                <p>Sample Name1</p>
+                            </div>
+                            <div class="individual">
+                                <p>Sample Name2</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <br>
+                </div>
+            </div>
+        </div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script src="./main.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -8,11 +8,16 @@
     "browser-sync": "^2.26.13",
     "bulma": "^0.9.1",
     "data-store": "^4.0.3",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "socket.io": "^3.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "repository": {
     "type": "git",
