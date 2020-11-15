@@ -13,10 +13,16 @@ const handelLoginButtonPress = async function (event) {
     event.preventDefault();
     event.stopPropagation();
     let email = $("#email").val();
-
+    if(!email){
+        const $message = $("#message");
+        let message = 'Please provide all the needed fields above!';
+        $message.empty();
+        $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
+        return
+    }
     const result = await axios({
         method: 'get',
-        url: `http://localhost:3000/api/users/${email}`
+        url: `/api/users/${email}`
     })
     let password1 = $("#password1").val();
     let password2 = $("#password2").val();
@@ -26,7 +32,7 @@ const handelLoginButtonPress = async function (event) {
     if (result.data.length===0&&email.length !== 0 && password1.length !== 0 && ValidateEmail(email) && password2.length !== 0 && password1 === password2 ){
         axios({
             method: 'post',
-            url: 'http://localhost:3000/api/users',
+            url: '/api/users',
             data: {
                 email: email,
                 password: password1

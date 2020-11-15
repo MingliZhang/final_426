@@ -19,11 +19,11 @@ const handelLoginButtonPress = async function (event) {
     
     const result = await axios({
         method: 'get',
-        url: `http://localhost:3000/api/users/${email}`
+        url: `/api/users/${email}`
     })
 
     if (result.data.length!==0&&result.data[0].password===password&&email.length !== 0 && password.length !== 0 && ValidateEmail(email)) {
-        window.location.href = "./main_interface/main_interface.html?email=" + email;
+        window.location.href = "./main_interface/main_interface.html";
     }else {
         let message = "";
         if(email.length === 0 || password.length === 0){
