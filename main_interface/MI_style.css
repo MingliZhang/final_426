@@ -1,0 +1,141 @@
+
+.individual{
+    border-top: lightgray 1px solid;
+}
+
+
+#main2{
+    position: absolute;
+    left: 16.6667%;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    padding: 0;
+}
+
+#main1{
+    position: fixed;
+}
+
+#main3{
+    position: fixed;
+    left: 75%;
+}
+
+.individual p{
+    text-align: left;
+}
+
+#icon{
+    width: 70px;
+    height: 70px;
+}
+
+button{
+    background-color: Transparent;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+.individual:hover button{
+    opacity: 1;
+}
+
+textarea{
+    resize: none;
+}
+
+.individual button{
+    opacity: 0;
+}
+
+button.friend{
+    
+    position: relative;
+    left: 250px;
+    top: -30px;
+}
+
+button.nav{
+    font-size: 24px;
+    text-align: left;
+    width: 250px;
+    height: 60px;
+    
+    transition: all .2s ease-in-out;
+}
+
+ul{
+    overflow: auto;
+    
+    max-height: 405px
+}
+
+ul li{
+display:inline-block;
+clear: both;
+padding: 8px;
+border-radius: 30px;
+margin-bottom: 2px;
+font-family: Helvetica, Arial, sans-serif;
+
+}
+
+
+
+.him{
+background: #eee;
+float: left;
+}
+
+.me{
+float: right;
+background: #0084ff;
+color: #fff;
+}
+
+.him + .me{
+border-bottom-right-radius: 5px;
+}
+
+.me + .me{
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+.me:last-of-type {
+border-bottom-right-radius: 30px;
+}
+
+#home{
+    text-align: left; margin-top: 10px;margin-bottom: 20px;font-size: 40px;position:relative;left: 30px;
+}
+
+#head{
+    border-bottom: gray 5px solid;
+    background-color: orange;
+    margin: 0;
+}
+
+textarea{
+    width: 500px;
+    height: 80px;
+    border:none;
+    background-color: lightblue;
+}
+
+
+
+#add_fri{
+    float: right;
+}
+
+button.nav:hover{
+    transform: scale(1.05); 
+}
+
+li{
+    max-width: 600px;
+    word-wrap: break-word;
+}
