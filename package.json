@@ -9,6 +9,7 @@
     "browser-sync": "^2.26.13",
     "bulma": "^0.9.1",
     "express": "^4.17.1",
+    "heroku": "^7.47.2",
     "mongoose": "^5.10.14",
     "socket.io": "^3.0.1"
   },
