@@ -10,18 +10,19 @@
         <!-- <link rel="stylesheet" href="MI_style.css" /> -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+        <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css"/>
         <link rel="stylesheet" href="MI_style.css" />
     </head>
 
     <body>
         <div id="main" >
             <div class="columns" style="margin: auto;">
-                <div id = 'main1' class="column is-2" style="background-color:rgb(18, 135, 189);height: 768px;">
-                    <div style="position: relative; left:45px;">
-                        <img id = "icon" src="./icon/icon.png">
-                        <div><button class='nav' onclick="alert('a')"><b>nav bar1</b></button></div>
-                        <div><button class='nav' onclick="alert('b')"><b>nav bar2</b></button></div>
-                        
+                <div id = 'main1' class="column is-2" style="height: 768px; background-color: #e6f0e6;">
+                    <div id="navbar"></div>
+                    <script src="../node_modules/jquery/dist/jquery.js"></script>
+                    <script src="../navbar/nav.js"></script>
+                    <script src="navlinks.js"></script>
                     </div>
                 </div>
                 <!-- used to append chat window -->
@@ -50,7 +51,7 @@
                     </div>
                 
 
-                <div id = 'main2' class="column is-7" style="min-height: 722px; background-color: lightskyblue;">
+                <div id = 'main2' class="column is-7" style="min-height: 722px; background-color:  #ffa161">
                     <div id="head">
                         <b id="home" style="position: relative;left: 350px;font-size: 30px;">Home</b>
                         <div class="columns">
@@ -65,7 +66,7 @@
                         <br>
                     </div>                    
                 </div>
-                <div id = 'main3' class="column is-3" style="background-color:rgb(28, 196, 50);height: 768px;">
+                <div id = 'main3' class="column is-3" style="background-color:#80b280;height: 768px;">
                     <h1 style="text-align: center;">Friend List</h1>
                     <br>
                     <input type="text" placeholder="search"><button id="add_fri" data-toggle="tooltip" data-placement="bottom" title="add friend"><i class="fas fa-user-friends fa-2x"></i></button>
