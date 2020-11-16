@@ -1,9 +1,9 @@
 $(function(){
     loadNavIntoDom();
     $('body').css("display","flex");
-    $('#navbar').css({"margin-left": "5%", "margin-right": "5%"})
+    $('#navbar').css({"padding-left": "1vw", "padding-right": "1vw"})
     $('#topicons').css("margin-top", "30%")
-    $('.icons a').css({"font-size": "2.5em", "color": "#0c3327"})
+    $('.icons a').css({"font-size": "3vw", "color": "#0c3327"})
     $('#usericon').css("margin-top","60%")
     // loadContent();
 });
