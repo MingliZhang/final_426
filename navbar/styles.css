@@ -1,0 +1,21 @@
+body{
+    display: flex;
+}
+
+#navbar{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#topicons{
+    margin-top: 30%;
+}
+
+.icons a{
+    font-size: 2.5em;
+    color: #2f4f4f;
+}
+
+#usericon{
+    margin-top: 300%;
+}
