@@ -18,7 +18,7 @@
                 <div class="columns is-centered">
                   <div class="column is-5-tablet is-4-desktop is-3-widescreen">
                       <div class="field">
-                        <label for="" class="label">Email</label>
+                        <label for="" class="label" style="color: white;">Email</label>
                         <div class="control has-icons-left">
                           <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" id = "email" required>
                           <span class="icon is-small is-left">
@@ -27,36 +27,34 @@
                         </div>
                       </div>
                       <div class="field">
-                        <label for="" class="label">Password</label>
+                        <label for="" class="label" style="color: white;">Password</label>
                         <div class="control has-icons-left">
-                          <input type="password" placeholder="**********" class="input" id = "password1" required>
+                          <!-- <input type="text" placeholder="**********" class="input" id = "password1" required> -->
+                          <input id="password" type="text" value="" placeholder="**********" class="input">
+                          <input id="hidden" type="hidden" value="" />
                           <span class="icon is-small is-left">
                             <i class="fa fa-lock"></i>
                           </span>
                         </div>
                       </div>
                       <div class="field">
-                        <label for="" class="label">Re-Enter Password</label>
+                        <label for="" class="label" style="color: white;">Re-Enter Password</label>
                         <div class="control has-icons-left">
-                          <input type="password" placeholder="**********" class="input" id = "password2" required>
+                          <input id="password2" type="text" value="" placeholder="**********" class="input">
+                          <input id="hidden2" type="hidden" value="" />
                           <span class="icon is-small is-left">
                             <i class="fa fa-lock"></i>
                           </span>
                         </div>
                       </div>
-
                       <div class = "field content" id = "message">
                       </div>
-
                       <div class="field">
-                        <button class="button is-success" id = "signUpButton">
-                          Sign Up
-                        </button>
+                        <a class="button" id = "signUpButton" >Sign up</a>
                       </div>
                       <div class = "field">
-                          <button class="button" id = "loginButton" onclick="window.location.href='../index.html';">
-                              Login
-                          </button>
+                        <a class="button is-success"  href="../index.html">Login</a>
+
                       </div>
                   </div>
                 </div>
@@ -68,5 +66,7 @@
         <script src="../node_modules/axios/dist/axios.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="./signUp.js"></script>
+        <script src="../ps.js"></script>
+        <script src="ps2.js"></script>
     </body>
 </html>
