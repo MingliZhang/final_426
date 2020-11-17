@@ -101,9 +101,7 @@ const handlenewPostSubmit = async function (event) {
         }
       });
     $(`.newPost`).remove();
-    $root.prepend(renderPost(result.data));
-    registerListeners(result.data);
-    $(`#create`).on('click', handleCreateButtonPress);
+    location.reload(true);
 };
 
 //Handle delete post
@@ -203,25 +201,23 @@ const loadDetailPopup = async function(id){
 
     const userName = result.data.userName;
     const detailPage = `
-        <div class = "container" id = "popup${id}">
-            <div class = "message" 
-            style="height:85vh;
-                    width:80vw;
-                    overflow:auto;
-                    border:2px solid #485550;
-                    padding:2%">
-                <div style = "display: flex;justify-content: flex-end;margin-bottom: 1vh;"><i id = "exit${id}" class="fas fa-times-circle"></i></div>
-                <div class = "message-header">${userName}</div>
-                <div class = "message-body" id = "content${id}"></div>
+        <div class = "container" id = "popup">
+            <div class = "message" style = "border:2px solid #485550; ">
+                <div class = "message-header"><p>${userName}</p><i onclick = "handleExitDetailPage()" type = "button" id = "exit${id}" class="fas fa-times-circle"></i></div>
+                <div style="height:80vh; width:80vw; overflow:auto; padding-top: 0">
+                    <div class = "message-body" id = "content${id}"></div>
+                </div>
             </div>
         </div>
     `;
     $('#details').append(detailPage)
+    // $(`#exit${id}`).on('click', handleExitDetailPage());
     loadDetailContent(id, userName);
 
-    //styles
-    $(`popup${id}`).css({"background-color": "orange", });
+}
 
+const handleExitDetailPage = function(){
+    $(`#popup`).remove();
 }
 
 const loadDetailContent = async function (id, userName) {
@@ -239,7 +235,6 @@ const loadDetailContent = async function (id, userName) {
         if(posts[i].userName == userName){
             console.log(posts[i]);
             content.append(renderComment(posts[i]));
-            registerListeners(posts[i]);
         }
     };
 }
