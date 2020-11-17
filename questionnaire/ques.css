@@ -1,0 +1,12 @@
+button{
+    padding-left: 3%;
+    padding-right: 3%;
+    width: 10%;
+    background-color: blueviolet;
+    color: white;
+}
+
+div{
+    margin-left: 3%;
+    text-align: center;
+}
