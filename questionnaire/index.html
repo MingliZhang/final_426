@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang = "en" dir = "ltr">
     <head>
-        <title> Comp 426 </title>
-        <link rel="stylesheet" href="style.css"> 
+        <meta charset= "utf-8">
+        <title> self made 2048 </title>
+        <link rel="stylesheet" href="ques.css"> 
+        <script src = "game.js" type="module" charset= "utf-8"></script>
+        <script src = "questions.js" type="module" charset= "utf-8"></script>
     </head>
     <body>
-        <div class = "c1 c2 c3" id = "i1">
-            <ul>
-                <li class = "odd">LI 1</li>
-                <li class = "even">LI 2</li>
-                <li class = "odd">LI 3</li>
-            </ul>
+
+        <div id = "userName"></div>
+        <div>
+            <div> Progress </div>
+            <span id = "progress"> 0% </span>
         </div>
-        <div class = "c2 c3 c4" id = "i2">
-            <p class = "odd">Para <span>1</span></p>
-            <p class = "even">Para <span>2</span></p>
-            <p class = "odd">Para <span>3</span></p>
+
+        <div class="row">
+          <div class = "column" id = "questionBody"></div>
+          <div class = "column" id = "rateBody"></div>
         </div>
-        <div class = "c2, c5" id = "i3">
-            <p>Para <span>4</span></p>
-        </div>
+        
     </body>
 </html>
