@@ -203,7 +203,7 @@ const loadDetailPopup = async function(id){
     const detailPage = `
         <div class = "container" id = "popup">
             <div class = "message" style = "border:2px solid #485550; ">
-                <div class = "message-header"><p>${userName}</p><i onclick = "handleExitDetailPage()" type = "button" id = "exit${id}" class="fas fa-times-circle"></i></div>
+                <div class = "message-header"><p>${userName}'s box</p><i onclick = "handleExitDetailPage()" type = "button" id = "exit${id}" class="fas fa-times-circle"></i></div>
                 <div style="height:80vh; width:80vw; overflow:auto; padding-top: 0">
                     <div class = "message-body" id = "content${id}"></div>
                 </div>
@@ -235,20 +235,42 @@ const loadDetailContent = async function (id, userName) {
         if(posts[i].userName == userName){
             console.log(posts[i]);
             content.append(renderComment(posts[i]));
+            $(`#replyComment${posts[i].id}`).on('click', handleCommentReply)
         }
     };
 }
 
 const renderComment = function(post){
     let comment =  `
-        <div class = "card" id = "comment${post.id}">
-            <div class = "card-header">${post.userName}</div>
+        <div class = "card comment" id = "comment${post.id}">
+            <div class = "card-header"><p class= "card-header-title">${post.userName}</p></div>
             <div class = "card-content">${post.body}</div>
-            <div class = "card-footer">footer</div>
+            <div class = "card-footer">
+                <button type = "button" class = "button" id = "replyComment${post.id}">Reply</button>
+            </div>
         </div>
     `;
 
     return comment;
+}
+
+const handleCommentReply = async function (event){
+    event.preventDefault();
+    const buttonid = $(event.target).attr("id")
+    const commentid = buttonid.replace('reply', '');
+    const read = await axios({
+        method: 'get',
+        // TODO
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts`,
+    });
+
+    //TODO
+    const reply = read.data[0];
+    alert('reply')
+}
+
+const renderCommentReply = function(){
+
 }
 
 //register listeners
@@ -258,4 +280,5 @@ const registerListeners = function(post){
     $(`.edit${post.id}`).on('click', handleEditPost);
     $(`.detail${post.id}`).on('click', handleDetailPost);
 };
+
 
