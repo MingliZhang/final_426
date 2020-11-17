@@ -6,16 +6,25 @@ const user = getUser()
 const questions = getQuestions()
 const questionDisplay = document.getElementById("questionBody")
 const rateDisplay = document.getElementById("rateBody")
+const startButton = document.getElementById("startButton")
+const matchButton = document.getElementById("matchButton")
+
 let questionBlock
 let blocks = []
 let rateBox
 let rateBoxes = []
 let rate
 let rates = []
-let score = 0
+let finalScore = 0
+let scores = new Array(10).fill(0)
+let currentPage = 0
+
+let clicked = new Array(50).fill(false);
 
 
 function initialte() {
+    startButton.style.visibility = "hidden"
+    matchButton.style.visibility = "hidden"
     document.getElementById("userName").innerHTML = (user.userName)
     for(let i = 0; i < 10; i++){
         rateBox = document.createElement('div')
@@ -23,32 +32,92 @@ function initialte() {
         for (let j = 0; j < 5; j++){
             rate = document.createElement('button')
             rate.innerHTML = j+1
+            rate.id = "r"+i+"c"+j
             rate.addEventListener("click", registerScore, false)
             rateBox.appendChild(rate)
-            rates.push(questionBlock)
+            rates.push(rate)
         } 
         rateBoxes.push(rateBox)
     }
     for (let i = 0; i < 1; i++){
         generateQuestions(i)
     }
+    let nextButton = document.createElement('button')
+    nextButton.innerHTML = "Next"
+    rateDisplay.appendChild(nextButton)
+    nextButton.addEventListener("click", continuePlay, true)
+    nextButton.id = "next"
 }
+startButton.onclick = initialte
 
-initialte()
-
-function generateQuestions(index){
-    for (let i = index; i < index*10+9; i++){
-        questionBlock = document.createElement('div')
-        questionBlock.innerHTML = questions[i].question
-        questionDisplay.appendChild(questionBlock)
-        blocks.push(questionBlock)
+function generateQuestions(pageNum){
+    if (currentPage == 0){
+        for (let i = 0; i < 10; i++){
+            questionBlock = document.createElement('div')
+            // questionBlock.id = ("ques" + i)
+            questionBlock.innerHTML = questions[pageNum*10+i].question
+            questionDisplay.appendChild(questionBlock)
+            blocks.push(questionBlock)
+        }
+    } else {
+        for (let i = 0; i < 10; i++){
+            blocks[i].innerHTML = questions[pageNum*10+i].question
+        }
     }
 }
 
 function registerScore(e){
-    score = e.target.innerHTML
-    document.getElementById("test").innerHTML = ("今天哪位小宝贝被点到了呢：" + score)
+    let target = e.target
+    let score = target.innerHTML
+    let id = target.id
+
+    e.target.style.backgroundColor = "red"
+    document.getElementById("test").innerHTML = ("今天哪位小宝贝被点到了呢：" + id + "---" + score)
+
+    let rId = parseInt(id[1])
+    let cId = parseInt(id[3])
+    for (let i = 0; i < 5; i++){
+        if(clicked[rId*5+i] == true && rId*5+i != id){
+            // console.log(rates[i])
+            rates[rId*5+i].style.backgroundColor = "blue"
+        }
+    }
+    clicked[rId*5 + cId] = true
+    scores[rId] = parseInt(score)
 }
 
+function continuePlay(){
+    let roundScore = scores.reduce(function (sum, score) {
+        return sum + score;
+      }, 0);
+      finalScore = finalScore + roundScore
+    resetBoard()
+    currentPage = currentPage+1
+    document.getElementById("progress").innerHTML = currentPage*(20) + '%'
+    if(currentPage == 4){
+        document.getElementById("next").innerHTML = "Finish"
+        generateQuestions(currentPage)
+        document.getElementById("next").removeEventListener("click", continuePlay, true)
+        document.getElementById("next").addEventListener("click", endGame, false)
+    } else {
+        generateQuestions(currentPage)
+    }
+}
+
+function resetBoard(){
+    rates.forEach((rate)=>rate.style.backgroundColor = "blue")
+    scores.forEach((score)=>score = 0)
+    rates.forEach((rate) => rate.addEventListener("click", registerScore, false))
+}
+
+function endGame(){
+   console.log("you have fucking finished what do you want?")
+   let roundScore = scores.reduce(function (sum, score) {
+    return sum + score;
+  }, 0);
+  finalScore = finalScore + roundScore
+    console.log("score: " + finalScore)
+   
+}
 
 
