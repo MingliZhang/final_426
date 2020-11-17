@@ -1,0 +1,15 @@
+.c2 p + p > span {
+    color: red;
+}
+
+#i1 > li {
+    color: yellow;
+}
+
+li.even {
+    color: blue;
+}
+
+#i3 span {
+    color: green;
+}
