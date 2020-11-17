@@ -47,7 +47,7 @@ function generateQuestions(index){
 
 function registerScore(e){
     score = e.target.innerHTML
-    console.log(score)
+    document.getElementById("test").innerHTML = ("今天哪位小宝贝被点到了呢：" + score)
 }
 
 
