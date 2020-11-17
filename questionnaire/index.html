@@ -2,21 +2,44 @@
 <html lang = "en" dir = "ltr">
     <head>
         <meta charset= "utf-8">
-        <title> self made 2048 </title>
+        <title> Questionnaire </title>
         <link rel="stylesheet" href="ques.css"> 
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+        <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css"/>
         <script src = "game.js" type="module" charset= "utf-8"></script>
         <script src = "questions.js" type="module" charset= "utf-8"></script>
     </head>
     <body>
+        <section class="hero is-primary">
+            <div class="hero-body">
+              <div class="container">
+                <h1 class="title">
+                    Questionnaire
+                </h1>
+                <h2 class="subtitle">
+                    Find people who are similar to you
+                </h2>
+            </br>
+                <div class = "title" id = "userName"></div>
+                <div>
+                    <div> Progress </div>
+                    <span class = "subtitle" id = "progress"> 0% </span>
+                </div>
+              </div>
+            </div>
+          </section>
 
-        <div id = "userName"></div>
-        <div>
-            <div> Progress </div>
-            <span id = "progress"> 0% </span>
+        
+        <div class = "notification is-primary" id = "testM"> This is a test field to see what button is clicked
+            <div id = "test" class = "notification is-danger">
+                我只是一个单纯可爱的Placeholder
+            </div> 
         </div>
 
-        <div class="row">
-          <div class = "column" id = "questionBody"></div>
+        <div class="columns">
+          <div class = "column">
+              <div id = "questionBody" class = "notification is-info"></div>
+          </div>
           <div class = "column" id = "rateBody"></div>
         </div>
         

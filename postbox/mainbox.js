@@ -257,4 +257,8 @@ const registerListeners = function(post){
     $(`.delete${post.id}`).on('click', handledeletePost);
     $(`.edit${post.id}`).on('click', handleEditPost);
     $(`.detail${post.id}`).on('click', handleDetailPost);
+
 };
+
+
+

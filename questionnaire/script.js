@@ -7,7 +7,7 @@ function getUser(){
         friends: [],
         highestGameScore: 0
     }
-    user.userName = "sww"
+    user.userName = "SWW大帅逼"
     user.email = "sww@sww.com"
     user.password = "xxx"
     user.matchPoint = "0"
