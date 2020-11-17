@@ -15,7 +15,8 @@ let rateBox
 let rateBoxes = []
 let rate
 let rates = []
-let score = 0
+let finalScore = 0
+let scores = new Array(10).fill(0)
 let currentPage = 0
 
 let clicked = new Array(50).fill(false);
@@ -63,7 +64,6 @@ function generateQuestions(pageNum){
             blocks[i].innerHTML = questions[pageNum*10+i].question
         }
     }
-    
 }
 
 function registerScore(e){
@@ -77,29 +77,47 @@ function registerScore(e){
     let rId = parseInt(id[1])
     let cId = parseInt(id[3])
     for (let i = 0; i < 5; i++){
-        if(clicked[rId*5+i] == true){
+        if(clicked[rId*5+i] == true && rId*5+i != id){
             // console.log(rates[i])
             rates[rId*5+i].style.backgroundColor = "blue"
         }
     }
     clicked[rId*5 + cId] = true
-    console.log(rId*5 + cId)
+    scores[rId] = parseInt(score)
 }
 
 function continuePlay(){
+    let roundScore = scores.reduce(function (sum, score) {
+        return sum + score;
+      }, 0);
+      finalScore = finalScore + roundScore
+    resetBoard()
     currentPage = currentPage+1
     document.getElementById("progress").innerHTML = currentPage*(20) + '%'
     if(currentPage == 4){
         document.getElementById("next").innerHTML = "Finish"
         generateQuestions(currentPage)
-        endGame()
+        document.getElementById("next").removeEventListener("click", continuePlay, true)
+        document.getElementById("next").addEventListener("click", endGame, false)
     } else {
         generateQuestions(currentPage)
     }
 }
 
+function resetBoard(){
+    rates.forEach((rate)=>rate.style.backgroundColor = "blue")
+    scores.forEach((score)=>score = 0)
+    rates.forEach((rate) => rate.addEventListener("click", registerScore, false))
+}
+
 function endGame(){
    console.log("you have fucking finished what do you want?")
+   let roundScore = scores.reduce(function (sum, score) {
+    return sum + score;
+  }, 0);
+  finalScore = finalScore + roundScore
+    console.log("score: " + finalScore)
+   
 }
 
 
