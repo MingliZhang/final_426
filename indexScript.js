@@ -16,7 +16,12 @@ const handelLoginButtonPress = async function (event) {
 
     // need to make a call to the backend and find the user id in this case;
     const $message = $("#message");
-    
+    if(!email){
+        let message = "Please provide all the needed fields above!";
+        $message.empty();
+        $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
+        return;
+    }
     const result = await axios({
         method: 'get',
         url: `/api/users/${email}`
