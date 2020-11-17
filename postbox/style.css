@@ -21,9 +21,14 @@
 }
 
 .post{
-    border: 2px #0a413b solid;
+    /* border: 2px #0a413b solid; */
     margin: 10px;
 }
+
+.post .card-header{
+    background-color: #f89970;
+}
+
 
 .allreplies{
     margin-left: 10px;
@@ -41,20 +46,20 @@
     padding: 0.2em;
 }
 
-.reply{
-    border: 2px #702804 solid;
+.comment {
+    /* border: 2px #702804 solid; */
     margin: 10px;
 }
 
-.reply .card-footer{
+.comment .card-footer{
     display: flex;
     justify-content: space-evenly;
-    background-color: #ffaf7a;
+    background-color: #54796d;
     padding: 0.2em;
 }
 
-.card-header{
-    background-color: #FFA883;
+.comment .card-header{
+    background-color: #ec8d64;
 }
 
 .hero-head{
@@ -65,8 +70,4 @@
 
 i{
     margin-right: 0.5em;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> b61c7367656a330d64a487133d5e5649a8b5bba6
