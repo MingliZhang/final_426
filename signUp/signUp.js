@@ -8,57 +8,59 @@ function ValidateEmail(mail) {
     }
 }
 
-const handelLoginButtonPress = async function (event) {
+const handelSignupButtonPress = async function (event) {
     // If I comment the below code out, the auto detection of email and password field goes off. But if I include it, the page will refresh everytime the button is pushed!
     event.preventDefault();
     event.stopPropagation();
-    let email = $("#email").val();
-    if(!email){
-        const $message = $("#message");
-        let message = 'Please provide all the needed fields above!';
-        $message.empty();
-        $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
-        return
-    }
-    const result = await axios({
-        method: 'get',
-        url: `/api/users/${email}`
-    })
-    let password1 = $("#password1").val();
-    let password2 = $("#password2").val();
+    window.location.href = "../index.html";
+
+    // let email = $("#email").val();
+    // if(!email){
+    //     const $message = $("#message");
+    //     let message = 'Please provide all the needed fields above!';
+    //     $message.empty();
+    //     $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
+    //     return
+    // }
+    // const result = await axios({
+    //     method: 'get',
+    //     url: `/api/users/${email}`
+    // })
+    // let password1 = $("#password1").val();
+    // let password2 = $("#password2").val();
     
-    // need to make a call to the backend and find the user id in this case;
-    const $message = $("#message");
-    if (result.data.length===0&&email.length !== 0 && password1.length !== 0 && ValidateEmail(email) && password2.length !== 0 && password1 === password2 ){
-        axios({
-            method: 'post',
-            url: '/api/users',
-            data: {
-                email: email,
-                password: password1
-            }
-        })
-        window.location.href = "../index.html";
-    }else{
-        let message = "";
-        if(email.length ===0 || password1.length === 0 || password2.length === 0){
-            message = "Please provide all the needed fields above!";
-        }else if(! ValidateEmail(email)){
-            message = "Please provide a valid email address!";
-        }else if(password1 !== password2){
-            message = "The two password provided does not match each other!";
-        }else if(result.data.length!==0){
-            message = "This email has been used!Try another one";
-        }else{
-            message = "This case is not covered!";
-        }
-        $message.empty();
-        $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
-    }
+    // // need to make a call to the backend and find the user id in this case;
+    // const $message = $("#message");
+    // if (result.data.length===0&&email.length !== 0 && password1.length !== 0 && ValidateEmail(email) && password2.length !== 0 && password1 === password2 ){
+    //     axios({
+    //         method: 'post',
+    //         url: '/api/users',
+    //         data: {
+    //             email: email,
+    //             password: password1
+    //         }
+    //     })
+    //     window.location.href = "../index.html";
+    // }else{
+    //     let message = "";
+    //     if(email.length ===0 || password1.length === 0 || password2.length === 0){
+    //         message = "Please provide all the needed fields above!";
+    //     }else if(! ValidateEmail(email)){
+    //         message = "Please provide a valid email address!";
+    //     }else if(password1 !== password2){
+    //         message = "The two password provided does not match each other!";
+    //     }else if(result.data.length!==0){
+    //         message = "This email has been used!Try another one";
+    //     }else{
+    //         message = "This case is not covered!";
+    //     }
+    //     $message.empty();
+    //     $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
+    // }
 }
 
 
 
 $(function () {
-    $("#signUpButton").on("click", handelLoginButtonPress);
+    $("#signUpButton").on("click", handelSignupButtonPress);
 });

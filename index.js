@@ -3,24 +3,18 @@ const http = require('http');
 const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const users = require('./routes/api/users')
 
-const db = require('./config/keys').mongoURI
-mongoose.connect(db,  { useUnifiedTopology: true ,useNewUrlParser: true,})
-    .then(()=>{console.log('connected...')})
-    .catch((err=>console.log(err)))
 
 const app = express();
-const server = http.createServer(app);
+
+
 app.use(bodyParser.json())
-app.use(express.static(path.join(__dirname, '')))
-app.use('/api/users', users)
+app.use(express.static(__dirname))
+const server = http.createServer(app);
 const io = socketio(server);
 
 
 io.on('connection', socket=>{
-
     socket.emit('message', 'welcome');
     socket.broadcast.emit('message', 'A user has joined the chat')
     
