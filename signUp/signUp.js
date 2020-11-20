@@ -8,57 +8,58 @@ function ValidateEmail(mail) {
     }
 }
 
-const handelLoginButtonPress = async function (event) {
+const handelSignupButtonPress = async function (event) {
     // If I comment the below code out, the auto detection of email and password field goes off. But if I include it, the page will refresh everytime the button is pushed!
     event.preventDefault();
     event.stopPropagation();
+    // window.location.href = "../index.html";
+    let password = $("#hidden").val();
     let email = $("#email").val();
-    if(!email){
-        const $message = $("#message");
+    let psConfirm = $("#hidden2").val();
+    const $message = $("#message");
+    if(!email || !password || !psConfirm){
         let message = 'Please provide all the needed fields above!';
+        $message.empty();
+        $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
+        return
+    }
+    if(psConfirm!==password){
+        let message = "The two password provided do not match each other!";
+        $message.empty();
+        $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
+        return
+    }
+    if(!ValidateEmail(email)){
+        let message = "Invalid email address!";
         $message.empty();
         $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
         return
     }
     const result = await axios({
         method: 'get',
-        url: `/api/users/${email}`
+        url: 'https://us-central1-comp426-firebase.cloudfunctions.net/users'
     })
-    let password1 = $("#password1").val();
-    let password2 = $("#password2").val();
-    
-    // need to make a call to the backend and find the user id in this case;
-    const $message = $("#message");
-    if (result.data.length===0&&email.length !== 0 && password1.length !== 0 && ValidateEmail(email) && password2.length !== 0 && password1 === password2 ){
-        axios({
-            method: 'post',
-            url: '/api/users',
-            data: {
-                email: email,
-                password: password1
-            }
-        })
-        window.location.href = "../index.html";
-    }else{
-        let message = "";
-        if(email.length ===0 || password1.length === 0 || password2.length === 0){
-            message = "Please provide all the needed fields above!";
-        }else if(! ValidateEmail(email)){
-            message = "Please provide a valid email address!";
-        }else if(password1 !== password2){
-            message = "The two password provided does not match each other!";
-        }else if(result.data.length!==0){
-            message = "This email has been used!Try another one";
-        }else{
-            message = "This case is not covered!";
-        }
+    let user = result.data.filter(user=>user.email===email)[0];
+    if(user){
+        let message = 'This email has been used!Try another one.';
         $message.empty();
         $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
+        return
     }
+    const username = email.split('@')[0];
+    const result2 = await axios({
+        method: 'post',
+        url: 'https://us-central1-comp426-firebase.cloudfunctions.net/users',
+        data:{
+            "userName" : username,
+            "email": email, 
+            "password": password
+        }
+    })
+    $('body').append('<h1 style="position: absolute; left : 40%; top: 20%;color: white">Add some message about successful signup</h1>')
+    setTimeout(function(){ window.location.href = "../index.html"; }, 1000);
 }
 
-
-
 $(function () {
-    $("#signUpButton").on("click", handelLoginButtonPress);
+    $("#signUpButton").on("click", handelSignupButtonPress);
 });

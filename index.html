@@ -17,11 +17,10 @@
               <div class="container">
                 <div class="columns is-centered">
                   <div class="column is-5-tablet is-4-desktop is-3-widescreen" >
-                    <form action="main_interface/main_interface.html" class="box">
                       <div class="field">
                         <label for="" class="label">Email</label>
                         <div class="control has-icons-left">
-                          <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" id = "email" required>
+                          <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" id = "email">
                           <span class="icon is-small is-left">
                             <i class="fa fa-envelope"></i>
                           </span>
@@ -30,25 +29,20 @@
                       <div class="field">
                         <label for="" class="label">Password</label>
                         <div class="control has-icons-left">
-                          <input type="password" placeholder="**********" class="input" id = "password" required>
+                          <input id="password" type="text" value="" placeholder="**********" class="input">
+                          <input id="hidden" type="hidden" value="" />
                           <span class="icon is-small is-left">
                             <i class="fa fa-lock"></i>
                           </span>
                         </div>
                       </div>
-                      <div class = "field content" id = "message">
-                      </div>
+                      <div class = "field content" id = "message"></div>
                       <div class="field">
-                        <button  class="button is-success" id = "loginButton">
-                          Login
-                        </button>
+                        <a class="button is-success" id = "loginButton" >Login</a>
                       </div>
                       <div class = "field">
-                          <button class="button" id = "signUpButton" onclick="window.location.href='./signUp/signUp.html';">
-                              Sign Up
-                          </button>
+                        <a class="button" href="./signUp/signUp.html">Sign up</a>
                       </div>
-                    </form>
                   </div>
                 </div>
               </div>
@@ -58,6 +52,11 @@
         <!-- Include links to JavaScript files below -->
         <script src="./node_modules/axios/dist/axios.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<<<<<<< HEAD
         <script src="login.js"></script>
+=======
+        <script src="indexScript.js"></script>
+        <script src="./ps.js"></script>
+>>>>>>> 00b291067e5f6eced0247e0de359929cecb7339c
     </body>
 </html>
