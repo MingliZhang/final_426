@@ -19,33 +19,37 @@
                 <h2 class="subtitle">
                     Find people who are similar to you
                 </h2>
-            </br>
-                <div class = "title" id = "userName"></div>
-                <div>
-                    <div> Progress </div>
-                    <span class = "subtitle" id = "progress"> 0% </span>
-                </div>
               </div>
             </div>
           </section>
 
         
-        <div class = "notification is-primary" id = "testM"> This is a test field to see what button is clicked
-            <div id = "test" class = "notification is-danger">
-                我只是一个单纯可爱的Placeholder
+        <div class = "notification"> 
+                <div>Rate from 1 to 5 how accurate are the following questions describing you!</div>
+                <div class = "score" id = "scoreBoard">
+                    <div id = "userName"></div>
+                    <div> Progress: </div>
+                    <div id = "progress"> 0% </div>
+                </div>
+                <div>1 = Inaccurate 2 = Somewhat Inaccurate 3 = Neutral 4 = Somewhat Accurate 5 = Accurate</div>
+            <div class = "field is-grouped">
+                <button class = "button is-danger center" id = "startButton">Play</button>
+                <button class = "button is-danger center" id = "matchButton">Current Matches</button>
             </div>
-            <button class = "button is-danger" id = "startButton">Play</button>
-            <button class = "button is-danger" id = "matchButton">Current Matches</button>
         </div>
 
-        <div class="columns">
-          <div class = "column">
-              <div id = "questionBody" class = "notification is-info"></div>
-          </div>
-          <div class = "column">
-              <div class = "notification is-primary" id = "rateBody"></div>
-          </div>
+        <div id = "body">
+            <div class="columns" id = "gameDisplay">
+                <div class = "column">
+                    <div id = "questionBody" class = "notification"></div>
+                </div>
+                <div class = "column">
+                    <div class = "notification" id = "rateBody"></div>
+                </div>
+            </div>
+            <div id = "submitDisplay"></div>
         </div>
+       
         
     </body>
 </html>
