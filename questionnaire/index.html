@@ -8,13 +8,15 @@
         <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css"/>
         <script src = "game.js" type="module" charset= "utf-8"></script>
         <script src = "questions.js" type="module" charset= "utf-8"></script>
+        <script src="../node_modules/axios/dist/axios.js"></script>
+
     </head>
     <body>
         <section class="hero is-primary">
             <div class="hero-body">
               <div class="container">
                 <h1 class="title">
-                    Questionnaire
+                    Personality Questionnaire
                 </h1>
                 <h2 class="subtitle">
                     Find people who are similar to you
@@ -35,6 +37,15 @@
             <div class = "field is-grouped">
                 <button class = "button is-danger center" id = "startButton">Play</button>
                 <button class = "button is-danger center" id = "matchButton">Current Matches</button>
+                <button class = "button is-danger center" id = "home" onclick=backHome()>Back to Home</button>
+
+                <script type="text/javascript">
+                    function backHome()
+                    {
+                        location.href = '../main_interface/main_interface.html'; // TODO need change to real home address
+                    
+                    }
+                </script>
             </div>
         </div>
 
@@ -49,7 +60,8 @@
             </div>
             <div id = "submitDisplay"></div>
         </div>
-       
+
+        <div id = "scoreDisplay"></div>
         
     </body>
 </html>

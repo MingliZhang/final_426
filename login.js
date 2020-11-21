@@ -8,13 +8,11 @@ function ValidateEmail(mail) {
 }
 
 const handelLoginButtonPress = async function (event) {
-  // If I comment the below code out, the auto detection of email and password field goes off. But if I include it, the page will refresh everytime the button is pushed!
   event.preventDefault();
   event.stopPropagation();
   let email = $("#email").val();
   let password = $("#hidden").val();
 
-  // need to make a call to the backend and find the user id in this case;
   const $message = $("#message");
 
   let message = "";
@@ -29,14 +27,28 @@ const handelLoginButtonPress = async function (event) {
         url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/email/${email}`,
       });
       let data = result.data;
+      console.log(data);
       if (data.password !== password) {
         message = "The password provided seems to be Incorrect!";
       } else {
+<<<<<<< HEAD
         createCookie('info', `${data.id}, ${data.userName}, ${data.email}`);
         window.location.href = "./main_interface/main_interface.html";
         // This is where the jump to the main page is at, at this point, the email and password provided match what we have in the database. The data of the user is in the data filed.
+=======
+        if (data.matchPoint[0] === -1) {
+          // this need to jump to the questionar page
+          // At this point, the email and password provided match what we have in the database. The data of the user is in the data filed.
+          window.location.href = "./questionnaire/index.html";
+        } else {
+          // jump to the main page
+          // At this point, the email and password provided match what we have in the database. The data of the user is in the data filed.
+          window.location.href = "./main_interface/main_interface.html";
+        }
+>>>>>>> 50e98d52a8e01468be0d97320b5fe2ad4c0f6356
       }
     } catch (err) {
+      console.log(err);
       message = "This email has not been registered yet!";
     }
   }
