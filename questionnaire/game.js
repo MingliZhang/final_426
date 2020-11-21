@@ -255,7 +255,7 @@ async function findMatches(){
         finalScore.conscientiousness+
         finalScore.emotional_stability+
         finalScore.extraversion+
-        finalScore.intellect == -5){
+        finalScore.intellect == -500){
             let noMatchDisplay = document.createElement('div')
             noMatchDisplay.innerHTML = "You have not completed the personality questionnaire..."
             scoreDisplay.classList.add("score")
@@ -284,7 +284,7 @@ async function findMatches(){
             friend.classList.add('is-warning')
             friend.classList.add('fas')
             friend.classList.add('fa-user-plus')
-            friend.id = user[1].userName + "add"
+            friend.id = user[1].email
             friend.addEventListener("click", addFriend)
             friends.push(friend)
     
