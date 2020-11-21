@@ -2,7 +2,7 @@ import {getUser, getUsers, upDateUser, addFriend, testAxios, getFakeUsers} from 
 import getQuestions from './questions.js'
 
 
-const user = getUser()
+let user
 const questions = getQuestions()
 
 const questionDisplay = document.getElementById("questionBody")
@@ -90,7 +90,10 @@ function initialte() {
 }
 document.addEventListener("DOMContentLoaded",function(){
     document.getElementById("userName").innerHTML = ("&nbsp" + user.userName)
+    user = await getUser()
   })
+
+
 startButton.onclick = initialte
 matchButton.onclick = findMatches
 

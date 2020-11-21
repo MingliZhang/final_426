@@ -1,33 +1,44 @@
 import {fakeppl} from './fakeppl.js'
 
-const current_user = getUser()
+let current_id = null
+let current_user = null
+let current_email = null
 
-export function getUser(){
-    // TODO
-    // reminber to change the async
-    // const result = await axios({
-    //     method: 'get',
-    //     url: 'https://us-central1-comp426-firebase.cloudfunctions.net/users/${id}}'	
-    //     });
-    console.log(getCookie('info'))
-    let user = {
-        userName: "",
-        email: "",
-        password: "",
-        matchPoint: [],
-        friends: [],
-        highestGameScore: 0
-    }
-    user.userName = "给世上最美好的SWW献上赞歌"
-    user.email = "sww@sww.com"
-    user.password = "xxx"
-    user.matchPoint = [10,10,10,10,10]
-    user.friends = []
-    user.highestGameScore = 0
+export async function getUser(){
+    let cookie = getCookie('info')
+    var re = ',';
+    var cookieList = cookie.split(re);
 
-    return user
+    current_id = cookieList[0]
+    current_user = cookieList[1]
+    current_email = cookieList[2]
+
+    try {
+        const result = await axios({
+            method: 'get',
+            url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/${current_id}}`
+        });
     
-        
+        console.log(result)
+        let user = {
+            userName: "",
+            email: "",
+            password: "",
+            matchPoint: [],
+            friends: [],
+            highestGameScore: 0
+        }
+        user.userName = "给世上最美好的SWW献上赞歌"
+        user.email = "sww@sww.com"
+        user.password = "xxx"
+        user.matchPoint = [10,10,10,10,10]
+        user.friends = []
+        user.highestGameScore = 0
+    
+        return user
+    } catch {
+        console.error("something went wrong pulling users");
+    }    
 }
 
 export async function getUsers(){
