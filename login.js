@@ -8,13 +8,11 @@ function ValidateEmail(mail) {
 }
 
 const handelLoginButtonPress = async function (event) {
-  // If I comment the below code out, the auto detection of email and password field goes off. But if I include it, the page will refresh everytime the button is pushed!
   event.preventDefault();
   event.stopPropagation();
   let email = $("#email").val();
   let password = $("#hidden").val();
 
-  // need to make a call to the backend and find the user id in this case;
   const $message = $("#message");
 
   let message = "";
@@ -32,7 +30,7 @@ const handelLoginButtonPress = async function (event) {
       if (data.password !== password) {
         message = "The password provided seems to be Incorrect!";
       } else {
-        console.log("jump to the main page");
+        // jump to the main page
         window.location.href = "./main_interface/main_interface.html";
         // This is where the jump to the main page is at, at this point, the email and password provided match what we have in the database. The data of the user is in the data filed.
       }
