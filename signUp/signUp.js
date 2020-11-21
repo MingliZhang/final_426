@@ -42,8 +42,6 @@ const handelSignupButtonPress = async function (event) {
     let data = result.data;
     let searchUserName = data.filter((user) => user.userName === userName);
     let searchEmail = data.filter((user) => user.email === email);
-    console.log(searchUserName);
-    console.log(searchEmail);
     if (searchUserName.length !== 0) {
       message = "This userName has already been taken! Try another one!";
     } else if (searchEmail.length !== 0) {
@@ -64,7 +62,7 @@ const handelSignupButtonPress = async function (event) {
         },
       });
       // This should jump to the personality test page, and it would be loged in already.
-      createCookie("info", `${result2.data.id}, ${userName}, ${email}`);
+      createCookie("info", `${result2.data}, ${userName}, ${email}`);
       problem = false;
       window.location.href = "../questionnaire/index.html";
     }
