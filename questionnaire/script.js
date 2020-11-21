@@ -13,7 +13,6 @@ export async function getUser(){
     current_id = cookieList[0]
     current_user = cookieList[1]
     current_email = cookieList[2]
-    console.log(current_id)
 
     try {
         const result = await axios({
@@ -21,7 +20,6 @@ export async function getUser(){
             url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/${current_id}`
         });
     
-        console.log(result)
         user = {
             userName: "",
             email: "",
@@ -43,8 +41,6 @@ export async function getUser(){
         user.matchPoint = result.data.matchPoint
         user.friends = result.data.friends
         user.highestGameScore = result.data.highestGameScore
-        
-        console.log(user)
         return user
     } catch {
         console.error("something went wrong pulling this user");

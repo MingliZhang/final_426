@@ -196,7 +196,6 @@ function resetBoard(){
 async function endGame(){
     registerScore()
 
-    console.log(finalScore)
     await upDateUser(finalScore)
     document.getElementById("progress").innerHTML = "100%"
     // register final score
