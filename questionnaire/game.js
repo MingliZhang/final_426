@@ -28,15 +28,24 @@ let scores = new Array(10).fill(0)
 let currentPage = 0
 
 let clicked = new Array(50).fill(false);
+let finalScore
 
-// final scores
-let finalScore = {
-    extraversion : user.matchPoint[0],
-    agreeableness : user.matchPoint[0],
-    conscientiousness : user.matchPoint[0],
-    emotional_stability : user.matchPoint[0],
-    intellect : user.matchPoint[0]
-}
+document.addEventListener("DOMContentLoaded",async function(){
+    
+    user = await getUser()
+
+    // final scores
+    finalScore = {
+        extraversion : user.matchPoint[0],
+        agreeableness : user.matchPoint[0],
+        conscientiousness : user.matchPoint[0],
+        emotional_stability : user.matchPoint[0],
+        intellect : user.matchPoint[0]
+    }
+
+    document.getElementById("userName").innerHTML = ("&nbsp" + user.userName)
+})
+
 
 
 
@@ -88,10 +97,6 @@ function initialte() {
     nextButton.id = "next"
     nextButton.disabled = true
 }
-document.addEventListener("DOMContentLoaded",function(){
-    document.getElementById("userName").innerHTML = ("&nbsp" + user.userName)
-    user = await getUser()
-  })
 
 
 startButton.onclick = initialte
@@ -121,15 +126,12 @@ function rateClickEvent(e){
     if (target == undefined){
         target = e.currentTarget.parentNode
     }
-    // console.log(target.type)
 
     target.style.backgroundColor = "rgb(242, 107, 107)"
 
     let rId = parseInt(id.charAt(1))
     let cId = parseInt(id.charAt(3))
     let score = cId+1
-    console.log(score)
-    // console.log(id + " " + rId + " " + cId)
     clicked[rId*5 + cId] = true
     for (let i = 0; i < 5; i++){
         if(clicked[rId*5+i] == true && rId*5+i != rId*5+cId){
@@ -172,7 +174,6 @@ function continuePlay(){
 }
 
 function registerScore(){
-    console.log(scores)
     finalScore.extraversion += scores[0]
     finalScore.agreeableness -= scores[1]
     finalScore.conscientiousness += scores[2]
@@ -192,11 +193,13 @@ function resetBoard(){
     document.getElementById('next').disabled = true
 }
 
-function endGame(){
-    upDateUser(finalScore)
+async function endGame(){
+    registerScore()
+
+    console.log(finalScore)
+    await upDateUser(finalScore)
     document.getElementById("progress").innerHTML = "100%"
     // register final score
-    registerScore()
 
     gameDisplay.remove()
     questionDisplay.remove()
