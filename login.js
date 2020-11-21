@@ -31,8 +31,7 @@ const handelLoginButtonPress = async function (event) {
       if (data.password !== password) {
         message = "The password provided seems to be Incorrect!";
       } else {
-        createCookie('info', `${data.id}, ${data.userName}, ${data.email}`);
-        window.location.href = "./main_interface/main_interface.html";
+        createCookie("info", `${data.id}, ${data.userName}, ${data.email}`);
         // This is where the jump to the main page is at, at this point, the email and password provided match what we have in the database. The data of the user is in the data filed.
 
         if (data.matchPoint[0] === -1) {
@@ -44,7 +43,6 @@ const handelLoginButtonPress = async function (event) {
           // At this point, the email and password provided match what we have in the database. The data of the user is in the data filed.
           window.location.href = "./main_interface/main_interface.html";
         }
-
       }
     } catch (err) {
       console.log(err);

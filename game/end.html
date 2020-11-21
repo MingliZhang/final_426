@@ -12,24 +12,19 @@
       <div id="end" class="flex-center flex-column">
         <h1 id="finalScore"></h1>
         <form>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="username"
-          />
+          <div id="username"></div>
           <button
             type="submit"
             class="btn"
             id="saveScoreBtn"
-            onclick="saveHighScore(event)"
-            disabled
+            onclick="updateUserScore(event)"
           >
             Save
           </button>
         </form>
         <a class="btn" href="./game.html">Play Again</a>
-        <a class="btn" href="/">Go Home</a>
+        <a class="btn" href="./highscores.html">Ranking</a>
+        <a class="btn" href="../main_interface/main_interface.html">Go Home</a>
       </div>
     </div>
     <script src="end.js"></script>

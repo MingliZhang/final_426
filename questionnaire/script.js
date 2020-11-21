@@ -3,12 +3,13 @@ import {fakeppl} from './fakeppl.js'
 const current_user = getUser()
 
 export function getUser(){
+    // TODO
     // reminber to change the async
     // const result = await axios({
     //     method: 'get',
     //     url: 'https://us-central1-comp426-firebase.cloudfunctions.net/users/${id}}'	
     //     });
-
+    console.log(getCookie())
     let user = {
         userName: "",
         email: "",
@@ -48,12 +49,32 @@ export function getFakeUsers(){
 export function upDateUser(finalScore){
     console.log("user info updated")
     console.log(finalScore)
+
+    // TODO
+    // const result = await axios({
+    //     method: put,
+    //     url: 'https://us-central1-comp426-firebase.cloudfunctions.net/users/${id}}',
+    //     data:{
+    //     "userName": "some User name",
+    //      "matchPoint": [#,#,#,#,#],
+    //      "friends": [array of friends user id],
+    //      "highestGameScore": ##,
+        
+    //             }
+    //     });     
 }
 
 export function addFriend(event){
     let target = event.target
+    target.innerHTML = "(๑•̀ㅂ•́)و✧ Friend Requested"
+    target.classList.remove('is-warning')
+    target.classList.remove('fas')
+    target.classList.remove('fa-user-plus')
+    target.classList.add('is-success')
     let id = target.id
-    console.log("Friend added: " + id)
+    console.log("Friend added: " + id)  
+
+    // TODO
 }
 
 export async function testAxios(){

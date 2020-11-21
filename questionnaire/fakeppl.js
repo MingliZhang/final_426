@@ -31,7 +31,7 @@ let user6 = {
         highestGameScore: 0
     }
     let user2 = {
-        userName: "暴风星云JD",
+        userName: "霹雳星云斩正统传人JD",
         email: "jd@lol.com",
         password: "123",
         matchPoint: [3,3,3,3,3],

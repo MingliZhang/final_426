@@ -6,9 +6,11 @@
         <link rel="stylesheet" href="ques.css"> 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
         <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css"/>
+        <script src="../cookie.js"></script>
         <script src = "game.js" type="module" charset= "utf-8"></script>
         <script src = "questions.js" type="module" charset= "utf-8"></script>
         <script src="../node_modules/axios/dist/axios.js"></script>
+        <script src="../cookie.js"></script>
 
     <!-- navbar style -->
     <style>
@@ -25,27 +27,33 @@
       </style>
     </head>
     <body>
-             <!-- navbar -->
-     <div id="barhover" style="padding: 0; margin: 0;">
-        <div id="navbar" style="padding: 0; margin: 0;"></div>
-        <script src="../node_modules/jquery/dist/jquery.js"></script>
-        <script src="../navbar/nav.js"></script>
-        <script src="navlinks.js"></script>
-    </div>
-
-    <div style="padding: 0; margin: 0; width:100vw; height:100vh">
+  
         <section class="hero is-primary">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title">
-                Personality Questionnaire
-            </h1>
-            <h2 class="subtitle">
-                Find people who are similar to you
-            </h2>
-          </div>
-        </div>
-      </section>
+            <div class="hero-body">
+              <div class="container">
+                <h1 class="title">
+                    Personality Questionnaire
+                </h1>
+                <h2 class="subtitle">
+                    Find people who are similar to you
+                </h2>
+              </div>
+            </div>
+          </section>
+        <div class = "notification"> 
+                <div class = "score" id = "scoreBoard">
+                    <div id = "userName" class = "fas fa-user">&nbsp Play Play Play</div>
+                    <div> Progress: </div>
+                    <div id = "progress"> 0% </div>
+                </div>
+            </br>
+                <div>Rate from 1 to 5 how accurate are the following questions describing you!</div>
+                <div>1 = Inaccurate 2 = Somewhat Inaccurate 3 = Neutral 4 = Somewhat Accurate 5 = Accurate</div>
+            </br>
+            <div class = "field is-grouped">
+                <button class = "button is-danger center fas fa-play" id = "startButton"> &nbsp Play</button>
+                <button class = "button is-danger center fas fa-list" id = "matchButton"> &nbsp Current Matches</button>
+                <button class = "button is-danger center fas fa-home" id = "home" onclick=backHome()> &nbsp Back to Home</button>
 
     
     <div class = "notification"> 

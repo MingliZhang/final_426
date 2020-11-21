@@ -51,6 +51,7 @@ div{
 }
 
 .rateButtonEven:hover, .rateButtonOdd:hover {
+    cursor: pointer;
     background-color:rgb(247, 131, 131) !important;
     color: white;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
@@ -74,4 +75,5 @@ div{
 html {
     scroll-behavior: smooth;
   }
+
 
