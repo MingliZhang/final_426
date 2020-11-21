@@ -1,13 +1,5 @@
-button{
-    padding-left: 3%;
-    padding-right: 3%;
-    width: 10%;
-    background-color: blueviolet;
-    color: white;
-}
-
 div{
-    margin-left: 3%;
+    margin-left: 0%;
     text-align: center;
 }
 
@@ -21,14 +13,14 @@ div{
 .center {
     margin-left: auto;
     margin-right: auto;
-    width: 10em;
+    width: 20em;
     text-align: center;
 }
 
-.rateButton {
+.rateButtonEven {
     outline:none;  
     background-color: #008CBA;
-    border-radius: 12px;
+    border-radius: 50%;
     padding: 14px 40px;
     display: inline;
     width: 17%;
@@ -37,13 +29,25 @@ div{
     transition-duration: 0.4s;
 }
 
-.rateButton:hover {
-    background-color:#f44336;
+.rateButtonOdd {
+    outline:none;  
+    background-color: #3bba00;
+    border-radius: 50%;
+    padding: 14px 40px;
+    display: inline;
+    width: 17%;
+    margin: 1%;
+    height: 9.5vh;
+    transition-duration: 0.4s;
+}
+
+.rateButtonEven:hover, .rateButtonOdd:hover {
+    background-color:#f44336 !important;
     color: white;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.rateButton:active {
+.rateButtonEven:active, .rateButtonOdd:active {
 background-color: #3e8e41;
 box-shadow: 0 5px #666;
 transform: translateY(4px);
@@ -58,4 +62,7 @@ transform: translateY(4px);
     border-color: whitesmoke;
 }
 
+html {
+    scroll-behavior: smooth;
+  }
 

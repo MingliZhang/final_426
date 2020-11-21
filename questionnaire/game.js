@@ -1,12 +1,15 @@
-import getUser from './script.js'
+import {getUser, getUsers, upDateUser, addFriend, testAxios} from './script.js'
 import getQuestions from './questions.js'
 
 
 const user = getUser()
 const questions = getQuestions()
+
 const questionDisplay = document.getElementById("questionBody")
 const rateDisplay = document.getElementById("rateBody")
 const body = document.getElementById("body")
+const gameDisplay = document.getElementById('gameDisplay')
+const scoreDisplay = document.getElementById('scoreDisplay')
 const submitDisplay = document.getElementById("submitDisplay")
 
 const startButton = document.getElementById("startButton")
@@ -18,6 +21,8 @@ let rateBox
 let rateBoxes = []
 let rate
 let rates = []
+let friend
+let friends = []
 
 let scores = new Array(10).fill(0)
 let currentPage = 0
@@ -26,16 +31,23 @@ let clicked = new Array(50).fill(false);
 
 // final scores
 let finalScore = {
-    extraversion : 0,
-    agreeableness : 0,
-    conscientiousness : 0,
-    emotional_stability : 0,
-    intellect : 0
+    extraversion : user.matchPoint[0],
+    agreeableness : user.matchPoint[0],
+    conscientiousness : user.matchPoint[0],
+    emotional_stability : user.matchPoint[0],
+    intellect : user.matchPoint[0]
 }
 
 
 
 function initialte() {
+    // set score to 0 because a new game is started. The user choose to change his/her score
+    finalScore.extraversion = 0
+    finalScore.agreeableness = 0
+    finalScore.conscientiousness = 0
+    finalScore.emotional_stability = 0
+    finalScore.intellect = 0
+
     document.getElementById("scoreBoard").style.visibility = "visible"
     startButton.style.visibility = "hidden"
     matchButton.style.visibility = "hidden"
@@ -46,9 +58,7 @@ function initialte() {
         rateDisplay.appendChild(rateBox)
         for (let j = 0; j < 5; j++){
             rate = document.createElement('button')
-            // rate.classList.add("button")
-            // rate.classList.add("is-info")
-            rate.classList.add("rateButton")
+            rate.classList.add((i % 2 == 0) ? "rateButtonEven" : "rateButtonOdd")
             rate.innerHTML = j+1
             rate.id = "r"+i+"c"+j
             rate.addEventListener("click", rateClickEvent)
@@ -69,8 +79,10 @@ function initialte() {
     submitDisplay.appendChild(nextButton)
     nextButton.addEventListener("click", continuePlay)
     nextButton.id = "next"
+    nextButton.disabled = true
 }
 startButton.onclick = initialte
+matchButton.onclick = findMatches
 
 function generateQuestions(pageNum){
     if (currentPage == 0){
@@ -101,14 +113,22 @@ function rateClickEvent(e){
     clicked[rId*5 + cId] = true
     for (let i = 0; i < 5; i++){
         if(clicked[rId*5+i] == true && rId*5+i != rId*5+cId){
-            // console.log(rates[i])
-            rates[rId*5+i].style.backgroundColor = "#008CBA"
+            rates[rId*5+i].style.backgroundColor = (rId % 2 == 0) ? "#008CBA" : "#3bba00"
             clicked[rId*5+i] = false
-            //console.log(clicked)
         }
     }
     
     scores[rId] = parseInt(score)
+    let flag = true
+    for (let i = 0; i < scores.length; i++){
+        if (scores[i] == 0){
+            flag = false
+            break
+        } 
+    }
+    if (flag){
+        document.getElementById('next').disabled = false
+    }
 }
 
 
@@ -117,11 +137,11 @@ function continuePlay(){
     registerScore()
     
     resetBoard()
-    // console.log(scores)
+    scroll(0,170)
     currentPage = currentPage+1
     document.getElementById("progress").innerHTML = currentPage*(20) + '%'
     if(currentPage == 4){
-        document.getElementById("next").innerHTML = "Finish"
+        document.getElementById("next").innerHTML = "Subumit New Score"
         generateQuestions(currentPage)
         document.getElementById("next").removeEventListener("click", continuePlay)
         document.getElementById("next").addEventListener("click", endGame)
@@ -144,21 +164,23 @@ function registerScore(){
 }
 
 function resetBoard(){
-    rates.map((rate)=>rate.style.backgroundColor = "#008CBA")
+    rates.map((rate, i)=>rate.style.backgroundColor = (Math.floor(i / 5) % 2 == 0) ? "#008CBA" :  "#3bba00")
     scores = scores.map((score)=> score = 0)
     clicked = clicked.map((c)=> c = false)
-
-    // console.log("reset")
+    document.getElementById('next').disabled = true
 }
 
 function endGame(){
+    upDateUser(finalScore)
     document.getElementById("progress").innerHTML = "100%"
     // register final score
     registerScore()
 
-    document.getElementById("gameDisplay").remove()
-
-    let ScoreDisplay = document.createElement('div')
+    gameDisplay.remove()
+    questionDisplay.remove()
+    rateDisplay.remove()
+    submitDisplay.remove()
+    
     let extraversionDisplay = document.createElement('div')
     extraversionDisplay.innerHTML = "Extraversion: " + finalScore.extraversion
     let agreeablenessDisplay = document.createElement('div')
@@ -170,23 +192,115 @@ function endGame(){
     let intellectDisplay = document.createElement('div')
     intellectDisplay.innerHTML = "Intellect: " + finalScore.intellect
 
-    ScoreDisplay.appendChild(extraversionDisplay)
-    ScoreDisplay.appendChild(agreeablenessDisplay)
-    ScoreDisplay.appendChild(conscientiousnessDisplay)
-    ScoreDisplay.appendChild(emotional_stabilityDisplay)
-    ScoreDisplay.appendChild(intellectDisplay)
+    scoreDisplay.appendChild(extraversionDisplay)
+    scoreDisplay.appendChild(agreeablenessDisplay)
+    scoreDisplay.appendChild(conscientiousnessDisplay)
+    scoreDisplay.appendChild(emotional_stabilityDisplay)
+    scoreDisplay.appendChild(intellectDisplay)
 
-    ScoreDisplay.classList.add("center")
-    body.appendChild(ScoreDisplay)
-    ScoreDisplay.style.marginBottom = "3%"
+    scoreDisplay.style.marginBottom = "3%"
 
-    document.getElementById("next").innerHTML = "Find Your Matches"
-    document.getElementById("next").removeEventListener("click", endGame)
-    document.getElementById("next").addEventListener("click", findMatches)
+    startButton.style.visibility = "visible"
+    matchButton.style.visibility = "visible"
+
+    startButton.onclick = null
+
+    startButton.innerHTML = "Back"
+    startButton.addEventListener("click", ()=>{location.reload()})
 }
 
-function findMatches(){
-    alert("Find your Matches")
+async function findMatches(){
+    matchButton.disabled = true
+    startButton.onclick = null
+
+    startButton.innerHTML = "Back"
+    startButton.addEventListener("click", ()=>{location.reload()})
+
+    if (document.getElementById("next")){
+        document.getElementById("next").style.visibility = "hidden"
+    }
+
+    gameDisplay.remove()
+    questionDisplay.remove()
+    rateDisplay.remove()
+
+    let matches = document.createElement('div')
+    let users = await getUsers()
+    let filteredUsers = filterUsers(users)
+
+    filteredUsers.forEach((user)=>{
+        let match = document.createElement('div')
+        match.classList.add('columns')
+
+        let uname = document.createElement('div')
+        uname.classList.add('column')
+        uname.innerHTML = user[1].userName
+
+        let email = document.createElement('div')
+        email.classList.add('column')
+        email.innerHTML = user[1].email
+
+        let similarity = document.createElement('div')
+        similarity.classList.add('column')
+        similarity.innerHTML = "Similarity: " + user[0] + "%"
+
+        friend = document.createElement('button')
+        friend.innerHTML = "Add This User to Your Friendlist"
+        friend.classList.add('column')
+        friend.classList.add('button')
+        friend.classList.add('is-success')
+        friend.id = user[1].userName + "add"
+        friend.addEventListener("click", addFriend)
+        friends.push(friend)
+
+        match.appendChild(uname)
+        match.appendChild(email)
+        match.appendChild(similarity)
+        match.appendChild(friend)
+
+        matches.appendChild(match)
+    })
+    scoreDisplay.appendChild(matches)
+    scoreDisplay.style.marginBottom = "3%"
 }
 
+function filterUsers(users){
+    let thisPoints = []
+    thisPoints.push(finalScore.extraversion)
+    thisPoints.push(finalScore.agreeableness)
+    thisPoints.push(finalScore.conscientiousness)
+    thisPoints.push(finalScore.emotional_stability)
+    thisPoints.push(finalScore.intellect)
+
+    let theirPoints = []
+    let diff = []
+    let similarities = new Array(users.length);
+
+    for (var i = 0; i < similarities.length; i++) {
+        similarities[i] = new Array(2);
+    }
+
+    users.forEach((user)=>{
+        theirPoints.push(user.matchPoint)
+    })
+    for (let i  = 0; i < theirPoints.length; i++){
+        for (let j = 0; j < 5; j++){
+            diff[j] = Math.abs(theirPoints[i][j] - thisPoints[j])
+        }
+        let t = 0
+        for (let k = 0; k < diff.length; k++){
+            t = t + diff[k]
+        }
+        similarities[i][0] = 100 - t
+        similarities[i][1] = users[i]
+    }
+
+    similarities.sort(function(a,b) {
+        return b[0]-a[0]
+    });
+
+
+    let filteredUsers = similarities.slice(0,5)    
+    return filteredUsers
+}
 
