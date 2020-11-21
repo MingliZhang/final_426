@@ -1,4 +1,4 @@
-import {getUser, getUsers, upDateUser, addFriend, testAxios} from './script.js'
+import {getUser, getUsers, upDateUser, addFriend, testAxios, getFakeUsers} from './script.js'
 import getQuestions from './questions.js'
 
 
@@ -48,18 +48,16 @@ function initialte() {
     finalScore.emotional_stability = 0
     finalScore.intellect = 0
 
-    document.getElementById("scoreBoard").style.visibility = "visible"
     startButton.style.visibility = "hidden"
     matchButton.style.visibility = "hidden"
-    document.getElementById("userName").innerHTML = (user.userName)
     for(let i = 0; i < 10; i++){
         rateBox = document.createElement('div')
-        rateBox.innerHTML = i+1
+        rateBox.innerHTML = '<font size="3">' + (i+1) + '</font>'
         rateDisplay.appendChild(rateBox)
         for (let j = 0; j < 5; j++){
             rate = document.createElement('button')
             rate.classList.add((i % 2 == 0) ? "rateButtonEven" : "rateButtonOdd")
-            rate.innerHTML = j+1
+            rate.innerHTML = '<font size="3">' + (j+1) + '</font>'
             rate.id = "r"+i+"c"+j
             rate.addEventListener("click", rateClickEvent)
             rateBox.appendChild(rate)
@@ -81,6 +79,9 @@ function initialte() {
     nextButton.id = "next"
     nextButton.disabled = true
 }
+document.addEventListener("DOMContentLoaded",function(){
+    document.getElementById("userName").innerHTML = (user.userName)
+  })
 startButton.onclick = initialte
 matchButton.onclick = findMatches
 
@@ -90,7 +91,7 @@ function generateQuestions(pageNum){
             questionBlock = document.createElement('div')
             questionBlock.classList.add("questions")
             // questionBlock.id = ("ques" + i)
-            questionBlock.innerHTML = i+1 + " " + questions[pageNum*10+i].question
+            questionBlock.innerHTML = '<font size="4">' + (i+1) + '</font>' + " " + questions[pageNum*10+i].question
             questionDisplay.appendChild(questionBlock)
             blocks.push(questionBlock)
         }
@@ -106,14 +107,14 @@ function rateClickEvent(e){
     let score = target.innerHTML
     let id = target.id
 
-    e.target.style.backgroundColor = "red"
+    e.target.style.backgroundColor = "rgb(242, 107, 107)"
 
     let rId = parseInt(id[1])
     let cId = parseInt(id[3])
     clicked[rId*5 + cId] = true
     for (let i = 0; i < 5; i++){
         if(clicked[rId*5+i] == true && rId*5+i != rId*5+cId){
-            rates[rId*5+i].style.backgroundColor = (rId % 2 == 0) ? "#008CBA" : "#3bba00"
+            rates[rId*5+i].style.backgroundColor = (rId % 2 == 0) ? "rgb(131, 214, 247)" : "rgb(131, 247, 203)"
             clicked[rId*5+i] = false
         }
     }
@@ -225,42 +226,58 @@ async function findMatches(){
     rateDisplay.remove()
 
     let matches = document.createElement('div')
-    let users = await getUsers()
+
+    // TODO Change this back
+    // let users = await getUsers()
+    let users = getFakeUsers()
+
     let filteredUsers = filterUsers(users)
 
-    filteredUsers.forEach((user)=>{
-        let match = document.createElement('div')
-        match.classList.add('columns')
-
-        let uname = document.createElement('div')
-        uname.classList.add('column')
-        uname.innerHTML = user[1].userName
-
-        let email = document.createElement('div')
-        email.classList.add('column')
-        email.innerHTML = user[1].email
-
-        let similarity = document.createElement('div')
-        similarity.classList.add('column')
-        similarity.innerHTML = "Similarity: " + user[0] + "%"
-
-        friend = document.createElement('button')
-        friend.innerHTML = "Add This User to Your Friendlist"
-        friend.classList.add('column')
-        friend.classList.add('button')
-        friend.classList.add('is-success')
-        friend.id = user[1].userName + "add"
-        friend.addEventListener("click", addFriend)
-        friends.push(friend)
-
-        match.appendChild(uname)
-        match.appendChild(email)
-        match.appendChild(similarity)
-        match.appendChild(friend)
-
-        matches.appendChild(match)
-    })
-    scoreDisplay.appendChild(matches)
+    // for people who has no score
+    if (finalScore.agreeableness+
+        finalScore.conscientiousness+
+        finalScore.emotional_stability+
+        finalScore.extraversion+
+        finalScore.intellect == -5){
+            let noMatchDisplay = document.createElement('div')
+            noMatchDisplay.innerHTML = "You have not completed the personality questionnaire..."
+            scoreDisplay.classList.add("score")
+            scoreDisplay.appendChild(noMatchDisplay)
+    } else {
+        filteredUsers.forEach((user)=>{
+            let match = document.createElement('div')
+            match.classList.add('columns')
+    
+            let uname = document.createElement('div')
+            uname.classList.add('column')
+            uname.innerHTML = user[1].userName
+    
+            let email = document.createElement('div')
+            email.classList.add('column')
+            email.innerHTML = user[1].email
+    
+            let similarity = document.createElement('div')
+            similarity.classList.add('column')
+            similarity.innerHTML = "Similarity: " + user[0] + "%"
+    
+            friend = document.createElement('button')
+            friend.innerHTML = "Add This User to Your Friendlist"
+            friend.classList.add('column')
+            friend.classList.add('button')
+            friend.classList.add('is-success')
+            friend.id = user[1].userName + "add"
+            friend.addEventListener("click", addFriend)
+            friends.push(friend)
+    
+            match.appendChild(uname)
+            match.appendChild(email)
+            match.appendChild(similarity)
+            match.appendChild(friend)
+    
+            matches.appendChild(match)
+        })
+        scoreDisplay.appendChild(matches)
+        }    
     scoreDisplay.style.marginBottom = "3%"
 }
 
