@@ -9,7 +9,7 @@ export function getUser(){
     //     method: 'get',
     //     url: 'https://us-central1-comp426-firebase.cloudfunctions.net/users/${id}}'	
     //     });
-    console.log(getCookie())
+    console.log(getCookie('info'))
     let user = {
         userName: "",
         email: "",

@@ -226,7 +226,7 @@ async function findMatches(){
     matchButton.disabled = true
     startButton.onclick = null
 
-    startButton.innerHTML = "Back"
+    startButton.innerHTML = "&nbsp Back"
     startButton.addEventListener("click", ()=>{location.reload()})
 
     if (document.getElementById("next")){
