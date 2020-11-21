@@ -1,4 +1,7 @@
-
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();  
+  
+});
 
 let socket = io();
 socket.on('message', message=>{
@@ -11,10 +14,7 @@ socket.on('chatMessage', message=>{
 
 
 
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();  
-  
-});
+
 
 $('.textarea').keydown(function (e) {
 

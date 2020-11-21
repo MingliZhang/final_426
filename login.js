@@ -12,7 +12,7 @@ const handelLoginButtonPress = async function (event) {
   event.preventDefault();
   event.stopPropagation();
   let email = $("#email").val();
-  let password = $("#password").val();
+  let password = $("#hidden").val();
 
   // need to make a call to the backend and find the user id in this case;
   const $message = $("#message");
