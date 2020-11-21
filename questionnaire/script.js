@@ -90,7 +90,7 @@ export function addFriend(event){
     let id = target.id
     console.log("Friend added: " + id)  
 
-    // TODO
+    // TODO: friend add
 }
 
 export async function testAxios(){

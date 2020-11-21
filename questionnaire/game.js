@@ -244,9 +244,9 @@ async function findMatches(){
 
     let matches = document.createElement('div')
 
-    // TODO Change this back
-    // let users = await getUsers()
-    let users = getFakeUsers()
+    // Change this back -- fateppl vs realppl
+    let users = await getUsers()
+    // let users = getFakeUsers()
 
     let filteredUsers = filterUsers(users)
 
@@ -275,7 +275,7 @@ async function findMatches(){
     
             let similarity = document.createElement('div')
             similarity.classList.add('column')
-            similarity.innerHTML = "Similarity: " + user[0] + "%"
+            similarity.innerHTML = (user[0] == -1) ? "No data" : "Similarity: " + user[0] + "%"
     
             friend = document.createElement('button')
             friend.innerHTML = "Add to Your Friendlist"
@@ -321,13 +321,21 @@ function filterUsers(users){
     })
     for (let i  = 0; i < theirPoints.length; i++){
         for (let j = 0; j < 5; j++){
-            diff[j] = Math.abs(theirPoints[i][j] - thisPoints[j])
+            if(theirPoints[i][j] != -100){
+                diff[j] = Math.abs(theirPoints[i][j]+20 - (thisPoints[j]+20))
+            } else {
+                diff[j] = -9999
+            }
         }
         let t = 0
         for (let k = 0; k < diff.length; k++){
             t = t + diff[k]
         }
-        similarities[i][0] = 100 - t
+        if (t < -10000){
+            similarities[i][0] = -1
+        } else {
+            similarities[i][0] = 100 - t
+        }
         similarities[i][1] = users[i]
     }
 
