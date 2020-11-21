@@ -104,7 +104,6 @@ function generateQuestions(pageNum){
 
 function rateClickEvent(e){
     let target = e.currentTarget
-    let score = target.innerHTML
     let id = target.id
 
     if (target == undefined){
@@ -116,6 +115,8 @@ function rateClickEvent(e){
 
     let rId = parseInt(id.charAt(1))
     let cId = parseInt(id.charAt(3))
+    let score = cId+1
+    console.log(score)
     // console.log(id + " " + rId + " " + cId)
     clicked[rId*5 + cId] = true
     for (let i = 0; i < 5; i++){
@@ -159,6 +160,7 @@ function continuePlay(){
 }
 
 function registerScore(){
+    console.log(scores)
     finalScore.extraversion += scores[0]
     finalScore.agreeableness -= scores[1]
     finalScore.conscientiousness += scores[2]
@@ -172,7 +174,7 @@ function registerScore(){
 }
 
 function resetBoard(){
-    rates.map((rate, i)=>rate.style.backgroundColor = (Math.floor(i / 5) % 2 == 0) ? "#008CBA" :  "#3bba00")
+    rates.map((rate, i)=>rate.style.backgroundColor = (Math.floor(i / 5) % 2 == 0) ? "rgb(131, 214, 247)" : "rgb(131, 247, 203)")
     scores = scores.map((score)=> score = 0)
     clicked = clicked.map((c)=> c = false)
     document.getElementById('next').disabled = true
