@@ -9,9 +9,12 @@
         <script src = "game.js" type="module" charset= "utf-8"></script>
         <script src = "questions.js" type="module" charset= "utf-8"></script>
         <script src="../node_modules/axios/dist/axios.js"></script>
+        <script src="../cookie.js"></script>
 
     </head>
     <body>
+
+        
         <section class="hero is-primary">
             <div class="hero-body">
               <div class="container">
@@ -24,20 +27,20 @@
               </div>
             </div>
           </section>
-
-        
         <div class = "notification"> 
-                <div>Rate from 1 to 5 how accurate are the following questions describing you!</div>
                 <div class = "score" id = "scoreBoard">
-                    <div id = "userName">Play Play Play</div>
+                    <div id = "userName" class = "fas fa-user">&nbsp Play Play Play</div>
                     <div> Progress: </div>
                     <div id = "progress"> 0% </div>
                 </div>
+            </br>
+                <div>Rate from 1 to 5 how accurate are the following questions describing you!</div>
                 <div>1 = Inaccurate 2 = Somewhat Inaccurate 3 = Neutral 4 = Somewhat Accurate 5 = Accurate</div>
+            </br>
             <div class = "field is-grouped">
-                <button class = "button is-danger center" id = "startButton">Play</button>
-                <button class = "button is-danger center" id = "matchButton">Current Matches</button>
-                <button class = "button is-danger center" id = "home" onclick=backHome()>Back to Home</button>
+                <button class = "button is-danger center fas fa-play" id = "startButton"> &nbsp Play</button>
+                <button class = "button is-danger center fas fa-list" id = "matchButton"> &nbsp Current Matches</button>
+                <button class = "button is-danger center fas fa-home" id = "home" onclick=backHome()> &nbsp Back to Home</button>
 
                 <script type="text/javascript">
                     function backHome()

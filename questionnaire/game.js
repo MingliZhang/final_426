@@ -48,7 +48,14 @@ function initialte() {
     finalScore.emotional_stability = 0
     finalScore.intellect = 0
 
-    startButton.style.visibility = "hidden"
+    startButton.onclick = null
+
+    startButton.innerHTML = "&nbsp Back"
+    startButton.classList.remove("fa-play")
+    startButton.classList.add("fas")
+    startButton.classList.add("fa-arrow-circle-left")
+    startButton.addEventListener("click", ()=>{location.reload()})
+
     matchButton.style.visibility = "hidden"
     for(let i = 0; i < 10; i++){
         rateBox = document.createElement('div')
@@ -69,10 +76,12 @@ function initialte() {
         generateQuestions(i)
     }
     let nextButton = document.createElement('button')
-    nextButton.innerHTML = "Next"
+    nextButton.innerHTML = "&nbsp Next"
     nextButton.classList.add("button")
     nextButton.classList.add("is-success")
     nextButton.classList.add("is-fullwidth")
+    nextButton.classList.add("fas")
+    nextButton.classList.add("fa-forward")
     nextButton.style.marginBottom="5%"
     submitDisplay.appendChild(nextButton)
     nextButton.addEventListener("click", continuePlay)
@@ -80,7 +89,7 @@ function initialte() {
     nextButton.disabled = true
 }
 document.addEventListener("DOMContentLoaded",function(){
-    document.getElementById("userName").innerHTML = (user.userName)
+    document.getElementById("userName").innerHTML = ("&nbsp" + user.userName)
   })
 startButton.onclick = initialte
 matchButton.onclick = findMatches
@@ -210,13 +219,7 @@ function endGame(){
 
     scoreDisplay.style.marginBottom = "3%"
 
-    startButton.style.visibility = "visible"
     matchButton.style.visibility = "visible"
-
-    startButton.onclick = null
-
-    startButton.innerHTML = "Back"
-    startButton.addEventListener("click", ()=>{location.reload()})
 }
 
 async function findMatches(){
@@ -270,10 +273,12 @@ async function findMatches(){
             similarity.innerHTML = "Similarity: " + user[0] + "%"
     
             friend = document.createElement('button')
-            friend.innerHTML = "Add This User to Your Friendlist"
+            friend.innerHTML = "Add to Your Friendlist"
             friend.classList.add('column')
             friend.classList.add('button')
-            friend.classList.add('is-success')
+            friend.classList.add('is-warning')
+            friend.classList.add('fas')
+            friend.classList.add('fa-user-plus')
             friend.id = user[1].userName + "add"
             friend.addEventListener("click", addFriend)
             friends.push(friend)

@@ -66,17 +66,17 @@ getNewQuestion = () => {
         return window.location.assign('./end.html');
     }
     questionCounter++;
-    progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
+    progressText.innerHTML = `Question ${questionCounter}/${MAX_QUESTIONS}`;
     //Update the progress bar
     progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
 
     const questionIndex = Math.floor(Math.random() * availableQuesions.length);
     currentQuestion = availableQuesions[questionIndex];
-    question.innerText = currentQuestion.question;
+    question.innerHTML = currentQuestion.question;
 
     choices.forEach((choice) => {
         const number = choice.dataset['number'];
-        choice.innerText = currentQuestion['choice' + number];
+        choice.innerHTML = currentQuestion['choice' + number];
     });
 
     availableQuesions.splice(questionIndex, 1);
@@ -103,11 +103,11 @@ choices.forEach((choice) => {
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
             getNewQuestion();
-        }, 1000);
+        }, 500);
     });
 });
 
 incrementScore = (num) => {
     score += num;
-    scoreText.innerText = score;
+    scoreText.innerHTML = score;
 };

@@ -9,9 +9,23 @@ const MAX_HIGH_SCORES = 5;
 
 finalScore.innerText = mostRecentScore;
 
-username.addEventListener('keyup', () => {
-    saveScoreBtn.disabled = !username.value;
-});
+function getUser(){
+    return ("SWWSWWSWW")
+}
+username.innerHTML = getUser()
+function getFriends(){
+
+}
+function updateUserScore(){
+    e.preventDefault();
+
+    const score = {
+        score: mostRecentScore,
+        name: username.value,
+    };
+
+    console.log("game score updated")
+}
 
 saveHighScore = (e) => {
     e.preventDefault();
@@ -27,3 +41,5 @@ saveHighScore = (e) => {
     localStorage.setItem('highScores', JSON.stringify(highScores));
     window.location.assign('/game');
 };
+
+
