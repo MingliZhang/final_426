@@ -4,24 +4,24 @@ $(document).ready(function(){
   
 });
 
-function buildConnection(){
-  socket = io();
-  socket.on('message', message=>{
-    console.log(message)
-  })
+// function buildConnection(){
+//   socket = io();
+//   socket.on('message', message=>{
+//     console.log(message)
+//   })
 
-  socket.on('chatMessage', message=>{
-    renderOthers(message);
-  })
+//   socket.on('chatMessage', message=>{
+//     renderOthers(message);
+//   })
 
-}
+// }
 
 
 $('.textarea').keydown(function (e) {
 
   if ((event.keyCode == 10 || event.keyCode == 13) && event.ctrlKey){
     const value = event.target.value;
-    socket.emit('chatMessage', value);
+    // socket.emit('chatMessage', value);
     render(value);
     event.target.value='';
     event.target.focus();
@@ -31,14 +31,14 @@ $('.textarea').keydown(function (e) {
 function showChat(){
   var temp = $('#chatWindow');
   temp.css('visibility', 'visible');
-  buildConnection();
+  // buildConnection();
   let chat_ul = document.getElementById('chat-ul')
   //need to load history
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
 
 function leave(){
-  socket.disconnect();
+  // socket.disconnect();
   $('#chatWindow').css('visibility', 'hidden')
   socket = undefined;
 }
