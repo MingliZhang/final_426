@@ -19,6 +19,7 @@ const handelSignupButtonPress = async function (event) {
   let psConfirm = $("#hidden2").val();
   const $message = $("#message");
   let message = "";
+  let problem = true;
 
   if (
     userName.length === 0 ||
@@ -48,69 +49,32 @@ const handelSignupButtonPress = async function (event) {
     } else if (searchEmail.length !== 0) {
       message = "This email has already been registered!";
     } else {
+      message = "please wait, we are creating your account!";
+      $message.empty();
+      $message.append(
+        `<p style="font-weight: bold; color:green">${message}</p>`
+      );
       const result2 = await axios({
         method: "post",
         url: "https://us-central1-comp426-firebase.cloudfunctions.net/users",
         data: {
-          userName: username,
+          userName: userName,
           email: email,
           password: password,
         },
       });
       // This should jump to the personality test page, and it would be loged in already.
-      window.location.href = "../index.html";
+      createCookie("info", `${result2.data.id}, ${userName}, ${email}`);
+      problem = false;
+      window.location.href = "../questionnaire/index.html";
     }
   }
-  $message.empty();
-  $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
+  if (problem) {
+    $message.empty();
+    $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
+  }
 };
 
 $(function () {
   $("#signUpButton").on("click", handelSignupButtonPress);
 });
-
-//   if (!email || !password || !psConfirm) {
-//     let message = "Please provide all the needed fields above!";
-//     $message.empty();
-//     $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
-//     return;
-//   }
-//   if (psConfirm !== password) {
-//     let message = "The two password provided do not match each other!";
-//     $message.empty();
-//     $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
-//     return;
-//   }
-//   if (!ValidateEmail(email)) {
-//     let message = "Invalid email address!";
-//     $message.empty();
-//     $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
-//     return;
-//   }
-//   const result = await axios({
-//     method: "get",
-//     url: "https://us-central1-comp426-firebase.cloudfunctions.net/users",
-//   });
-//   let user = result.data.filter((user) => user.email === email)[0];
-//   if (user) {
-//     let message = "This email has been used!Try another one.";
-//     $message.empty();
-//     $message.append(`<p style="font-weight: bold; color:red">${message}</p>`);
-//     return;
-//   }
-//   const username = email.split("@")[0];
-//   const result2 = await axios({
-//     method: "post",
-//     url: "https://us-central1-comp426-firebase.cloudfunctions.net/users",
-//     data: {
-//       userName: username,
-//       email: email,
-//       password: password,
-//     },
-//   });
-//   $("body").append(
-//     '<h1 style="position: absolute; left : 40%; top: 20%;color: white">Add some message about successful signup</h1>'
-//   );
-//   setTimeout(function () {
-//     window.location.href = "../index.html";
-//   }, 1000);

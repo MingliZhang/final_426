@@ -3,5 +3,6 @@ $(function(){
     $('#gameicon a').attr("href", "../game/index.html")
     $('#inboxicon a').attr("href", "../postbox/index.html")
     $('#chaticon a').attr("href", "#")
+    $('#questionicon a').attr("href", "../questionnaire/index.html")
     $('#usericon a').attr("href", "#")
 })

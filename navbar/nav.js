@@ -17,6 +17,7 @@ const loadNavIntoDom = function(){
             <div class = "icons" id = "gameicon"><a href = "#"><i class="fas fa-gamepad"></i></a></div>
             <div class = "icons" id = "inboxicon"><a href = "#"><i class="fas fa-envelope-open-text"></i></a></div>
             <div class = "icons" id = "chaticon"><a href = "#"><i class="fas fa-comments"></i></a></div>
+            <div class = "icons" id = "questionicon"><a href = "#"><i class="far fa-map"></i></i></a></div>
         </div>
         <div class = "icons" id = "usericon">
             <a href = "#"><i class="fas fa-user-circle"></i></a>
