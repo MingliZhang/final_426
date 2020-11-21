@@ -58,7 +58,7 @@ function initialte() {
             rate = document.createElement('button')
             rate.classList.add((i % 2 == 0) ? "rateButtonEven" : "rateButtonOdd")
             rate.innerHTML = '<font size="3">' + (j+1) + '</font>'
-            rate.id = "r"+i+"c"+j
+            rate.setAttribute("id", "r"+i+"c"+j)
             rate.addEventListener("click", rateClickEvent)
             rateBox.appendChild(rate)
             rates.push(rate)
@@ -103,17 +103,24 @@ function generateQuestions(pageNum){
 }
 
 function rateClickEvent(e){
-    let target = e.target
+    let target = e.currentTarget
     let score = target.innerHTML
     let id = target.id
 
-    e.target.style.backgroundColor = "rgb(242, 107, 107)"
+    if (target == undefined){
+        target = e.currentTarget.parentNode
+    }
+    // console.log(target.type)
 
-    let rId = parseInt(id[1])
-    let cId = parseInt(id[3])
+    target.style.backgroundColor = "rgb(242, 107, 107)"
+
+    let rId = parseInt(id.charAt(1))
+    let cId = parseInt(id.charAt(3))
+    // console.log(id + " " + rId + " " + cId)
     clicked[rId*5 + cId] = true
     for (let i = 0; i < 5; i++){
         if(clicked[rId*5+i] == true && rId*5+i != rId*5+cId){
+            
             rates[rId*5+i].style.backgroundColor = (rId % 2 == 0) ? "rgb(131, 214, 247)" : "rgb(131, 247, 203)"
             clicked[rId*5+i] = false
         }
