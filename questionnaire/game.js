@@ -343,8 +343,19 @@ function filterUsers(users){
         return b[0]-a[0]
     });
 
-
-    let filteredUsers = similarities.slice(0,5)    
+    let selfFlag = false
+    let filteredUsers = []
+ 
+    for (let i = 0; i < 5; i++){
+        if (similarities[i]){
+            if (similarities[i][1].id == user.id){
+                selfFlag = true
+            } else {
+                filteredUsers.push(similarities[i])
+            }
+        } 
+    }
+    
     return filteredUsers
 }
 

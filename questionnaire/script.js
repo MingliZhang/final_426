@@ -21,6 +21,7 @@ export async function getUser(){
         });
     
         user = {
+            id: "",
             userName: "",
             email: "",
             password: "",
@@ -35,6 +36,7 @@ export async function getUser(){
         // user.friends = []
         // user.highestGameScore = 0
 
+        user.id = result.data.id
         user.userName = result.data.userName
         user.email = result.data.email
         user.password = result.data.password
