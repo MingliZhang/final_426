@@ -41,7 +41,7 @@ export async function getUser(){
         user.email = result.data.email
         user.password = result.data.password
         user.matchPoint = result.data.matchPoint
-        user.friends = result.data.friends
+        user.following = result.data.following
         user.highestGameScore = result.data.highestGameScore
         return user
     } catch {
