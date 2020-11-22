@@ -2,7 +2,6 @@
 var socket = undefined;
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();  
-  
 });
 
 function buildConnection(){
@@ -42,8 +41,10 @@ $('.textarea').keydown(function (e) {
 
   if ((event.keyCode == 10 || event.keyCode == 13) && event.ctrlKey){
     const value = event.target.value;
+    if(!value) {return}
     socket.emit('chatMessage', value);
     render(value);
+    $('#chat-ul').scrollTop = $('#chat-ul').scrollHeight;
     event.target.value='';
     event.target.focus();
   }

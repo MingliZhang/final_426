@@ -33,22 +33,21 @@
                 </div>
 
                 <div id = 'main2' class="column is-7" style="min-height: 722px; background-color:  #ffa161;">
-                    <div id="head" style="text-align: center;">
-                        <b id="home" style="margin: auto;font-size: 30px;">Home</b>
-                    </div>  
-                    <div id = "chatWindow"style="background: white url(./background/2.png);border: black solid 1px;width: auto;height: 670px; visibility: visible; z-index: 5; border-radius: 5px">
+                     
+                    <div id = "chatWindow"style="background: white url(./background/spot.png);border: black solid 1px;width: auto;height: 720px;  z-index: 5; ">
                     
-                        <div id = "leave"style="font-size: 30px;width: max-content;margin: auto;text-align: center;border-bottom: black solid 1px;">Other User</div>
+                        <div id = "leave"style="font-size: 30px;width: max-content;margin: auto;text-align: center;border-bottom: black solid 1px;">Welcome to Group Chat!</div>
                         <br>
+                        <!-- <em style="text-align: center;color: yellow;position: relative;font-size: larger;">Don't put sensitive information in chat window. Have fun!</em> -->
+                        
                         <ul id = "chat-ul">
-                            <li class="him">Sample By anOther User</li>
-                            <li class="me">Sample By Me</li>
-                            
                         </ul>
-                        <div class="field" style="position: absolute; bottom: 0; width: 100%;">
+                        <div class="field" style="position: absolute; bottom: 0; width: 95%;">
+                            <button id="expression" style="position: relative; left: 840px; top: 100px;z-index: 10" data-toggle="tooltip" data-placement="right" title="expression"><i class="far fa-smile fa-2x"></i></button><button data-toggle="tooltip" data-placement="right" title="background" id="background" style="position: relative; left: 795px; top: 69px;z-index: 10"><i class="fas fa-image fa-2x"></i></button ><button data-toggle="tooltip" data-placement="right" title="clear" id = "clear" style="position: relative; left: 751px; top: 39px;z-index: 10"><i class="fas fa-ban fa-2x"></i></button>
                             <div class="control">
-                                <textarea id="textarea"class="textarea is-primary" placeholder="Press Ctrl + Enter to send" rows="2" style="resize:none;height: 100px"></textarea>
+                                <textarea id="textarea"class="textarea is-primary" placeholder="Press Ctrl + Enter to send" rows="2" style="resize:none;height: 100px; opacity: 0.8;">Remember: Press Ctrl + Enter to send!!!</textarea>
                             </div>
+                            
                         </div>
                     </div>                  
                 </div>
@@ -57,30 +56,51 @@
                     <br>
                     <button onclick='showFollow()' id="add_follow" data-toggle="tooltip" data-placement="bottom" title="follow"><i class="fas fa-plus-square fa-2x"></i></button>
                     <br><br>
-                    <div id="follow_column" style="height: 320px; overflow: auto;"></div>
-                    <div style="position: relative;; border-top: darkslategray solid 1px;">
+                    <div id="follow_column" style="height: 300px; overflow: auto;"></div>
+                    <div style="position: relative;; border-top: darkslategray solid 1px;text-align: center;">
+                        <h1 id="title">It must display something...</h1>
                         <br>
-                        <h1 style="text-align: center;">Recommendation</h1>
-                        <div id="friend_column">
-                            <div class="individual">
-                                <p>Sample Name1</p>
-                            </div>
-                            <div class="individual">
-                                <p>Sample Name2</p>
-                            </div>
-                        </div>
+                        <div id="choice"> </div>
                     </div>
-                    
-
                     <br>
                 </div>
             </div>
         </div>
         <script src="../cookie.js"></script>
+        
         <script>
             if(!getCookie('info')){
               window.location.href = "../index.html";
             }
+            $('#clear').on('click', function(){$('#chat-ul').empty()})
+            $('#background').on('click', function(){
+                $('#choice').empty();
+                $('#title').html('Please choose your background');
+                const div = `<div id="bg-options" style="display: grid;grid-template-columns: repeat(2, 1fr);grid-gap: 10px;">
+                                <button onclick="$('#chatWindow').css('background-image', 'url(./background/christmas-tree.jpg)')" style="background: url('./background/epitome/christmas-tree.jpg');height: 125px;width: 175px;"></button>
+                                <button onclick="$('#chatWindow').css('background-image', 'url(./background/wave.jpg)')" style="background: url('./background/epitome/wave.jpg');height: 125px;width: 175px;"></button>
+                                <button onclick="$('#chatWindow').css('background-image', 'url(./background/spot.png)')" style="background: white url('./background/spot.png');height: 125px;width: 175px;"></button>
+                                <button onclick="$('#chatWindow').css('background-image', 'url(./background/UNC.jpg)')" style="background: url('./background/epitome/UNC.jpg');height: 125px;width: 175px;"></button>
+                            </div>`;
+                $('#choice').append(div)
+            })
+            $('#expression').on('click', function(){
+                $('#choice').empty();
+                $('#title').html('Please choose your expression to add');
+                const div = `<div id="bg-options" style="display: grid;grid-template-columns: repeat(3, 1fr);grid-gap: 15px;">
+                                <button class="ex-btn">w(ﾟДﾟ)w</button> <button class="ex-btn" onclick = "">( *︾▽︾)</button> <button class="ex-btn">[]~(￣▽￣)~*</button> 
+                                <button class="ex-btn">（￣.￣）</button> <button class="ex-btn">╮(╯▽╰)╭</button> <button class="ex-btn">（＞﹏＜）</button> 
+                                <button class="ex-btn">（→_→）</button><button class="ex-btn">（。_。）</button> <button class="ex-btn">o((⊙﹏⊙))o</button> 
+                                <button class="ex-btn">(*^▽^*)</button> <button class="ex-btn">(￣o￣) . z Z</button> <button class="ex-btn">(ง •_•)ง</button> 
+                                <button class="ex-btn">(✧◡✧) </button> <button class="ex-btn">(⊙﹏⊙)</button> <button class="ex-btn" style = "width: auto">ヾ(￣▽￣)Bye</button> 
+                                <button class="ex-btn">(o゜▽゜)o☆</button> <button class="ex-btn">ㄟ(≧◇≦)ㄏ</button> <button class="ex-btn" style = "width: auto">(＃￣～￣＃)</button> 
+                            </div>`;
+                $('#choice').append(div)
+                $('.ex-btn').on('click', function(){
+                    const value = $('#textarea').val();
+                    $('#textarea').val(value+$(this).html());
+                })
+            })
         </script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="../node_modules/axios/dist/axios.js"></script>
