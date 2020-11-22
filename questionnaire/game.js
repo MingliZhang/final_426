@@ -22,7 +22,7 @@ let rateBoxes = []
 let rate
 let rates = []
 let friend
-let friends = []
+let following = []
 
 let scores = new Array(10).fill(0)
 let currentPage = 0
@@ -278,7 +278,7 @@ async function findMatches(){
             similarity.innerHTML = (user[0] == -1) ? "No data" : "Similarity: " + user[0] + "%"
     
             friend = document.createElement('button')
-            friend.innerHTML = "Add to Your Friendlist"
+            friend.innerHTML = "&nbsp Follow this User"
             friend.classList.add('column')
             friend.classList.add('button')
             friend.classList.add('is-warning')
@@ -286,7 +286,7 @@ async function findMatches(){
             friend.classList.add('fa-user-plus')
             friend.id = user[1].email
             friend.addEventListener("click", addFriend)
-            friends.push(friend)
+            following.push(friend)
     
             match.appendChild(uname)
             match.appendChild(email)

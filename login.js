@@ -27,7 +27,6 @@ const handelLoginButtonPress = async function (event) {
         url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/email/${email}`,
       });
       let data = result.data;
-      console.log(data);
       if (data.password != password) {
         message = "The password provided seems to be Incorrect!";
       } else {

@@ -1,19 +1,19 @@
 const questions = [
     {
       "id": 1,
-      "question": "Am the life of the party",
+      "question": "I am the life of the party",
       "category": "extraversion",
       "scale": 1
     },
     {
       "id": 2,
-      "question": "Feel little concern for others",
+      "question": "I feel little concern for others",
       "category": "agreeableness",
       "scale": -1
     },
     {
       "id": 3,
-      "question": "Am always prepared",
+      "question": "I am always prepared",
       "category": "conscientiousness",
       "scale": 1
     },
