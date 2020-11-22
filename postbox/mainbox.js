@@ -139,9 +139,7 @@ const loadDetailContent = async function (id) {
     }
 }
 
-const renderReply = async function(reply) {
-    let user = await getUser();
-
+const renderReply = function(reply) {
     let render = `
     <div class = "post card" id = "replyBox${reply.id}">
         <div class = "card-header">
