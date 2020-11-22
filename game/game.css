@@ -14,8 +14,7 @@ div{
 .choice-container:hover {
   cursor: pointer;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-  color:#925e87;
-  background-color:rgb(253, 255, 140);
+  color:#ddeb5f;
   font-weight: 600;
 }
 
