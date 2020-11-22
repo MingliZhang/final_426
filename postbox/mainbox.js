@@ -120,8 +120,8 @@ const loadDetailContent = async function (id) {
       });
     const postList = result.data;
     for (let i=0; i<postList.length;i++){
-        content.append(renderComment(postList[i]));
-        $(`#replyComment${postList[i].id}`).on('click', handleCommentReply)
+        content.append(await renderComment(postList[i]));
+        $(`#deleteComment${postList[i].id}`).on('click', handleDeleteComment(postList[i].id))
         if(postList[i].comments.length != 0){
             content.append(`<div class = "commentBox" id = "commentBox${postList[i].id}"></div>`)
             $(`#commentBox${postList[i].id}`).append(`<p>Reply from ${postList[i].comments[0].userName}: </p>`)
@@ -139,7 +139,9 @@ const loadDetailContent = async function (id) {
     }
 }
 
-const renderReply = function(reply) {
+const renderReply = async function(reply) {
+    let user = await getUser();
+
     let render = `
     <div class = "post card" id = "replyBox${reply.id}">
         <div class = "card-header">
@@ -203,7 +205,7 @@ const handlenewQuestionSubmit = async function(event){
         url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${result.data}`
         });
 
-    $(renderComment(post.data)).insertAfter(`#questionBox`);
+    $(await renderComment(post.data)).insertAfter(`#questionBox`);
     // location.reload(true);
 }
 
@@ -215,33 +217,33 @@ const handlenewQuestionCancel = function(event){
     $(`#postQuestion${postToId}`).on('click', handlePostQuestion);
 }
 
-const renderComment = function(post){
+const renderComment = async function(post){
+    let user = await getUser();
+
     let comment =  `
         <div class = "card comment" id = "comment${post.id}">
             <div class = "card-header"><p class= "card-header-title">${post.userName}</p></div>
             <div class = "card-content">${post.body}</div>
-            <div class = "card-footer">
-                <button type = "button" class = "button" id = "likeComment${post.id}">Like</button>
-            </div>
+            <div class = "card-footer">`
+    if(user.id == post.uid){
+        comment += `<button type = "button" class = "button" id = "deleteComment${post.id}">Delete</button>
         </div>
-    `;
+    </div>`
+    }else{
+        comment +=`<button type = "button" class = "button" id = "likeComment${post.id}">Like</button>
+        </div>
+    </div>`
+    }
 
     return comment;
 }
 
-const handleCommentReply = async function (event){
-    event.preventDefault();
-    const buttonid = $(event.target).attr("id")
-    const commentid = buttonid.replace('reply', '');
-    const read = await axios({
-        method: 'get',
-        // TODO
-        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts`,
-    });
-
-    //TODO
-    const reply = read.data[0];
-    alert('reply')
+const handleDeleteComment = async function(postid){
+    const result = await axios({
+        method: 'delete',
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${postid}`
+        });
+    $(`comment${postid}`).remove()
 }
 
 //register listeners

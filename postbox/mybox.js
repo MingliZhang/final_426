@@ -28,7 +28,7 @@ const renderPost = function(post) {
 
 const renderReply = function(reply) {
     let render = `
-    <div class = "post card" id = "replyBox${reply.id}">
+    <div class = "post card" id = "replyContainer${reply.id}">
         <div class = "card-header">
             <h3 class = "author card-header-title">${reply.userName}</h2>
         </div>
@@ -55,13 +55,16 @@ const loadPostsIntoDOM = async function() {
     const QuestionList = result.data;
     for (let i=0; i<QuestionList.length;i++){
         $root.append(renderPost(QuestionList[i]));
-        console.log(QuestionList[i].comments)
         if(QuestionList[i].comments.length != 0){
             $root.append(`<div class = "commentBox" id = "commentBox${QuestionList[i].id}"></div>`)
             $(`#commentBox${QuestionList[i].id}`).append(`<p>Your Response: </p>`)
             $(`#commentBox${QuestionList[i].id}`).append(renderReply(QuestionList[i].comments[0]))
         }
         registerListeners(QuestionList[i]);
+
+        $(`#deleteReply${QuestionList[i].id}`).on('click', handleDeleteReply)
+        $(`#editReply${QuestionList[i].id}`).on('click', handleEditReply)
+        
     };
 
     if(QuestionList.length == 0){
@@ -92,8 +95,20 @@ const handleQuestionReply = function (event){
 
 const renderReplyForm = function(id){
     let form = `
-    <form class = "newReply card post" id = "replybox${id}">
+    <form class = "newReply card post replybox${id}">
     <textarea name = "bodytext" class = "textarea newPostText">Type your response here</textarea>
+    <div class = "card-footer">
+        <button type = "button" class = "button" id = "cancelReply${id}">Cancel</button>
+        <button type = "button" class = "button" id = "submitReply${id}">Submit</button>
+    </div>
+    </form>`;
+    return form;
+};
+
+const renderReplyEditForm = function(id, body){
+    let form = `
+    <form class = "newReply card post replybox${id}">
+    <textarea name = "bodytext" class = "textarea newPostText">${body}</textarea>
     <div class = "card-footer">
         <button type = "button" class = "button" id = "cancelReply${id}">Cancel</button>
         <button type = "button" class = "button" id = "submitReply${id}">Submit</button>
@@ -106,7 +121,7 @@ const handleCancelReply = function(event){
     event.preventDefault();
     const buttonid = $(event.target).attr("id")
     const id = buttonid.replace('cancelReply', '');
-    $(`#replybox${id}`).remove();
+    $(`.replybox${id}`).remove();
 };
 
 const handleSubmitReply = async function(event){
@@ -124,8 +139,8 @@ const handleSubmitReply = async function(event){
     const uid = question.data.uid
     const username = question.data.userName;
     const postTo = question.data.postTo;
-    const comments = question.data.comments;
-    const text = $(`#replybox${questionid}`).serializeArray()[0].value;
+    const comments = [];
+    const text = $(`.replybox${questionid}`).serializeArray()[0].value;
     const comment = {"id":questionid,
                     "userName": user.userName,
                     "body":text
@@ -144,9 +159,58 @@ const handleSubmitReply = async function(event){
         "postTo": postTo,
         }
     });
-    
-    $(`#question${questionid}`).after(renderReply(comment))
+    $(`#question${questionid}`).after(`<div class = "commentBox" id = "commentBox${questionid}"></div>`)
+    $(`#commentBox${questionid}`).append(`<p>Your Response: </p>`)
+    $(`#commentBox${questionid}`).append(renderReply(comment))
+    $(`.replybox${questionid}`).remove();
 };
+
+//delete reply
+const handleDeleteReply = async function(event){
+    event.preventDefault();
+    const buttonid = $(event.target).attr("id")
+    const questionid = buttonid.replace('deleteReply', '');
+
+    const question = await axios({
+        method: 'get',
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${questionid}`
+    });
+    const questionbody = question.data.body;
+    const uid = question.data.uid
+    const username = question.data.userName;
+    const postTo = question.data.postTo;
+    const comments = [];
+    const result = await axios({
+        method: 'put',
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${questionid}`,
+        data:{
+        "body": questionbody,
+        "uid": uid,
+        "userName": username,
+        "anonymous": true,
+        "comments": comments,
+        "likes": [],
+        "postTo": postTo,
+        }
+    });
+
+    $(`#commentBox${questionid}`).remove()
+}
+
+//edit reply
+const handleEditReply = async function(event){
+    event.preventDefault();
+    const buttonid = $(event.target).attr("id")
+    const questionid = buttonid.replace('editReply', '');
+    const text = $(`#replyContainer${questionid} p`).html();
+
+    //TODO
+    $(`#commentBox${questionid}`).remove()
+    $(`#question${questionid}`).after(renderReplyEditForm(questionid, text))
+    $(`#cancelReply${questionid}`).on('click', handleCancelReply);
+    $(`#submitReply${questionid}`).on('click', handleSubmitReply);
+
+}
 
 //register listeners
 const registerListeners = function(post){
