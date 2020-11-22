@@ -20,7 +20,7 @@ const renderPost = async function(post) {
     if(user.id == post.id){
         bottom = `        
         <div class = "bottom card-footer">
-            <button type = "button" class = "button detail${post.id}">View My Mailbox</button>`;
+            <a href = "mybox.html"><button type = "button" class = "button" id = "mymailbox">View My Mailbox</button></a>`;
     }else{
         bottom = `        
         <div class = "bottom card-footer">
@@ -120,8 +120,13 @@ const loadDetailContent = async function (id) {
       });
     const postList = result.data;
     for (let i=0; i<postList.length;i++){
-        content.append(renderComment(postList[i]));
-        $(`#replyComment${postList[i].id}`).on('click', handleCommentReply)
+        content.append(await renderComment(postList[i]));
+        $(`#deleteComment${postList[i].id}`).on('click', handleDeleteComment)
+        if(postList[i].comments.length != 0){
+            content.append(`<div class = "commentBox" id = "commentBox${postList[i].id}"></div>`)
+            $(`#commentBox${postList[i].id}`).append(`<p>Reply from ${postList[i].comments[0].userName}: </p>`)
+            $(`#commentBox${postList[i].id}`).append(renderReply(postList[i].comments[0]))
+        }
     };
 
     if(postList.length == 0){
@@ -133,6 +138,21 @@ const loadDetailContent = async function (id) {
         content.append(message);
     }
 }
+
+const renderReply = function(reply) {
+    let render = `
+    <div class = "post card" id = "replyBox${reply.id}">
+        <div class = "card-header">
+            <h3 class = "author card-header-title">${reply.userName}</h2>
+        </div>
+        <p class = "body card-content">${reply.body}</p>
+        <div class = "bottom card-footer" style = "min-height: 8vh">
+            
+        </div>
+    </div>`;
+    
+    return render;        
+};
 
 const handlePostQuestion = function(event){
     const buttonid = $(event.target).attr("id")
@@ -164,6 +184,18 @@ const handlenewQuestionSubmit = async function(event){
     let user = await getUser();
     const userid = user.id;
     const userName = user.userName
+
+    //Third Party API word filter
+    const wordFilter = await axios({
+        url: "https://api.promptapi.com/bad_words",
+        method: "post",
+        params: {"censor_character": "*"},
+        headers: {"apikey": "aBn2ki5q7DHZ7xo4qRAk3Yj6V9aKmybs"},
+        data: text
+    });
+
+    text = wordFilter.data.censored_content;
+
     const result = await axios({
         method: 'post',
         url: 'https://us-central1-comp426-firebase.cloudfunctions.net/posts',
@@ -183,7 +215,7 @@ const handlenewQuestionSubmit = async function(event){
         url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${result.data}`
         });
 
-    $(renderComment(post.data)).insertAfter(`#questionBox`);
+    $(await renderComment(post.data)).insertAfter(`#questionBox`);
     // location.reload(true);
 }
 
@@ -195,37 +227,35 @@ const handlenewQuestionCancel = function(event){
     $(`#postQuestion${postToId}`).on('click', handlePostQuestion);
 }
 
-const renderComment = function(post){
+const renderComment = async function(post){
+    let user = await getUser();
+
     let comment =  `
         <div class = "card comment" id = "comment${post.id}">
-            <div class = "card-header"><p class= "card-header-title">${post.userName}</p></div>
+            <div class = "card-header"><p class= "card-header-title">Anonymous</p></div>
             <div class = "card-content">${post.body}</div>
-            <div class = "card-footer">
-                <button type = "button" class = "button" id = "replyComment${post.id}">Reply</button>
-            </div>
+            <div class = "card-footer" style = "min-height: 8vh">`
+    if(user.id == post.uid){
+        comment += `<button type = "button" class = "button" id = "deleteComment${post.id}">Delete</button>
         </div>
-    `;
+    </div>`
+    }else{
+        comment +=`</div></div>`
+    }
 
     return comment;
 }
 
-const handleCommentReply = async function (event){
+const handleDeleteComment = async function(event){
     event.preventDefault();
     const buttonid = $(event.target).attr("id")
-    const commentid = buttonid.replace('reply', '');
-    const read = await axios({
-        method: 'get',
-        // TODO
-        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts`,
-    });
-
-    //TODO
-    const reply = read.data[0];
-    alert('reply')
-}
-
-const renderCommentReply = function(){
-
+    const postid = buttonid.replace('deleteComment','');
+    const result = await axios({
+        method: 'delete',
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${postid}`
+        });
+    $(`#comment${postid}`).remove()
+    $(`#commentBox${postid}`).remove()
 }
 
 //register listeners

@@ -21,14 +21,28 @@
 }
 
 .post{
-    /* border: 2px #0a413b solid; */
-    margin: 10px;
+    margin-top: 2vh;
 }
 
 .post .card-header{
     background-color: #f89970;
 }
 
+.commentBox{
+    padding: 2vw; 
+    background-color: white
+}
+
+.commentBox .post .card-header{
+    background-color: orange;
+}
+
+.commentBox .post .card-footer{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #6b5f51;
+    padding: 0.2em;
+}
 
 .allreplies{
     margin-left: 10px;
@@ -48,7 +62,7 @@
 
 .comment {
     /* border: 2px #702804 solid; */
-    margin: 10px;
+    margin-top: 2vh;
 }
 
 .comment .card-footer{
