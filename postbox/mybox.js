@@ -1,4 +1,4 @@
-import {getUser, getUsers} from './getUser.js'
+import {getUser} from './getUser.js'
 
 $(function() {
     loadHeaderIntoDom();
@@ -7,27 +7,37 @@ $(function() {
 
 const renderPost = function(post) {
     let render = `
-    <div class = "post card" id = "post${post.id}">
+    <div class = "post card" id = "question${post.id}">
         <div class = "card-header">
             <h3 class = "author card-header-title">${post.userName}</h2>
         </div>
-        <p class = "body card-content">Welcome to my Mailbox! Please leave any question you have for me!</p>
+        <p class = "body card-content">${post.body}</p>
     `;
 
     let bottom  = ``;
-    if(user.id == post.id){
         bottom = `        
         <div class = "bottom card-footer">
-            <button type = "button" class = "button detail${post.id}">View My Mailbox</button>`;
-    }else{
-        bottom = `        
-        <div class = "bottom card-footer">
-            <button type = "button" class = "button detail${post.id}">Details</button>`;
-    }
+            <button type = "button" class = "button" id = "reply${post.id}">Reply</button>`;
 
     bottom += `</div>`
     render += bottom;
     render += `</div>`;
+    
+    return render;        
+};
+
+const renderReply = function(reply) {
+    let render = `
+    <div class = "post card" id = "replyBox${reply.id}">
+        <div class = "card-header">
+            <h3 class = "author card-header-title">${reply.userName}</h2>
+        </div>
+        <p class = "body card-content">${reply.body}</p>
+        <div class = "bottom card-footer">
+            <button type = "button" class = "button" id = "editReply${reply.id}">Edit</button>
+            <button type = "button" class = "button" id = "deleteReply${reply.id}">Delete</button>
+        </div>
+    </div>`;
     
     return render;        
 };
@@ -37,17 +47,20 @@ const loadPostsIntoDOM = async function() {
 
     let user = await getUser();
     const userid = user.id
-    console.log(userid)
     const result = await axios({
         method: 'get',
         url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/postTo/${userid}`,
       });
 
     const QuestionList = result.data;
-    console.log((QuestionList))
     for (let i=0; i<QuestionList.length;i++){
-        // console.log(users[i].userName)
         $root.append(renderPost(QuestionList[i]));
+        console.log(QuestionList[i].comments)
+        if(QuestionList[i].comments.length != 0){
+            $root.append(`<div class = "commentBox" id = "commentBox${QuestionList[i].id}"></div>`)
+            console.log(renderReply(QuestionList[i].comments[0]))
+            $(`#commentBox${QuestionList[i].id}`).append(renderReply(QuestionList[i].comments[0]))
+        }
         registerListeners(QuestionList[i]);
     };
 
@@ -65,175 +78,77 @@ const loadHeaderIntoDom = async function(){
     $title.append(postHeader)
 };
 
-
-const handleDetailPost = async function(event){
+const handleQuestionReply = function (event){
     event.preventDefault();
-    const buttonclass = $(event.target).attr("class").split(" ");
-    const buttonid = buttonclass[buttonclass.length -1]
-    const postid = buttonid.replace('detail','');
-    // console.log(postid)
-    loadDetailPopup(postid);
+    const buttonid = $(event.target).attr("id")
+    const questionid = buttonid.replace('reply', '');
+    $(`#question${questionid}`).after(renderReplyForm(questionid))
+    $(`#cancelReply${questionid}`).on('click', handleCancelReply);
+    $(`#submitReply${questionid}`).on('click', handleSubmitReply);
 }
 
-const loadDetailPopup = async function(id){
-
-    const box = await axios({
-        method: 'get',
-        url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/${id}`
-    });
-    const boxUser = box.data.userName;
-    // console.log(boxUser);
-
-    const detailPage = `
-        <div class = "container" id = "popup">
-            <div class = "message" style = "border:2px solid #485550; ">
-                <div class = "message-header"><p>${boxUser}'s box</p><i onclick = "handleExitDetailPage()" type = "button" id = "exit${id}" class="fas fa-times-circle"></i></div>
-                <div style="height:80vh; width:80vw; overflow:auto; padding-top: 0">
-                    <div class = "message-body" id = "content${id}"></div>
-                </div>
-            </div>
-        </div>
-    `;
-    $('#details').append(detailPage)
-    loadDetailContent(id);
-    $(`#exit${id}`).on('click', handleExitDetailPage);
-
-}
-
-const handleExitDetailPage = function(){
-    $(`#popup`).remove();
+const renderReplyForm = function(id){
+    let form = `
+    <form class = "newReply card post" id = "replybox${id}">
+    <textarea name = "bodytext" class = "textarea newPostText">Type your response here</textarea>
+    <div class = "card-footer">
+        <button type = "button" class = "button" id = "cancelReply${id}">Cancel</button>
+        <button type = "button" class = "button" id = "submitReply${id}">Submit</button>
+    </div>
+    </form>`;
+    return form;
 };
 
-const loadDetailContent = async function (id) {
-    const content = $(`#content${id}`);
-
-    const replyButton = `
-    <div id = "questionBox" style = "text-align: center;"><button type = "button" class = "button" id = "postQuestion${id}">Post Question Here</button></div>`;
-    content.append(replyButton);
-    $(`#postQuestion${id}`).on('click', handlePostQuestion);
-
-    const result = await axios({
-        method: 'get',
-        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/postTo/${id}`,
-        // TODO
-        params: {
-            sort: {createdAt: 'DESC'}
-        }
-      });
-    const postList = result.data;
-    for (let i=0; i<postList.length;i++){
-        content.append(renderComment(postList[i]));
-        $(`#replyComment${postList[i].id}`).on('click', handleCommentReply)
-    };
-
-    if(postList.length == 0){
-        let message = `
-            <p id = "defaultText" style = "text-align: center;
-            font-size: 3vh;
-            margin-bottom: 3vh;">There's no question yet!</p>
-        `;
-        content.append(message);
-    }
-}
-
-const handlePostQuestion = function(event){
-    const buttonid = $(event.target).attr("id")
-    const postToId = buttonid.replace('postQuestion','');
-    let form = `
-        <form class = "newPost card post">
-            <textarea name = "bodytext" class = "textarea newPostText">Type your question here</textarea>
-            <div class = "card-footer">
-                <button type = "button" class = "button" id = "cancelNew${postToId}">Cancel</button>
-                <button type = "button" class = "button" id = "submitNew${postToId}">Submit</button>
-            </div>
-        </form>
-    `;
-    $(`#content${postToId} #defaultText`).remove();
-    $(form).insertAfter(`#postQuestion${postToId}`);
-    // $(`#content${postToId}`).prepend(form);
-
-    $(`#cancelNew${postToId}`).on('click', handlenewQuestionCancel);
-    $(`#submitNew${postToId}`).on('click', handlenewQuestionSubmit);
-    
-    $(`#postQuestion${postToId}`).off();
-}
-
-const handlenewQuestionSubmit = async function(event){
+const handleCancelReply = function(event){
     event.preventDefault();
     const buttonid = $(event.target).attr("id")
-    const postToId = buttonid.replace('submitNew','');
-    let text = $(`.newPostText`).serializeArray()[0].value;
+    const id = buttonid.replace('cancelReply', '');
+    $(`#replybox${id}`).remove();
+};
+
+const handleSubmitReply = async function(event){
+    event.preventDefault();
+    const buttonid = $(event.target).attr("id")
+    const questionid = buttonid.replace('submitReply', '');
+
     let user = await getUser();
-    const userid = user.id;
-    const userName = user.userName
-    const result = await axios({
-        method: 'post',
-        url: 'https://us-central1-comp426-firebase.cloudfunctions.net/posts',
-        data:{
-        "body": text,
-        "uid": userid,
-        "userName": userName,
-        "anonymous": true,
-        "postTo": postToId,
-        }
-      });
-    $(`.newPost`).remove();
-    $(`#postQuestion${postToId}`).on('click', handlePostQuestion);
 
-    const post = await axios({
+    const question = await axios({
         method: 'get',
-        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${result.data}`
-        });
-
-    $(renderComment(post.data)).insertAfter(`#questionBox`);
-    // location.reload(true);
-}
-
-const handlenewQuestionCancel = function(event){
-    event.preventDefault();
-    const buttonid = $(event.target).attr("id")
-    const postToId = buttonid.replace('cancelNew','');
-    $(`.newPost`).remove();
-    $(`#postQuestion${postToId}`).on('click', handlePostQuestion);
-}
-
-const renderComment = function(post){
-    let comment =  `
-        <div class = "card comment" id = "comment${post.id}">
-            <div class = "card-header"><p class= "card-header-title">${post.userName}</p></div>
-            <div class = "card-content">${post.body}</div>
-            <div class = "card-footer">
-                <button type = "button" class = "button" id = "replyComment${post.id}">Reply</button>
-            </div>
-        </div>
-    `;
-
-    return comment;
-}
-
-const handleCommentReply = async function (event){
-    event.preventDefault();
-    const buttonid = $(event.target).attr("id")
-    const commentid = buttonid.replace('reply', '');
-    const read = await axios({
-        method: 'get',
-        // TODO
-        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts`,
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${questionid}`
     });
-
-    //TODO
-    const reply = read.data[0];
-    alert('reply')
-}
-
-const renderCommentReply = function(){
-
-}
+    const questionbody = question.data.body;
+    const uid = question.data.uid
+    const username = question.data.userName;
+    const postTo = question.data.postTo;
+    const comments = question.data.comments;
+    const text = $(`#replybox${questionid}`).serializeArray()[0].value;
+    const comment = {"id":questionid,
+                    "userName": user.userName,
+                    "body":text
+                    }
+    comments.push(comment)
+    const result = await axios({
+        method: 'put',
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${questionid}`,
+        data:{
+        "body": questionbody,
+        "uid": uid,
+        "userName": username,
+        "anonymous": true,
+        "comments": comments,
+        "likes": [],
+        "postTo": postTo,
+        }
+    });
+    
+    $(`#question${questionid}`).after(renderReply(comment))
+};
 
 //register listeners
 const registerListeners = function(post){
 
-    $(`.detail${post.id}`).on('click', handleDetailPost);
+    $(`#reply${post.id}`).on('click', handleQuestionReply);
 
 };
 

@@ -20,13 +20,24 @@
     top: 10%;
 }
 
-.post{
-    /* border: 2px #0a413b solid; */
-    margin: 10px;
-}
-
 .post .card-header{
     background-color: #f89970;
+}
+
+.commentBox{
+    padding: 2vw; 
+    background-color: white
+}
+
+.commentBox .post .card-header{
+    background-color: orange;
+}
+
+.commentBox .post .card-footer{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #6b5f51;
+    padding: 0.2em;
 }
 
 
