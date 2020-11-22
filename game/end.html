@@ -28,5 +28,11 @@
       </div>
     </div>
     <script src="end.js"></script>
+    <script src="../cookie.js"></script>
+    <script>
+      if(!getCookie('info')){
+        window.location.href = "../index.html";
+      }
+    </script>
   </body>
 </html>

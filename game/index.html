@@ -11,7 +11,11 @@
 
     <link rel="stylesheet" href="./app.css" />
     <script src="../cookie.js"></script>
-
+    <script>
+      if(!getCookie('info')){
+        window.location.href = "../index.html";
+      }
+    </script>
     <!-- navbar style -->
     <style>
       #barhover{
