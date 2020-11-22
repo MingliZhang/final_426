@@ -13,6 +13,12 @@
     <script src="../cookie.js"></script>
     <script src="../node_modules/axios/dist/axios.js"></script>
 
+    <script>
+      if(!getCookie('info')){
+        window.location.href = "../index.html";
+      }
+    </script>
+
     <!-- navbar style -->
     <style>
       #barhover{

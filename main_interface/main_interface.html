@@ -55,7 +55,7 @@
                 <div id = 'main3' class="column is-3" style="background-color:#80b280;height: 768px;">
                     <h1 style="text-align: center;">Following List</h1>
                     <br>
-                    <input type="text" placeholder="search"><button onclick='showFollow()' id="add_follow" data-toggle="tooltip" data-placement="bottom" title="follow"><i class="fas fa-plus-square fa-2x"></i></button>
+                    <button onclick='showFollow()' id="add_follow" data-toggle="tooltip" data-placement="bottom" title="follow"><i class="fas fa-plus-square fa-2x"></i></button>
                     <br><br>
                     <div id="follow_column" style="height: 320px; overflow: auto;"></div>
                     <div style="position: relative;; border-top: darkslategray solid 1px;">
@@ -77,6 +77,11 @@
             </div>
         </div>
         <script src="../cookie.js"></script>
+        <script>
+            if(!getCookie('info')){
+              window.location.href = "../index.html";
+            }
+        </script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="../node_modules/axios/dist/axios.js"></script>
         <script src="./userSearch.js"></script>

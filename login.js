@@ -27,14 +27,13 @@ const handelLoginButtonPress = async function (event) {
         url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/email/${email}`,
       });
       let data = result.data;
-      console.log(data.password);console.log(password);
       if (data.password != password) {
         message = "The password provided seems to be Incorrect!";
       } else {
         createCookie("info", `${data.id}, ${data.userName}, ${data.email}`);
         // This is where the jump to the main page is at, at this point, the email and password provided match what we have in the database. The data of the user is in the data filed.
 
-        if (data.matchPoint[0] === -1) {
+        if (data.matchPoint[0] === -100) {
           // this need to jump to the questionar page
           // At this point, the email and password provided match what we have in the database. The data of the user is in the data filed.
           window.location.href = "./questionnaire/index.html";
