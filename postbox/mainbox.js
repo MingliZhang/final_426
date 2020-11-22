@@ -105,9 +105,18 @@ const handleExitDetailPage = function(){
 const loadDetailContent = async function (id) {
     const content = $(`#content${id}`);
 
+    const replyButton = `
+    <div id = "questionBox" style = "text-align: center;"><button type = "button" class = "button" id = "postQuestion${id}">Post Question Here</button></div>`;
+    content.append(replyButton);
+    $(`#postQuestion${id}`).on('click', handlePostQuestion);
+
     const result = await axios({
         method: 'get',
-        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/postTo/${id}`
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/postTo/${id}`,
+        // TODO
+        params: {
+            sort: {createdAt: 'DESC'}
+        }
       });
     const postList = result.data;
     for (let i=0; i<postList.length;i++){
@@ -123,10 +132,6 @@ const loadDetailContent = async function (id) {
         `;
         content.append(message);
     }
-    const replyButton = `
-    <div style = "text-align: center;"><button type = "button" class = "button" id = "postQuestion${id}">Post Question Here</button></div>`;
-    content.append(replyButton);
-    $(`#postQuestion${id}`).on('click', handlePostQuestion);
 }
 
 const handlePostQuestion = function(event){
@@ -142,7 +147,8 @@ const handlePostQuestion = function(event){
         </form>
     `;
     $(`#content${postToId} #defaultText`).remove();
-    $(`#content${postToId}`).prepend(form);
+    $(form).insertAfter(`#postQuestion${postToId}`);
+    // $(`#content${postToId}`).prepend(form);
 
     $(`#cancelNew${postToId}`).on('click', handlenewQuestionCancel);
     $(`#submitNew${postToId}`).on('click', handlenewQuestionSubmit);
@@ -158,10 +164,6 @@ const handlenewQuestionSubmit = async function(event){
     let user = await getUser();
     const userid = user.id;
     const userName = user.userName
-    console.log(user.userName);
-    console.log(user.id);
-    console.log(postToId)
-    console.log(text)
     const result = await axios({
         method: 'post',
         url: 'https://us-central1-comp426-firebase.cloudfunctions.net/posts',
@@ -175,7 +177,14 @@ const handlenewQuestionSubmit = async function(event){
       });
     $(`.newPost`).remove();
     $(`#postQuestion${postToId}`).on('click', handlePostQuestion);
-    location.reload(true);
+
+    const post = await axios({
+        method: 'get',
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${result.data}`
+        });
+
+    $(renderComment(post.data)).insertAfter(`#questionBox`);
+    // location.reload(true);
 }
 
 const handlenewQuestionCancel = function(event){
