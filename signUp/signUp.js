@@ -21,6 +21,15 @@ const handelSignupButtonPress = async function (event) {
   let message = "";
   let problem = true;
 
+  const result = await axios({
+    url: "https://api.promptapi.com/bad_words",
+    method: "post",
+    params: { censor_character: "*" },
+    headers: { apikey: "aBn2ki5q7DHZ7xo4qRAk3Yj6V9aKmybs" },
+    data: userName,
+  });
+  console.log(result);
+
   if (
     userName.length === 0 ||
     password.length === 0 ||
@@ -34,6 +43,8 @@ const handelSignupButtonPress = async function (event) {
     // console.log(psConfirm);
   } else if (!ValidateEmail(email)) {
     message = "Please provide a valid email address!!";
+  } else if (result.data.bad_words_total != 0) {
+    message = "Please do not put any inappropriate words as your username.";
   } else {
     const result = await axios({
       method: "get",
