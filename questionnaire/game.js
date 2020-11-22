@@ -1,4 +1,4 @@
-import {getUser, getUsers, upDateUser, addFriend, testAxios, getFakeUsers} from './script.js'
+import {getUser, getUsers, upDateUser, addFriend, getFakeUsers} from './script.js'
 import getQuestions from './questions.js'
 
 
@@ -22,7 +22,7 @@ let rateBoxes = []
 let rate
 let rates = []
 let friend
-let following = []
+let followingList = []
 
 let scores = new Array(10).fill(0)
 let currentPage = 0
@@ -261,21 +261,21 @@ async function findMatches(){
             scoreDisplay.classList.add("score")
             scoreDisplay.appendChild(noMatchDisplay)
     } else {
-        filteredUsers.forEach((user)=>{
+        filteredUsers.forEach((userFriend)=>{
             let match = document.createElement('div')
             match.classList.add('columns')
     
             let uname = document.createElement('div')
             uname.classList.add('column')
-            uname.innerHTML = user[1].userName
+            uname.innerHTML = userFriend[1].userName
     
             let email = document.createElement('div')
             email.classList.add('column')
-            email.innerHTML = user[1].email
+            email.innerHTML = userFriend[1].email
     
             let similarity = document.createElement('div')
             similarity.classList.add('column')
-            similarity.innerHTML = (user[0] == -1) ? "No data" : "Similarity: " + user[0] + "%"
+            similarity.innerHTML = (userFriend[0] == -1) ? "No data" : "Similarity: " + userFriend[0] + "%"
     
             friend = document.createElement('button')
             friend.innerHTML = "&nbsp Follow this User"
@@ -284,9 +284,16 @@ async function findMatches(){
             friend.classList.add('is-warning')
             friend.classList.add('fas')
             friend.classList.add('fa-user-plus')
-            friend.id = user[1].email
+            friend.id = userFriend[1].id
             friend.addEventListener("click", addFriend)
-            following.push(friend)
+
+            for (let i = 0; i < user.following.length; i++){
+                if (user.following[i].id == userFriend[1].id){
+                    friend.disabled = true
+                    friend.innerHTML = "&nbsp Currently Following"
+                }
+            }
+            followingList.push(friend)
     
             match.appendChild(uname)
             match.appendChild(email)

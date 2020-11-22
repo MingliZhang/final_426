@@ -11,41 +11,40 @@ const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 async function getUsers(){
   try{
       const result = await axios({
-          method: 'get',
+          method:'get',
           url: 'https://us-central1-comp426-firebase.cloudfunctions.net/users'
       })
-      //console.log(result.data)
       return result.data
   } catch {
-      console.error(error);
+      console.error();
   }
 }
 
 
 document.addEventListener("DOMContentLoaded", async function render(){
   let allUsers = await getUsers()
-  //console.log(allUsers)
 
-  // let scores = new Array(allUsers.length)
-  // scores.map((score) => score = new Array(2))
-  // for (let i = 0; i < allUsers.length; i++){
-  // scores[i][0] = allUsers[i].data.highestGameScore
-  // scores[i][1] = allUsers[i].data.userName
-  // }
+  let scores = new Array(allUsers.length)
+  console.log(allUsers)
+  for(let i = 0; i < allUsers.length; i++){
+    scores[i] = new Array(2)
+  }
+  for (let i = 0; i < allUsers.length; i++){
+    scores[i][0] = allUsers[i].highestGameScore
+    scores[i][1] = allUsers[i].userName
+  }
 
-  // scores.sort(function(a,b) {
-  //   return b[0]-a[0]
-  // });
+  scores.sort(function(a,b) {
+    return b[0]-a[0]
+  });
 
-  // let highestFive = scores.slice(0, 11);
+  let highestFive = scores.slice(0, 11);
 
-
-  // highScoresList.innerHTML = highestFive
-  //   .map(score => {
-  //     return `<li class="high-score">${score.name} - ${score.score}</li>`;
-  //   })
-  //   .join("")
-
+  highScoresList.innerHTML = highestFive
+    .map(score => {
+      return `<li class="high-score">${score[1]} - ${score[0]}</li>`;
+    })
+    .join("")
 })
 
 
