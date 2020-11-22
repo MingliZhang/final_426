@@ -18,80 +18,46 @@
     <body>
         <div id="main">
             <div class="columns" style="margin: auto;">
-                <div id = 'main1' class="column is-1" style="height: 768px; background-color: #e6f0e6;">
+                <div id = 'main1' class="column is-2" style="height: 768px; background-color: #e6f0e6;">
                     <div id="navbar"></div>
                         <script src="../node_modules/jquery/dist/jquery.js"></script>
                         <script src="../navbar/nav.js"></script>
                         <script src="navlinks.js"></script>
                     </div>
                 </div>
-                <!-- used to append chat window -->
                 <div id = 'black_shadow' ></div>
-                <div id = "chatWindow"style="background: white url(./background/2.png);border: black solid 1px;width: 500px;height: 550px;position: absolute; left: 30%; top: 10%; visibility: hidden; z-index: 5; border-radius: 15px">
-                    
-                    <div id = "leave"style="font-size: 30px;width: max-content;margin: auto;text-align: center;border-bottom: black solid 1px;">Other User<button style="position:relative; left: 160px" onclick="leave()"><i class="fas fa-times"></i></button></div>
-                    <br>
-                    <ul id = "chat-ul">
-                        <li class="him">Sample By anOther User</li>
-                        <li class="me">Sample By Me</li>
-                        
-                    </ul>
-                    <div class="field" style="position: absolute; bottom: 0; width: 498px;">
-                        <div class="control">
-                            <textarea class="textarea is-primary" placeholder="Press Ctrl + Enter to send" rows="2" style="border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;resize:none"></textarea>
-                        </div>
-                        </div>
-                </div>
-                <div id = "add_fri_window"style="background: white;border: black solid 1px;width: 320px;position: absolute; left: 40%; top: 30%; visibility: hidden; z-index: 5;height: 42px">
-                    <input id="fri_input" type="text"  placeholder="Username" style="width: 66.5%;height: 100%;margin: 0;"><button onclick="addFri()" class="button" style="margin: 0;position: relative;left: 2px;height: 40px;">add</button><button class="button" onclick="leave2()"style="margin: 0;display: inline-block;height: 40px;width: auto;position: relative; left: 1px"><i class="fas fa-times"></i></button>
+                
+                <div id = "add_follow_window"style="background: white;border: black solid 1px;width: 370px;position: absolute; left: 40%; top: 30%; visibility: hidden; z-index: 5;height: 42px">
+                    <input id="follow_input" type="text"  placeholder="Username" style="width: 66.5%;height: 100%;margin: 0;"><button onclick="confirmFollow()" class="button" style="margin: 0;position: relative;left: 2px;height: 40px;">follow</button><button class="button" onclick="leave2()"style="margin: 0;display: inline-block;height: 40px;width: auto;position: relative; left: 1px"><i class="fas fa-times"></i></button>
                     <div id="search_res"></div>
                 </div>
 
-                <div id = 'main2' class="column is-8" style="min-height: 722px; background-color:  #ffa161">
-                    <div id="head">
-                        <b id="home" style="position: relative;left: 350px;font-size: 30px;">Home</b>
-                        <div class="columns">
-                            <div class="column is-one-fifth">
-                                <p style="text-align: center center;position: relative;left: 20px;">User info and img</p>
-                            </div>
-                            <div class="column" >
-                                <textarea  placeholder="Type your content here"></textarea>
-                                <button class="button is-primary" style="float: right; position: relative;left: -80px;top: 20px;font-size: larger;height: 32px;">post</button>
+                <div id = 'main2' class="column is-7" style="min-height: 722px; background-color:  #ffa161;">
+                    <div id="head" style="text-align: center;">
+                        <b id="home" style="margin: auto;font-size: 30px;">Home</b>
+                    </div>  
+                    <div id = "chatWindow"style="background: white url(./background/2.png);border: black solid 1px;width: auto;height: 670px; visibility: visible; z-index: 5; border-radius: 5px">
+                    
+                        <div id = "leave"style="font-size: 30px;width: max-content;margin: auto;text-align: center;border-bottom: black solid 1px;">Other User</div>
+                        <br>
+                        <ul id = "chat-ul">
+                            <li class="him">Sample By anOther User</li>
+                            <li class="me">Sample By Me</li>
+                            
+                        </ul>
+                        <div class="field" style="position: absolute; bottom: 0; width: 100%;">
+                            <div class="control">
+                                <textarea id="textarea"class="textarea is-primary" placeholder="Press Ctrl + Enter to send" rows="2" style="resize:none;height: 100px"></textarea>
                             </div>
                         </div>
-                        <br>
-                    </div>                    
+                    </div>                  
                 </div>
                 <div id = 'main3' class="column is-3" style="background-color:#80b280;height: 768px;">
-                    <h1 style="text-align: center;">Friend List</h1>
+                    <h1 style="text-align: center;">Following List</h1>
                     <br>
-                    <input type="text" placeholder="search"><button onclick='showAddFriend()' id="add_fri" data-toggle="tooltip" data-placement="bottom" title="add friend"><i class="fas fa-user-friends fa-2x"></i></button>
+                    <input type="text" placeholder="search"><button onclick='showFollow()' id="add_follow" data-toggle="tooltip" data-placement="bottom" title="follow"><i class="fas fa-plus-square fa-2x"></i></button>
                     <br><br>
-                    <div id="friend_column" style="height: 320px; overflow: auto;">
-                        <div id="online">
-                            <h1>Online</h1>
-                            <div id = "1" class="individual">
-                                <p>Sam <button ></button></p>
-                                <p>status: online</p><button id="chat1" onclick="showChat()" class="friend"><i class="fas fa-comment"></i></button><button class="friend"><i class="fas fa-user-slash"></i></button>
-                                <br>
-                            </div>
-                            <div id = "1" class="individual">
-                                <p>Jack <button ></button></p>
-                                <p>status: online</p><button id="chat1" onclick="showChat()" class="friend"><i class="fas fa-comment"></i></button><button class="friend"><i class="fas fa-user-slash"></i></button>
-                                <br>
-                            </div>
-                        </div>
-                        <br><br>
-                        <div id="offline">
-                            <h1>Offline</h1>
-                            <div id = "1" class="individual">
-                                <p>Bob <button ></button></p>
-                                <p>status: online</p><button id="chat1" onclick="showChat()" class="friend"><i class="fas fa-comment"></i></button><button class="friend"><i class="fas fa-user-slash"></i></button>
-                                <br>
-                            </div>
-                            
-                        </div>
-                    </div>
+                    <div id="follow_column" style="height: 320px; overflow: auto;"></div>
                     <div style="position: relative;; border-top: darkslategray solid 1px;">
                         <br>
                         <h1 style="text-align: center;">Recommendation</h1>
@@ -114,7 +80,6 @@
         <script src="/socket.io/socket.io.js"></script>
         <script src="../node_modules/axios/dist/axios.js"></script>
         <script src="./userSearch.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
         <script src="./main.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
