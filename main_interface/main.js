@@ -29,8 +29,8 @@ async function loadFollowing(){
     return;
   }
   result.data.following.map(follow=>{
-    const div = `<div id = "${follow.id}" class="individual">
-    <p>${follow.username}</p>
+    const div = `<div id = "${follow.username}" class="individual">
+    <p style="font-size: larger">${follow.username}</p><span style="relative;left: 50px">${follow.email}</span><button style="float: right; position: relative; top: -15px"><i class="fas fa-minus-square fa-2x"></i></button>
     <br>
     </div>`;
     column.append(div);
@@ -79,11 +79,16 @@ async function showFollow(){
     if(user.userName === getCookie('info').split(', ')[1]){
       return
     }
-    localUsers.push({id: user.id, username: user.userName})
+    localUsers.push({id: user.id, username: user.userName, email: user.email})
   })
 }
 
 async function confirmFollow(){
+  if(!$('#follow_input').val()) return
+  if($('#'+$('#follow_input').val())){
+    alert('alert!')
+    return
+  }
   const id = getCookie('info').split(', ')[0];
   const result = await axios({
     method: "get",
@@ -106,7 +111,11 @@ async function confirmFollow(){
     }
   });
   $('#target').html('');
-  $('#follow_column').append(`<div id = "${newFollow.id}" class="individual"><p>${newFollow.username}</p><br></div>`)
+  const div = `<div id = "${newFollow.username}" class="individual">
+  <p style="font-size: larger">${newFollow.username}</p><span style="float: right;position: relative; top: -15px">${newFollow.email}</span><button ><i class="fas fa-minus-square fa-2x"></i></button>
+  <br>
+  </div>`;
+  $('#follow_column').append(div);
   $('#follow_input').val('');
   $('#search_res').empty();
   leave2();
