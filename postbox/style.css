@@ -20,6 +20,10 @@
     top: 10%;
 }
 
+.post{
+    margin-top: 2vh;
+}
+
 .post .card-header{
     background-color: #f89970;
 }
@@ -40,7 +44,6 @@
     padding: 0.2em;
 }
 
-
 .allreplies{
     margin-left: 10px;
     margin-right: 10px;
@@ -59,7 +62,7 @@
 
 .comment {
     /* border: 2px #702804 solid; */
-    margin: 10px;
+    margin-top: 2vh;
 }
 
 .comment .card-footer{

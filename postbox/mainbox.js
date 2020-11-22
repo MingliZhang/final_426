@@ -20,7 +20,7 @@ const renderPost = async function(post) {
     if(user.id == post.id){
         bottom = `        
         <div class = "bottom card-footer">
-            <button type = "button" class = "button detail${post.id}">View My Mailbox</button>`;
+            <a href = "mybox.html"><button type = "button" class = "button" id = "mymailbox">View My Mailbox</button></a>`;
     }else{
         bottom = `        
         <div class = "bottom card-footer">
@@ -122,6 +122,11 @@ const loadDetailContent = async function (id) {
     for (let i=0; i<postList.length;i++){
         content.append(renderComment(postList[i]));
         $(`#replyComment${postList[i].id}`).on('click', handleCommentReply)
+        if(postList[i].comments.length != 0){
+            content.append(`<div class = "commentBox" id = "commentBox${postList[i].id}"></div>`)
+            $(`#commentBox${postList[i].id}`).append(`<p>Reply from ${postList[i].comments[0].userName}: </p>`)
+            $(`#commentBox${postList[i].id}`).append(renderReply(postList[i].comments[0]))
+        }
     };
 
     if(postList.length == 0){
@@ -133,6 +138,21 @@ const loadDetailContent = async function (id) {
         content.append(message);
     }
 }
+
+const renderReply = function(reply) {
+    let render = `
+    <div class = "post card" id = "replyBox${reply.id}">
+        <div class = "card-header">
+            <h3 class = "author card-header-title">${reply.userName}</h2>
+        </div>
+        <p class = "body card-content">${reply.body}</p>
+        <div class = "bottom card-footer">
+            <button type = "button" class = "button" id = "likeReply${reply.id}">Like</button>
+        </div>
+    </div>`;
+    
+    return render;        
+};
 
 const handlePostQuestion = function(event){
     const buttonid = $(event.target).attr("id")
@@ -201,7 +221,7 @@ const renderComment = function(post){
             <div class = "card-header"><p class= "card-header-title">${post.userName}</p></div>
             <div class = "card-content">${post.body}</div>
             <div class = "card-footer">
-                <button type = "button" class = "button" id = "replyComment${post.id}">Reply</button>
+                <button type = "button" class = "button" id = "likeComment${post.id}">Like</button>
             </div>
         </div>
     `;
@@ -222,10 +242,6 @@ const handleCommentReply = async function (event){
     //TODO
     const reply = read.data[0];
     alert('reply')
-}
-
-const renderCommentReply = function(){
-
 }
 
 //register listeners

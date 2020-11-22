@@ -58,18 +58,21 @@ const loadPostsIntoDOM = async function() {
         console.log(QuestionList[i].comments)
         if(QuestionList[i].comments.length != 0){
             $root.append(`<div class = "commentBox" id = "commentBox${QuestionList[i].id}"></div>`)
-            console.log(renderReply(QuestionList[i].comments[0]))
+            $(`#commentBox${QuestionList[i].id}`).append(`<p>Your Response: </p>`)
             $(`#commentBox${QuestionList[i].id}`).append(renderReply(QuestionList[i].comments[0]))
         }
         registerListeners(QuestionList[i]);
     };
+
+    if(QuestionList.length == 0){
+        $root.append(`<p style = "text-align: center; font-size: 1.5em">You don't have any question inbox yet.</p>`)
+    }
 
 };
 
 //Load title
 const loadHeaderIntoDom = async function(){
     const $title = $(`#title`);
-
 
     let postHeader = `
         <div class = "header">
