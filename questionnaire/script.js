@@ -41,7 +41,7 @@ export async function getUser(){
         user.email = result.data.email
         user.password = result.data.password
         user.matchPoint = result.data.matchPoint
-        user.friends = result.data.friends
+        user.following = result.data.following
         user.highestGameScore = result.data.highestGameScore
         return user
     } catch {
@@ -82,25 +82,42 @@ export async function upDateUser(finalScore){
     });     
 }
 
-export function addFriend(event){
+export async function addFriend(event){
     let target = event.target
-    target.innerHTML = "(๑•̀ㅂ•́)و✧ Friend Requested"
+    target.innerHTML = "(๑•̀ㅂ•́)و✧ Successfully Followed"
     target.classList.remove('is-warning')
     target.classList.remove('fas')
     target.classList.remove('fa-user-plus')
     target.classList.add('is-success')
     let id = target.id
-    console.log("Friend added: " + id)  
+    
+    let followTarget = null
+    try{
+        followTarget = await axios({
+            method: 'get',
+            url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/${id}`	
+        });
+    } catch {
+        console.error("get following error")
+    }
 
-    // TODO: friend add
-}
+    let followTargetObj = {
+        id: followTarget.data.id,
+        // username is lowercase in this only fucking place
+        username: followTarget.data.userName
+    }
+        
 
-export async function testAxios(){
-    //const result = "ss"
-    const result = await axios({
-        method: 'get',
-        url: 'https://us-central1-comp426-firebase.cloudfunctions.net/users'
-    })
-    console.log(result)
-    return result        
+    user.following.push(followTargetObj)
+
+    try{
+        const result = await axios({
+            method: 'put',
+            url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/${current_id}`,
+            data: user
+        });     
+    } catch{
+        console.error('put following error')
+    }
 }
+   

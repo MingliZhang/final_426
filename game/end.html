@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="../node_modules/axios/dist/axios.js"></script>
+    <script src="../cookie.js"></script>
     <title>Congrats!</title>
     <link rel="stylesheet" href="app.css" />
   </head>
@@ -14,10 +16,9 @@
         <form>
           <div id="username"></div>
           <button
-            type="submit"
             class="btn"
             id="saveScoreBtn"
-            onclick="updateUserScore(event)"
+            onclick="upDateUser(event)"
           >
             Save
           </button>
@@ -28,5 +29,11 @@
       </div>
     </div>
     <script src="end.js"></script>
+    <script src="../cookie.js"></script>
+    <script>
+      if(!getCookie('info')){
+        window.location.href = "../index.html";
+      }
+    </script>
   </body>
 </html>

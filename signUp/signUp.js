@@ -28,7 +28,7 @@ const handelSignupButtonPress = async function (event) {
     psConfirm.length === 0
   ) {
     message = "Please provide all the needed fields above!!";
-  } else if (password !== psConfirm) {
+  } else if (password != psConfirm) {
     message = "The two password provided does not match each other!";
     // console.log(password);
     // console.log(psConfirm);

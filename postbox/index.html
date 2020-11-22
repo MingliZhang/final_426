@@ -41,6 +41,13 @@
     <script src="../node_modules/axios/dist/axios.min.js"></script>
     <script src="../cookie.js"></script>
     <!-- <script src="mainbox.js" type="module"></script> -->
+    
+    <script>
+      if(!getCookie('info')){
+        window.location.href = "../index.html";
+      }
+    </script>
+    <script src="mainbox.js"></script>
 
 </body>
 </html>
