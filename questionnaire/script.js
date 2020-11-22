@@ -104,7 +104,8 @@ export async function addFriend(event){
     let followTargetObj = {
         id: followTarget.data.id,
         // username is lowercase in this only fucking place
-        username: followTarget.data.userName
+        username: followTarget.data.userName,
+        email: followTarget.data.email
     }
         
 

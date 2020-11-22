@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Cover Page</title>
-
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
@@ -19,29 +19,43 @@
   </head>
 
   <body>
-    <section class="hero is-primary">
+    <section class="hero header">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            A App
+            Miao Miao
           </h1>
           <h2 class="subtitle">
-            Connect with your friends
+            GET ON Miao Miao, GET ON THE WORLD
           </h2>
         </div>
       </div>
     </section>
     <br>
     <div class="columns">
-      <div class="column is-four-fifths">
-        
+      <div class="column is-three-fifths infoSection">
+        <div class="columns">
+          <div class="column">
+            <img src = './media/earth.jpg' width = 100%>
+          </div>
+          <div class="column">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, 
+              eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+            </br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, 
+              eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+            </br>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, 
+                eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+          </div>
+        </div>
       </div>
-      <div class="column is-one-fifths">
+      <div class="column is-one-fifths btns">
         <div class="field">
-          <a class="button is-success" id="loginButton">Login</a>
+          <a class="button is-success is-fullwidth" id="loginButton">Login</a>
         </div>
         <div class="field">
-          <a class="button" id="signUpButton">Sign up</a>
+          <a class="button is-fullwidth" id="signUpButton">Sign up</a>
         </div>
       </div>
     </div>
@@ -56,4 +70,17 @@
     </script> -->
     <script src="coverPage.js"></script>
   </body>
+  <footer class="footer my-footer"> 
+    <div class="content">
+      <p>
+        <strong>Miao Miao</strong> by Princess, Her Highness Yinuo Hu, and her three noble knights: Kaihao Liu, Mingli Zhang, Haopeng Huang.
+      </p>
+      <p>
+        This website has utlized a personality test from the International Personality Item Pool (https://ipip.ori.org/)
+      </p>
+      <p>
+        This website has utlized two api from https://opentdb.com/ (for quiz questions) and https://promptapi.com/marketplace/description/bad_words-api (to filter bad words).
+      </p>
+    </div>
+  </footer>
 </html>
