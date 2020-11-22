@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -33,6 +34,7 @@
     </style>
 
   </head>
+
   <body>
 
       <!-- navbar -->
@@ -41,7 +43,7 @@
         <script src="../node_modules/jquery/dist/jquery.js"></script>
         <script src="../navbar/nav.js"></script>
         <script src="navlinks.js"></script>
-    </div>
+      </div>
 
     <div id = "contents" style="width:100%; min-height: 100vh;
                                 display: flex;
@@ -51,9 +53,27 @@
                                 background-color: #e0f0e9;
                                 text-align: center;
     ">
+
         <div class = "header"><h1>User Settings</h1></div>
         <div id="title" style = "width:80%;"></div>
       <div id="root" style = "width:80%;"></div>
+      <div class="field is-grouped">
+        <p class="control">
+          <a type = "button" class="btn button is-primary fas fa-arrow-circle-left" href="../main_interface/main_interface.html">
+            &nbsp Back
+          </a>
+        </p>
+        <p class="control">
+          <button type = "button" class = "btn fas fas fa-key button  is-warning" id = "changePassword">
+            Change Password
+          </button>
+        </p>
+        <p class="control">
+          <button type = "button" class = "btn fas fa-sign-out-alt button  is-danger" id = "logoutButton">
+             &nbsp Log Out
+          </button>
+        </p>
+      </div>
     </div>
 
     <script src="../node_modules/axios/dist/axios.js"></script>

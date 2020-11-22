@@ -1,64 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Login</title>
+    <title>Cover Page</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+      crossorigin="anonymous"
+    />
+  </head>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-    </head>
+  <body>
+    <section class="hero header">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Miao Miao
+          </h1>
+          <h2 class="subtitle">
+            GET ON Miao Miao, GET ON THE WORLD
+          </h2>
+        </div>
+      </div>
+    </section>
+    <br />
+    <div class="columns">
+      <div class="column is-three-fifths infoSection">
+        <div class="columns">
+          <div class="column">
+            <img src = './media/earth.jpg' width = 100%>
+          </div>
+          <div class="column">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, 
+              eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+            </br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, 
+              eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+            </br>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, 
+                eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+          </div>
+        </div>
+      </div>
+      <div class="column is-one-fifths btns">
+        <div class="field">
+          <a class="button is-success is-fullwidth" id="loginButton">Login</a>
+        </div>
+        <div class="field">
+          <a class="button is-fullwidth" id="signUpButton">Sign up</a>
+        </div>
+      </div>
+    </div>
 
-    <body>
-        <section class="hero is-fullheight" style="background-color: #ecf5ff;">
-            <div class="hero-body">
-              <div class="container">
-                <div class="columns is-centered">
-                  <div class="column is-5-tablet is-4-desktop is-3-widescreen" >
-                      <div class="field">
-                        <label for="" class="label">Email</label>
-                        <div class="control has-icons-left">
-                          <input type="email" placeholder="e.g. bobsmith@gmail.com" class="input" id = "email">
-                          <span class="icon is-small is-left">
-                            <i class="fa fa-envelope"></i>
-                          </span>
-                        </div>
-                      </div>
-                      <div class="field">
-                        <label for="" class="label">Password</label>
-                        <div class="control has-icons-left">
-                          <input id="password" type="text" value="" placeholder="**********" class="input">
-                          <input id="hidden" type="hidden" value="" />
-                          <span class="icon is-small is-left">
-                            <i class="fa fa-lock"></i>
-                          </span>
-                        </div>
-                      </div>
-                      <div class = "field content" id = "message"></div>
-                      <div class="field">
-                        <a class="button is-success" id = "loginButton" >Login</a>
-                      </div>
-                      <div class = "field">
-                        <a class="button" href="./signUp/signUp.html">Sign up</a>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-        <!-- Include links to JavaScript files below -->
-        
-        <script src="./node_modules/axios/dist/axios.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="./cookie.js"></script>
-        <script>
-            if(getCookie('info')){
-              window.location.href = "./main_interface/main_interface.html";
-            }
-        </script>
-        <script src="login.js"></script>
-        <script src="./ps.js"></script>
-    </body>
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./cookie.js"></script>
+    <script>
+      if (getCookie("info")) {
+        window.location.href = "./main_interface/main_interface.html";
+      }
+    </script>
+    <script src="coverPage.js"></script>
+  </body>
+  <footer class="footer my-footer"> 
+    <div class="content">
+      <p>
+        <strong>Miao Miao</strong> by Princess, Her Highness Yinuo Hu, and her three noble knights: Kaihao Liu, Mingli Zhang, Haopeng Huang.
+      </p>
+      <p>
+        This website has utlized a personality test from the International Personality Item Pool (https://ipip.ori.org/)
+      </p>
+      <p>
+        This website has utlized two api from https://opentdb.com/ (for quiz questions) and https://promptapi.com/marketplace/description/bad_words-api (to filter bad words).
+      </p>
+    </div>
+  </footer>
 </html>

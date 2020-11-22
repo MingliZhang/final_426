@@ -50,6 +50,8 @@ async function upDateUser(event){
     } catch {
         console.error("something went wrong")
     }
+    confirm("Your new score has been Saved!")
+    event.target.disabled = true
 }
 
 document.addEventListener("DOMContentLoaded", getUser())
