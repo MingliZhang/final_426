@@ -140,17 +140,22 @@ input[type="submit"] {
 
 .wordDonebyLKH {
   color: rgb(247, 131, 131);
+  background-color: rgb(243, 227, 227);
   text-align: center;
   font-weight: bolder;
   font-size: large;
+  height: 5vh;
 }
-/* 
-  .buttonLKHExpression{
-    position: relative; left: 54.25vw; top: 8.5vh;
-  }
-  .buttonLKHBackground{
-    position: relative; left: 50.9vw; top: 13.7vh;
-  }
-  .buttonLKHClear{
-    position: relative; left: 47.3vw; top: 19vh;
-  } */
+
+.buttonLKHExpression{
+    /* position: relative; left: 54.25vw; top: 8.5vh; */
+    float: right;
+}
+.buttonLKHBackground{
+    /* position: relative; left: 50.9vw; top: 13.7vh; */
+    float: right;
+}
+.buttonLKHClear{
+    /* position: relative; left: 47.3vw; top: 19vh; */
+    float: right;
+}
