@@ -117,7 +117,7 @@ const loadDetailContent = async function (id) {
 
     if(postList.length == 0){
         let message = `
-            <p style = "text-align: center;
+            <p id = "defaultText" style = "text-align: center;
             font-size: 3vh;
             margin-bottom: 3vh;">There's no question yet!</p>
         `;
@@ -141,7 +141,7 @@ const handlePostQuestion = function(event){
             </div>
         </form>
     `;
-    $(`#content${postToId} p`).remove();
+    $(`#content${postToId} #defaultText`).remove();
     $(`#content${postToId}`).prepend(form);
 
     $(`#cancelNew${postToId}`).on('click', handlenewQuestionCancel);
@@ -156,16 +156,21 @@ const handlenewQuestionSubmit = async function(event){
     const postToId = buttonid.replace('submitNew','');
     let text = $(`.newPostText`).serializeArray()[0].value;
     let user = await getUser();
+    const userid = user.id;
+    const userName = user.userName
     console.log(user.userName);
+    console.log(user.id);
+    console.log(postToId)
+    console.log(text)
     const result = await axios({
         method: 'post',
         url: 'https://us-central1-comp426-firebase.cloudfunctions.net/posts',
         data:{
         "body": text,
-        "uid": user.id,
-        "userName": user.name,
+        "uid": userid,
+        "userName": userName,
         "anonymous": true,
-        "postTo": postToId
+        "postTo": postToId,
         }
       });
     $(`.newPost`).remove();
