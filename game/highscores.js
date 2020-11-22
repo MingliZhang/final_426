@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", async function render(){
   let allUsers = await getUsers()
 
   let scores = new Array(allUsers.length)
-  console.log(allUsers)
   for(let i = 0; i < allUsers.length; i++){
     scores[i] = new Array(2)
   }

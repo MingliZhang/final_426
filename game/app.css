@@ -107,6 +107,10 @@ h3 {
   background-color:rgb(247, 131, 131) !important;
 }
 
+.btn[disabled]{
+  background-color: rgb(165, 150, 148)!important
+}
+
 .btn[disabled]:hover {
   cursor: not-allowed;
   box-shadow: none;
