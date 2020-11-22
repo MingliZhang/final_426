@@ -78,7 +78,7 @@ button.nav{
 ul{
     overflow: auto;
     
-    max-height: 405px
+    max-height: 500px
 }
 
 ul li{
@@ -104,17 +104,6 @@ background: #0084ff;
 color: #fff;
 }
 
-
-
-#home{
-    text-align: left; margin-top: 10px;margin-bottom: 20px;font-size: 40px;position:relative;left: 30px;
-}
-
-#head{
-    border-bottom: gray 5px solid;
-    background-color:#f6cd61;
-    margin: 0;
-}
 
 textarea{
     width: 500px;

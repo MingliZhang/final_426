@@ -140,12 +140,25 @@ const handleSubmitReply = async function(event){
     const username = question.data.userName;
     const postTo = question.data.postTo;
     const comments = [];
-    const text = $(`.replybox${questionid}`).serializeArray()[0].value;
+    let text = $(`.replybox${questionid}`).serializeArray()[0].value;
+
+        //Third Party API word filter
+        const wordFilter = await axios({
+            url: "https://api.promptapi.com/bad_words",
+            method: "post",
+            params: {"censor_character": "*"},
+            headers: {"apikey": "aBn2ki5q7DHZ7xo4qRAk3Yj6V9aKmybs"},
+            data: text
+        });
+    
+        text = wordFilter.data.censored_content
+        
     const comment = {"id":questionid,
                     "userName": user.userName,
                     "body":text
                     }
     comments.push(comment)
+
     const result = await axios({
         method: 'put',
         url: `https://us-central1-comp426-firebase.cloudfunctions.net/posts/${questionid}`,
