@@ -184,6 +184,18 @@ const handlenewQuestionSubmit = async function(event){
     let user = await getUser();
     const userid = user.id;
     const userName = user.userName
+
+    //Third Party API word filter
+    const wordFilter = await axios({
+        url: "https://api.promptapi.com/bad_words",
+        method: "post",
+        params: {"censor_character": "*"},
+        headers: {"apikey": "aBn2ki5q7DHZ7xo4qRAk3Yj6V9aKmybs"},
+        data: text
+    });
+
+    text = wordFilter.data.censored_content;
+
     const result = await axios({
         method: 'post',
         url: 'https://us-central1-comp426-firebase.cloudfunctions.net/posts',
