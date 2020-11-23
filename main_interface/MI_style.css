@@ -90,15 +90,14 @@ ul li {
 .him {
   background: #eee;
   float: left;
-  font-size: larger
+  font-size: larger;
 }
 
-
 .official#A {
-    background: lightgray;
-    float: left;
-    position: relative;
-    left: 40%;
+  background: lightgray;
+  float: left;
+  position: relative;
+  left: 40%;
 }
 
 .official#B {
@@ -115,7 +114,7 @@ ul li {
 }
 
 textarea {
-  width: auto;
+  width: 500px;
   height: 80px;
   border: none;
   background-color: lightblue;
@@ -173,10 +172,4 @@ input[type="submit"] {
 .buttonLKHClear {
   /* position: relative; left: 47.3vw; top: 19vh; */
   float: right;
-}
-
-.bottomLKH{
-    position: fixed;
-    margin-top: 73vh;
-    width: 58% !important;
 }

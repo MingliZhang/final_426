@@ -27,24 +27,24 @@
                 </div>
                 <div id = 'black_shadow' ></div>
                 
-                <div id = "add_follow_window"style="background: white;border: black solid 1px;width: 36vh;position: absolute; left: 79vw; top: 5vh; visibility: hidden; z-index: 5;height: 5vh">
-                    <input id="follow_input" type="text"  placeholder="Username" style="width: 20vh;height: 5vh;margin: 0;"><button onclick="confirmFollow()" class="button" style="margin: 0;position: relative;left:0vh;height: 5vh;">follow</button><button class="button" onclick="leave2()"style="display: inline-block;height: 5vh;width: auto;position: relative; left: 0px"><i class="fas fa-times"></i></button>
+                <div id = "add_follow_window"style="background: white;border: black solid 1px;width: 370px;position: absolute; left: 40%; top: 30%; visibility: hidden; z-index: 5;height: 42px">
+                    <input id="follow_input" type="text"  placeholder="Username" style="width: 66.5%;height: 100%;margin: 0;"><button onclick="confirmFollow()" class="button" style="margin: 0;position: relative;left: 2px;height: 40px;">follow</button><button class="button" onclick="leave2()"style="margin: 0;display: inline-block;height: 40px;width: auto;position: relative; left: 1px"><i class="fas fa-times"></i></button>
                     <div id="search_res"></div>
                 </div>
 
-                <div id = 'main2' class="column is-7" style="height: 100vh; position: fixed; background-color:  #ffa161;">
+                <div id = 'main2' class="column is-7" style="height: 100vh; background-color:  #ffa161;">
                      
-                    <div id = "chatWindow"style="background: white url(./background/spot.png);border: black solid 1px;width: 58.33vw;height: 100vh;  z-index: 5; ">
+                    <div id = "chatWindow"style="background: white url(./background/spot.png);border: black solid 1px;width: auto;height: 720px;  z-index: 5; ">
                     
-                        <div id = "leave"style="font-size: 5vh;font-weight:bold;width: max-content;margin: auto;text-align: center;border-bottom: black solid 1px;">Welcome to Group Chat!</div>
+                        <div id = "leave"style="font-size: 30px;width: max-content;margin: auto;text-align: center;border-bottom: black solid 1px;">Welcome to Group Chat!</div>
                         <br>
                         
                         <ul id = "chat-ul">
                         </ul>
 
-                        <div class="field" style="position: relative; bottom: 0; width: 57.5vw;">
+                        <div class="field" style="position: absolute; bottom: 0; width: 100%;">
 
-                            <div class="control bottomLKH">
+                            <div class="control">
                                         <button class = "buttonLKHExpression" id="expression" 
                                     data-toggle="tooltip" 
                                     data-placement="top" title="expression"><i class="far fa-smile fa-2x"></i></button>
@@ -57,18 +57,18 @@
                                     <i class="fas fa-ban fa-2x"></i></button>
                             
                                 <div class = "wordDonebyLKH">Remember: Press Ctrl + Enter to send!!!</div>
-                                <textarea id="textarea"class="textarea is-primary" placeholder="Press Ctrl + Enter to send" rows="2" style="resize:none;height: 10vh; opacity: 0.8;"></textarea>
+                                <textarea id="textarea"class="textarea is-primary" placeholder="Press Ctrl + Enter to send" rows="2" style="resize:none;height: 100px; opacity: 0.9;"></textarea>
                             </div>
                         </div>
                     </div>                  
                 </div>
                 <div id = 'main3' class="column is-3" style="background-color:#e6f0e6;height: 100vh;">
-                    <h1 style="text-align: center; font-size: 2vw">Following List</h1>
+                    <h1 style="text-align: center; font-size: 32px">Following List</h1>
                     <br>
-                    <button onclick='showFollow()' id="add_follow" data-toggle="tooltip" data-placement="bottom" title="follow" style="position: relative; top: -7vh;left: 19vw"><i class="fas fa-plus-square fa-2x"></i></button>
+                    <button onclick='showFollow()' id="add_follow" data-toggle="tooltip" data-placement="bottom" title="follow" style="position: relative; top: -60px;left: 300px"><i class="fas fa-plus-square fa-2x"></i></button>
                     
-                    <div id="follow_column" style="height: 45vh; overflow: auto;"></div>
-                    <div style="position: relative; border-top: darkslategray solid 1px;text-align: center;">
+                    <div id="follow_column" style="height: 300px; overflow: auto;"></div>
+                    <div style="position: relative;; border-top: darkslategray solid 1px;text-align: center;">
                         <h1 id="title">It must display something...</h1>
                         <br>
                         <div id="choice"> </div>
