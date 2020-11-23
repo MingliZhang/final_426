@@ -38,8 +38,6 @@ $(async function () {
             }
             confirm("Your password has been changed!") 
         }
-        confirm("You have cancelled the request!") 
-        
     })
 });
 
