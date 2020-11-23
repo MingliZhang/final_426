@@ -75,7 +75,6 @@ button.nav {
 
 ul {
   overflow: auto;
-
   max-height: 500px;
 }
 
@@ -83,25 +82,30 @@ ul li {
   display: inline-block;
   clear: both;
   padding: 8px;
-  border-radius: 30px;
-  margin-bottom: 2px;
+  border-radius: 12px;
+  margin-bottom: 5px;
   font-family: Helvetica, Arial, sans-serif;
 }
 
 .him {
   background: #eee;
   float: left;
+  font-size: larger
 }
 
-.username{
-  background: #eee;
-  float: left;
-  font-size: larger;
-}
 
-.official {
-    background: gray;
+.official#A {
+    background: lightgray;
     float: left;
+    position: relative;
+    left: 40%;
+}
+
+.official#B {
+  background: lightgray;
+  float: left;
+  position: relative;
+  left: 39%;
 }
 
 .me {
@@ -130,7 +134,7 @@ li {
   word-wrap: break-word;
 }
 
-#fri_input {
+#follow_input {
   border: 1px solid transparent;
   background-color: #f1f1f1;
   padding: 10px;

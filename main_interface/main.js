@@ -1,5 +1,5 @@
-
 var socket = undefined;
+
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();  
 });
@@ -8,11 +8,14 @@ function buildConnection(){
   socket = io();
   const username = getCookie('info').split(', ')[1];
   socket.emit('join', username);
-  socket.on('chatMessage', (username, message)=>{
-    renderOthers(username, message);
+  socket.on('chatMessage', (username, message, time)=>{
+    renderOthers(username, message, time);
   })
   socket.on('broadcast', message=>{
     officialRender(message);
+  })
+  socket.on("myMsg", (username, msg, time)=>{
+    render(username, msg, time);
   })
 }
 
@@ -66,23 +69,11 @@ $('.textarea').keydown(function (e) {
     const value = event.target.value;
     if(!value) {return}
     socket.emit('chatMessage', username, value);
-    render(value);
     $('#chat-ul').scrollTop = $('#chat-ul').scrollHeight;
     event.target.value='';
     event.target.focus();
   }
 });
-
-function showChat(){
-  $('#black_shadow').css('visibility', 'visible');
-  $('#black_shadow').css('visibility', 'visible');
-  var temp = $('#chatWindow');
-  temp.css('visibility', 'visible');
-  buildConnection();
-  let chat_ul = document.getElementById('chat-ul')
-  //need to load history
-  chat_ul.scrollTop = chat_ul.scrollHeight;
-}
 
 
 function leave2(){
@@ -104,10 +95,7 @@ async function showFollow(){
     }
     localUsers.push({id: user.id, username: user.userName, email: user.email})
   })
-  console.log(localUsers.length)
 }
-
-
 
 async function confirmFollow(){
   if(!$('#follow_input').val()) return
@@ -149,21 +137,25 @@ async function confirmFollow(){
 }
 
 
-function render(msg){
-  $('#chat-ul').append(`<li class = "me">${msg}</li>`);
+function render(username, msg, time){
+  $('#chat-ul').append(`<li class = "me"><div style="font-size: 15px;float: right">${username}  ${time}</div><br>${msg}</li>`);
   let chat_ul = document.getElementById('chat-ul')
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
 
-function renderOthers(username, msg){
-  $('#chat-ul').append(`<li class = "username">${username}</li>`);
-  $('#chat-ul').append(`<li class = "him">${msg}</li>`);
+function renderOthers(username, msg, time){
+  $('#chat-ul').append(`<li class = "him"><div style="font-size: 15px" >${username}  ${time}</div>${msg}</li>`);
   let chat_ul = document.getElementById('chat-ul')
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
 
 function officialRender(msg){
-  $('#chat-ul').append(`<li class = "official">${msg}</li>`);
+  if(msg.length===21){
+    $('#chat-ul').append(`<li class = "official" id = "A">${msg}</li>`);
+  } else {
+    $('#chat-ul').append(`<li class = "official" id = "B">${msg}</li>`);
+  }
+  
   let chat_ul = document.getElementById('chat-ul')
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }

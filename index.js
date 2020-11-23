@@ -3,7 +3,7 @@ const http = require('http');
 const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
-
+const moment = require('moment');
 
 const app = express();
 let users = [];
@@ -33,6 +33,8 @@ io.on('connection', socket=>{
     })
 
     socket.on('chatMessage', (username, msg)=>{
-        socket.broadcast.emit('chatMessage', username, msg)
+        let time = moment().format('h:mm a');
+        socket.broadcast.emit('chatMessage', username, msg, time);
+        socket.emit('myMsg', username, msg, time)
     });
 })
