@@ -32,9 +32,9 @@
                     <div id="search_res"></div>
                 </div>
 
-                <div id = 'main2' class="column is-7" style="height: 100vh; background-color:  #ffa161;">
+                <div id = 'main2' class="column is-7" style="height: 100vh; position: fixed; background-color:  #ffa161;">
                      
-                    <div id = "chatWindow"style="background: white url(./background/spot.png);border: black solid 1px;width: 58.33vw;height: 90vh;  z-index: 5; ">
+                    <div id = "chatWindow"style="background: white url(./background/spot.png);border: black solid 1px;width: 58.33vw;height: 100vh;  z-index: 5; ">
                     
                         <div id = "leave"style="font-size: 5vh;font-weight:bold;width: max-content;margin: auto;text-align: center;border-bottom: black solid 1px;">Welcome to Group Chat!</div>
                         <br>
@@ -43,9 +43,9 @@
                         <ul id = "chat-ul">
                         </ul>
 
-                        <div class="field" style="position: absolute; bottom: 0; width: 57.5vw;">
+                        <div class="field" style="position: relative; bottom: 0; width: 57.5vw;">
 
-                            <div class="control">
+                            <div class="control bottomLKH">
                                         <button class = "buttonLKHExpression" id="expression" 
                                     data-toggle="tooltip" 
                                     data-placement="right" title="expression"><i class="far fa-smile fa-2x"></i></button>
@@ -58,7 +58,7 @@
                                     <i class="fas fa-ban fa-2x"></i></button>
                             
                                 <div class = "wordDonebyLKH">Remember: Press Ctrl + Enter to send!!!</div>
-                                <textarea id="textarea"class="textarea is-primary" placeholder="Press Ctrl + Enter to send" rows="2" style="resize:none;height: 10vh; opacity: 0.9;"></textarea>
+                                <textarea id="textarea"class="textarea is-primary" placeholder="Press Ctrl + Enter to send" rows="2" style="resize:none;height: 10vh; opacity: 0.8;"></textarea>
                             </div>
                         </div>
                     </div>                  

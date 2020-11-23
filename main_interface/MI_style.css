@@ -100,7 +100,7 @@ ul li {
 }
 
 textarea {
-  width: 500px;
+  width: auto;
   height: 80px;
   border: none;
   background-color: lightblue;
@@ -158,4 +158,10 @@ input[type="submit"] {
 .buttonLKHClear {
   /* position: relative; left: 47.3vw; top: 19vh; */
   float: right;
+}
+
+.bottomLKH{
+    position: fixed;
+    margin-top: 73vh;
+    width: 58% !important;
 }
