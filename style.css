@@ -16,6 +16,7 @@ body {
   margin-right: 2%;
   margin-left: 2%;
   border-radius: 25px;
+  animation: 1s ease-out 0s 1 slideInFromRight;
 }
 
 .infoSection {
@@ -24,6 +25,7 @@ body {
   margin-right: 1.5vh;
   margin-left: 1.5vh;
   border-radius: 25px;
+  animation: 1s ease-out 0s 1 slideInFromLeft;
 }
 
 h1 {
@@ -101,4 +103,22 @@ strong {
     margin-left: 40vw;
     margin-top: 2vh;
     mix-blend-mode: multiply;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
