@@ -80,3 +80,19 @@ p {
 strong {
   color: rgba(26, 11, 68, 0.849) !important;
 }
+
+.pic{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    mix-blend-mode: normal;
+}
+
+.logo{
+    width: 10vw;
+    position: absolute;
+    margin-left: 40vw;
+    margin-top: 2vh;
+    mix-blend-mode: multiply;
+}
