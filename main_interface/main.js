@@ -15,9 +15,34 @@ function buildConnection(){
   })
 
 }
+
+async function unfollow(email){
+  alert('aaa')
+  const id = getCookie('info').split(', ')[0];
+  const result = await axios({
+    method: "get",
+    url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/${id}`
+  });
+  let newFollowList = result.data.following;
+  newFollowList = newFollowList.filter(follow=>follow.email!==email);
+  const result2 = await axios({
+    method: "put",
+    url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/${id}`,
+    data: {
+      "userName": result.data.userName,
+      "matchPoint": result.data.matchPoint,
+      "email": result.data.email,
+      "password": result.data.password,
+      "following": newFollowList,
+      "highestGameScore": result.data.highestGameScore
+    }
+  });
+  // $('#'+`${email}`).remove();
+  loadFollowing();
+}
 buildConnection()
 async function loadFollowing(){
-  
+  $('#follow_column').empty();
   const column = $('#follow_column');
   const id = getCookie('info').split(', ')[0];
   const result = await axios({
@@ -29,8 +54,8 @@ async function loadFollowing(){
     return;
   }
   result.data.following.map(follow=>{
-    const div = `<div id = "${follow.username}" class="individual">
-    <p style="font-size: larger">${follow.username}</p><span style="relative;left: 50px">${follow.email}</span><button style="float: right; position: relative; top: -15px"><i class="fas fa-minus-square fa-2x"></i></button>
+    const div = `<div id = "${follow.email}" class="individual">
+    <p style="font-size: larger">${follow.username}</p><span style="relative;left: 50px">${follow.email}</span><button onclick="unfollow('${follow.email}')" style="float: right; position: relative; top: -15px"><i class="fas fa-minus-square fa-2x"></i></button>
     <br>
     </div>`;
     column.append(div);
@@ -81,12 +106,16 @@ async function showFollow(){
     }
     localUsers.push({id: user.id, username: user.userName, email: user.email})
   })
+  console.log(localUsers.length)
 }
+
+
 
 async function confirmFollow(){
   if(!$('#follow_input').val()) return
-  if($('#'+$('#follow_input').val())){
-    alert('alert!')
+  if($('#'+$('#follow_input').val()).val()){
+    $('#search_res').empty();
+    $('#search_res').append('<h1 style="color: red">You follow someone twice!</h1>')
     return
   }
   const id = getCookie('info').split(', ')[0];
@@ -111,8 +140,8 @@ async function confirmFollow(){
     }
   });
   $('#target').html('');
-  const div = `<div id = "${newFollow.username}" class="individual">
-  <p style="font-size: larger">${newFollow.username}</p><span style="float: right;position: relative; top: -15px">${newFollow.email}</span><button ><i class="fas fa-minus-square fa-2x"></i></button>
+  const div = `<div id = "${newFollow.email}" class="individual">
+  <p style="font-size: larger">${newFollow.username}</p><span>${newFollow.email}</span><button style="float: right; position: relative; top: -15px" onclick="unfollow('${newFollow.email}')"><i class="fas fa-minus-square fa-2x"></i></button>
   <br>
   </div>`;
   $('#follow_column').append(div);
