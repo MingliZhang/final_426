@@ -36,8 +36,10 @@ $(async function () {
             } catch{
                 console.error('put following error')
             }
+            confirm("Your password has been changed!") 
         }
-        confirm("Your Password has been changed!") 
+        confirm("You have cancelled the request!") 
+        
     })
 });
 
