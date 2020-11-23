@@ -9,7 +9,7 @@ const renderPost = async function(post) {
     let render = `
     <div class = "post card" id = "post${post.id}">
         <div class = "card-header">
-            <h3 class = "author card-header-title">${post.userName}</h2>
+            <h3 class = "author card-header-title">${post.username}</h2>
         </div>
         <p class = "body card-content">Welcome to my Mailbox! Please leave any question you have for me!</p>
     `;
@@ -37,12 +37,14 @@ const renderPost = async function(post) {
 const loadPostsIntoDOM = async function() {
     const $root = $('#root');
 
+    let currentUser = await getUser();
+
     const result = await axios({
         method: 'get',
-        url: 'https://us-central1-comp426-firebase.cloudfunctions.net/users',
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/users/${currentUser.id}`,
       });
 
-    const users = result.data;
+    const users = result.data.following;
     for (let i=0; i<users.length;i++){
         // console.log(users[i].userName)
         $root.append(await renderPost(users[i]));
