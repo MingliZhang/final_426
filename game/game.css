@@ -1,32 +1,38 @@
 div{
   margin-bottom: 1vh;
+  color: rgb(20, 96, 126) !important;
 }
 
 .choice-container {
   display: flex;
   margin-bottom: 2rem;
-  width: 100%;
+  width: 60vw;
   font-size: 1.8rem;
-  border: 0.1rem solid  rgb(131, 214, 247);
+  border: 0.5vh solid  rgb(131, 214, 247);
   background-color: white;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .choice-container:hover {
   cursor: pointer;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-  color:#ddeb5f;
+  border-color:#ddeb5f;
   font-weight: 600;
+  border-width: 0.5vh;
 }
 
 .choice-prefix {
   padding: 1.5rem 2.5rem;
-  background-color:  rgb(131, 214, 247);
+  background-color:  rgb(20, 96, 126);
   color: white;
 }
 
 .choice-text {
   padding: 1.5rem;
   width: 100%;
+  color: rgb(20, 96, 126) !important;
 }
 
 .correct {
@@ -57,14 +63,14 @@ div{
 #progressBar {
   width: 20rem;
   height: 4rem;
-  border: 0.3rem solid rgb(131, 247, 208);
+  border: 0.3rem solid rgb(20, 141, 26);
   margin-top: 1.5rem;
 
 }
 
 #progressBarFull {
   height: 3.4rem;
-  background-color: rgb(76, 211, 71);
+  background-color:rgb(112, 241, 107);
   width: 0%;
 }
 
@@ -72,7 +78,7 @@ div{
 #loader {
   border: 1.6rem solid white;
   border-radius: 50%;
-  border-top: 1.6rem solid rgb(131, 214, 247);
+  border-top: 1.6rem solid rgb(20, 96, 126);
   width: 12rem;
   height: 12rem;
   animation: spin 2s linear infinite;
@@ -85,4 +91,16 @@ div{
   100% {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-image: url("../media/questionmark.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+#question{
+  color: rgb(20, 96, 126)!important;
+  font-weight: medium !important;
 }

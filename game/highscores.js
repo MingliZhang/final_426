@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async function render(){
     return b[0]-a[0]
   });
 
-  let highestFive = scores.slice(0, 11);
+  let highestFive = scores.slice(0, 10);
 
   highScoresList.innerHTML = highestFive
     .map((score, i) => {
