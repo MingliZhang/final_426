@@ -17,8 +17,8 @@ body {
 
 #black_shadow {
   position: absolute;
-  width: 1600px;
-  height: 722px;
+  width: 100vw;
+  height: 100vh;
   background-color: black;
   opacity: 0.5;
   visibility: hidden;
