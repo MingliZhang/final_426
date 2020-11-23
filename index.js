@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 
 const app = express();
-
+let users = [];
 
 app.use(bodyParser.json())
 app.use(express.static(__dirname))
@@ -19,15 +19,20 @@ server.listen(PORT, ()=>{
 const io = socketio(server);
 
 
+
 io.on('connection', socket=>{
-    socket.emit('message', 'welcome');
-    socket.broadcast.emit('message', 'A user has joined the chat')
+    socket.on('join', (username)=>{
+        socket.broadcast.emit('broadcast', `${username} has joined the chat`);
+        users.push({username: username, id: socket.id});
+    })
+    
     
     socket.on('disconnect', ()=>{
-        socket.broadcast.emit('message', 'the user has left the chat')
+        let user = users.find(user=>user.id===socket.id);
+        if(user) socket.broadcast.emit('broadcast', `${user.username} has left the chat`)
     })
 
-    socket.on('chatMessage', msg=>{
-        socket.broadcast.emit('chatMessage', msg)
+    socket.on('chatMessage', (username, msg)=>{
+        socket.broadcast.emit('chatMessage', username, msg)
     });
 })

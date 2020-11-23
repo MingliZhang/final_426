@@ -6,18 +6,17 @@ $(document).ready(function(){
 
 function buildConnection(){
   socket = io();
-  socket.on('message', message=>{
-    console.log(message)
+  const username = getCookie('info').split(', ')[1];
+  socket.emit('join', username);
+  socket.on('chatMessage', (username, message)=>{
+    renderOthers(username, message);
   })
-
-  socket.on('chatMessage', message=>{
-    renderOthers(message);
+  socket.on('broadcast', message=>{
+    officialRender(message);
   })
-
 }
 
 async function unfollow(email){
-  alert('aaa')
   const id = getCookie('info').split(', ')[0];
   const result = await axios({
     method: "get",
@@ -37,7 +36,6 @@ async function unfollow(email){
       "highestGameScore": result.data.highestGameScore
     }
   });
-  // $('#'+`${email}`).remove();
   loadFollowing();
 }
 buildConnection()
@@ -63,11 +61,11 @@ async function loadFollowing(){
 }
 loadFollowing();
 $('.textarea').keydown(function (e) {
-
+  const username = getCookie('info').split(', ')[1];
   if ((event.keyCode == 10 || event.keyCode == 13) && event.ctrlKey){
     const value = event.target.value;
     if(!value) {return}
-    socket.emit('chatMessage', value);
+    socket.emit('chatMessage', username, value);
     render(value);
     $('#chat-ul').scrollTop = $('#chat-ul').scrollHeight;
     event.target.value='';
@@ -157,8 +155,15 @@ function render(msg){
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
 
-function renderOthers(msg){
+function renderOthers(username, msg){
+  $('#chat-ul').append(`<li class = "username">${username}</li>`);
   $('#chat-ul').append(`<li class = "him">${msg}</li>`);
+  let chat_ul = document.getElementById('chat-ul')
+  chat_ul.scrollTop = chat_ul.scrollHeight;
+}
+
+function officialRender(msg){
+  $('#chat-ul').append(`<li class = "official">${msg}</li>`);
   let chat_ul = document.getElementById('chat-ul')
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }

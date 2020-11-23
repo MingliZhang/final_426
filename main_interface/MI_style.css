@@ -93,6 +93,17 @@ ul li {
   float: left;
 }
 
+.username{
+  background: #eee;
+  float: left;
+  font-size: larger;
+}
+
+.official {
+    background: gray;
+    float: left;
+}
+
 .me {
   float: right;
   background: #0084ff;
