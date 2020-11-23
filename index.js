@@ -4,7 +4,7 @@ const socketio = require('socket.io');
 const path = require('path');
 const bodyParser = require('body-parser');
 const moment = require('moment');
-
+moment().format('LTS');
 const app = express();
 let users = [];
 

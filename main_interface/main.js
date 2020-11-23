@@ -41,8 +41,10 @@ async function unfollow(email){
   });
   loadFollowing();
 }
-buildConnection()
+let IF = [];
+buildConnection();
 async function loadFollowing(){
+  IF.splice(0, IF.length);
   $('#follow_column').empty();
   const column = $('#follow_column');
   const id = getCookie('info').split(', ')[0];
@@ -55,11 +57,12 @@ async function loadFollowing(){
     return;
   }
   result.data.following.map(follow=>{
-    const div = `<div id = "${follow.email}" class="individual">
+    const div = `<div id = "${follow.userName}" class="individual">
     <p style="font-size: larger">${follow.username}</p><span style="relative;left: 50px">${follow.email}</span><button onclick="unfollow('${follow.email}')" style="float: right; position: relative; top: -15px"><i class="fas fa-minus-square fa-2x"></i></button>
     <br>
     </div>`;
     column.append(div);
+    IF.push(follow.username);
   });
 }
 loadFollowing();
@@ -99,8 +102,9 @@ async function showFollow(){
 
 async function confirmFollow(){
   if(!$('#follow_input').val()) return
-  if($('#'+$('#follow_input').val()).val()){
+  if(IF.includes($('#follow_input').val())){
     $('#search_res').empty();
+
     $('#search_res').append('<h1 style="color: red">You follow someone twice!</h1>')
     return
   }
@@ -131,6 +135,7 @@ async function confirmFollow(){
   <br>
   </div>`;
   $('#follow_column').append(div);
+  IF.push($('#follow_input').val());
   $('#follow_input').val('');
   $('#search_res').empty();
   leave2();
