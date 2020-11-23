@@ -85,7 +85,7 @@ const loadDetailPopup = async function(id){
     const detailPage = `
         <div class = "container" id = "popup">
             <div class = "message" style = "border:2px solid #485550; ">
-                <div class = "message-header"><p>${boxUser}'s box</p><i onclick = "handleExitDetailPage()" type = "button" id = "exit${id}" class="fas fa-times-circle"></i></div>
+                <div class = "message-header"><p>${boxUser}'s box</p><i type = "button" id = "exit${id}" class="fas fa-times-circle"></i></div>
                 <div style="height:80vh; width:80vw; overflow:auto; padding-top: 0">
                     <div class = "message-body" id = "content${id}"></div>
                 </div>
@@ -159,7 +159,7 @@ const handlePostQuestion = function(event){
     const postToId = buttonid.replace('postQuestion','');
     let form = `
         <form class = "newPost card post">
-            <textarea name = "bodytext" class = "textarea newPostText">Type your question here</textarea>
+            <textarea name = "bodytext" class = "textarea newPostText" placeholder = "Type your question here"></textarea>
             <div class = "card-footer">
                 <button type = "button" class = "button" id = "cancelNew${postToId}">Cancel</button>
                 <button type = "button" class = "button" id = "submitNew${postToId}">Submit</button>
@@ -216,6 +216,7 @@ const handlenewQuestionSubmit = async function(event){
         });
 
     $(await renderComment(post.data)).insertAfter(`#questionBox`);
+    $(`#deleteComment${post.data.id}`).on('click', handleDeleteComment)
     // location.reload(true);
 }
 
@@ -231,9 +232,14 @@ const renderComment = async function(post){
     let user = await getUser();
 
     let comment =  `
-        <div class = "card comment" id = "comment${post.id}">
-            <div class = "card-header"><p class= "card-header-title">Anonymous</p></div>
-            <div class = "card-content">${post.body}</div>
+        <div class = "card comment" id = "comment${post.id}">`
+        if (post.anonymous == true){
+            comment += `<div class = "card-header"><p class= "card-header-title">Anonymous</p></div>`
+        }else{
+            comment += `<div class = "card-header"><p class= "card-header-title">${post.userName}</p></div>`
+        }
+
+        comment += `<div class = "card-content">${post.body}</div>
             <div class = "card-footer" style = "min-height: 8vh">`
     if(user.id == post.uid){
         comment += `<button type = "button" class = "button" id = "deleteComment${post.id}">Delete</button>
