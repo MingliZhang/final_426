@@ -2,11 +2,11 @@
 
 ## Welcome to our Miao Miao web app.
 
-List of funcitons that our web app has:
+List of functions that our web app has:
 
 ### Group Chat Function
 
- This group chat function allows the user to chat with all other loged in users without the fear that your chat history will be secretly shared. The chat happens in real time without any time delay (unless your wifi is poor), and is not going to be stored in any shape of form. Once you exit the window, all history will be cleared! Who needs Snapchat to delete your history 24 hours latter?
+ This group chat function allows the user to chat with all other loged in users without the fear that your chat history will be secretly shared. The chat happens in real time without any time delay (unless your Wi-Fi is poor) and is not going to be stored in any shape of form. Once you exit the window, all history will be cleared! Who needs Snapchat to delete your history 24 hours latter?
 
 ### post functions
 
@@ -20,5 +20,9 @@ However, we do not want you to feel distanced from you existing friends, you can
 
 ### bad word detection
 
-Although our app has anonymous features, this does not mean this web app is a place for people to spread hatred language. All posts, questions, and usernames cannot contain any inappropriate words. If contained, they will be replaced by "\*". To achieve this, we used a their party api for bad word detections. Basically, we will send the content we want it to check and it will return back the content without the bad words being blocked out. 
-Be aware, this does not mean 
+Although our app has anonymous features, this does not mean this web app is a place for people to spread hatred language. All posts, questions, and usernames cannot contain any inappropriate words. If contained, they will be replaced by "\*". To achieve this, we used their party api for bad word detections. Basically, we will send the content we want it to check and it will return the content without the bad words being blocked out. 
+
+### credit
+Thanks to the International Personality Item Pool (https://ipip.ori.org) for the Big Five personality test. 
+Thanks to https://opentdb.com for quiz questions.
+Thanks to https://promptapi.com/marketplace/description/bad_words-api for the bad word filtering api.
