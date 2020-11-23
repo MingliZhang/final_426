@@ -9,15 +9,27 @@ const renderPost = function(post) {
     let render = `
     <div class = "post card" id = "question${post.id}">
         <div class = "card-header">
-            <h3 class = "author card-header-title">${post.userName}</h2>
-        </div>
-        <p class = "body card-content">${post.body}</p>
     `;
 
+    if(post.anonymous == true){
+        render += `<h3 class = "author card-header-title">Anonymous</h2>
+        </div>
+        <p class = "body card-content">${post.body}</p>`
+    }else{
+        render += `<h3 class = "author card-header-title">${post.userName}</h2>
+        </div>
+        <p class = "body card-content">${post.body}</p>`
+    }
+
     let bottom  = ``;
-        bottom = `        
+    if(post.comments.length == 0){
+        bottom += `        
         <div class = "bottom card-footer">
             <button type = "button" class = "button" id = "reply${post.id}">Reply</button>`;
+    }else{
+        bottom += `        
+        <div class = "bottom card-footer" style = "min-height: 8vh">`;
+    }
 
     bottom += `</div>`
     render += bottom;
@@ -91,12 +103,13 @@ const handleQuestionReply = function (event){
     $(`#question${questionid}`).after(renderReplyForm(questionid))
     $(`#cancelReply${questionid}`).on('click', handleCancelReply);
     $(`#submitReply${questionid}`).on('click', handleSubmitReply);
+    $(`#reply${questionid}`).off('click', handleQuestionReply);
 }
 
 const renderReplyForm = function(id){
     let form = `
     <form class = "newReply card post replybox${id}">
-    <textarea name = "bodytext" class = "textarea newPostText">Type your response here</textarea>
+    <textarea name = "bodytext" class = "textarea newPostText" placeholder = "Type your response here"></textarea>
     <div class = "card-footer">
         <button type = "button" class = "button" id = "cancelReply${id}">Cancel</button>
         <button type = "button" class = "button" id = "submitReply${id}">Submit</button>
@@ -122,6 +135,7 @@ const handleCancelReply = function(event){
     const buttonid = $(event.target).attr("id")
     const id = buttonid.replace('cancelReply', '');
     $(`.replybox${id}`).remove();
+    $(`#reply${id}`).on('click', handleQuestionReply);
 };
 
 const handleSubmitReply = async function(event){
@@ -172,10 +186,14 @@ const handleSubmitReply = async function(event){
         "postTo": postTo,
         }
     });
-    $(`#question${questionid}`).after(`<div class = "commentBox" id = "commentBox${questionid}"></div>`)
-    $(`#commentBox${questionid}`).append(`<p>Your Response: </p>`)
-    $(`#commentBox${questionid}`).append(renderReply(comment))
-    $(`.replybox${questionid}`).remove();
+    location.reload(true);
+    // $(`#question${questionid}`).after(`<div class = "commentBox" id = "commentBox${questionid}"></div>`)
+    // $(`#commentBox${questionid}`).append(`<p>Your Response: </p>`)
+    // $(`#commentBox${questionid}`).append(renderReply(comment))
+
+    // $(`#deleteReply${questionid}`).on('click', handleDeleteReply)
+    // $(`#editReply${questionid}`).on('click', handleEditReply)
+    // $(`.replybox${questionid}`).remove();
 };
 
 //delete reply
@@ -207,20 +225,27 @@ const handleDeleteReply = async function(event){
         }
     });
 
-    $(`#commentBox${questionid}`).remove()
+    // $(`#commentBox${questionid}`).remove()
+    location.reload(true)
 }
 
 //edit reply
-const handleEditReply = async function(event){
+const handleEditReply = function(event){
     event.preventDefault();
     const buttonid = $(event.target).attr("id")
     const questionid = buttonid.replace('editReply', '');
     const text = $(`#replyContainer${questionid} p`).html();
 
     //TODO
+    let previousReply = $(`#commentBox${questionid}`);
     $(`#commentBox${questionid}`).remove()
     $(`#question${questionid}`).after(renderReplyEditForm(questionid, text))
-    $(`#cancelReply${questionid}`).on('click', handleCancelReply);
+    $(`#cancelReply${questionid}`).on('click', function(){
+        $(`#question${questionid}`).after(previousReply);
+        $(`#deleteReply${questionid}`).on('click', handleDeleteReply)
+        $(`#editReply${questionid}`).on('click', handleEditReply)
+        $(`.replybox${questionid}`).remove();
+    });
     $(`#submitReply${questionid}`).on('click', handleSubmitReply);
 
 }

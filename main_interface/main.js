@@ -1,23 +1,25 @@
-
 var socket = undefined;
+
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();  
 });
 
 function buildConnection(){
   socket = io();
-  socket.on('message', message=>{
-    console.log(message)
+  const username = getCookie('info').split(', ')[1];
+  socket.emit('join', username);
+  socket.on('chatMessage', (username, message, time)=>{
+    renderOthers(username, message, time);
   })
-
-  socket.on('chatMessage', message=>{
-    renderOthers(message);
+  socket.on('broadcast', message=>{
+    officialRender(message);
   })
-
+  socket.on("myMsg", (username, msg, time)=>{
+    render(username, msg, time);
+  })
 }
 
 async function unfollow(email){
-  alert('aaa')
   const id = getCookie('info').split(', ')[0];
   const result = await axios({
     method: "get",
@@ -37,7 +39,6 @@ async function unfollow(email){
       "highestGameScore": result.data.highestGameScore
     }
   });
-  // $('#'+`${email}`).remove();
   loadFollowing();
 }
 buildConnection()
@@ -63,28 +64,16 @@ async function loadFollowing(){
 }
 loadFollowing();
 $('.textarea').keydown(function (e) {
-
+  const username = getCookie('info').split(', ')[1];
   if ((event.keyCode == 10 || event.keyCode == 13) && event.ctrlKey){
     const value = event.target.value;
     if(!value) {return}
-    socket.emit('chatMessage', value);
-    render(value);
+    socket.emit('chatMessage', username, value);
     $('#chat-ul').scrollTop = $('#chat-ul').scrollHeight;
     event.target.value='';
     event.target.focus();
   }
 });
-
-function showChat(){
-  $('#black_shadow').css('visibility', 'visible');
-  $('#black_shadow').css('visibility', 'visible');
-  var temp = $('#chatWindow');
-  temp.css('visibility', 'visible');
-  buildConnection();
-  let chat_ul = document.getElementById('chat-ul')
-  //need to load history
-  chat_ul.scrollTop = chat_ul.scrollHeight;
-}
 
 
 function leave2(){
@@ -106,10 +95,7 @@ async function showFollow(){
     }
     localUsers.push({id: user.id, username: user.userName, email: user.email})
   })
-  console.log(localUsers.length)
 }
-
-
 
 async function confirmFollow(){
   if(!$('#follow_input').val()) return
@@ -151,14 +137,25 @@ async function confirmFollow(){
 }
 
 
-function render(msg){
-  $('#chat-ul').append(`<li class = "me">${msg}</li>`);
+function render(username, msg, time){
+  $('#chat-ul').append(`<li class = "me"><div style="font-size: 15px;float: right">${username}  ${time}</div><br>${msg}</li>`);
   let chat_ul = document.getElementById('chat-ul')
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
 
-function renderOthers(msg){
-  $('#chat-ul').append(`<li class = "him">${msg}</li>`);
+function renderOthers(username, msg, time){
+  $('#chat-ul').append(`<li class = "him"><div style="font-size: 15px" >${username}  ${time}</div>${msg}</li>`);
+  let chat_ul = document.getElementById('chat-ul')
+  chat_ul.scrollTop = chat_ul.scrollHeight;
+}
+
+function officialRender(msg){
+  if(msg.length===21){
+    $('#chat-ul').append(`<li class = "official" id = "A">${msg}</li>`);
+  } else {
+    $('#chat-ul').append(`<li class = "official" id = "B">${msg}</li>`);
+  }
+  
   let chat_ul = document.getElementById('chat-ul')
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
