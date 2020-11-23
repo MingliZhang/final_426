@@ -21,15 +21,6 @@ const handelSignupButtonPress = async function (event) {
   let message = "";
   let problem = true;
 
-  const result = await axios({
-    url: "https://api.promptapi.com/bad_words",
-    method: "post",
-    params: { censor_character: "*" },
-    headers: { apikey: "aBn2ki5q7DHZ7xo4qRAk3Yj6V9aKmybs" },
-    data: userName,
-  });
-  console.log(result);
-
   if (
     userName.length === 0 ||
     password.length === 0 ||
@@ -42,43 +33,57 @@ const handelSignupButtonPress = async function (event) {
     message = "Your password must be longer than 8 characters!!";
   } else if (password != psConfirm) {
     message = "The two password provided does not match each other!";
+    console.log(psConfirm[0]);
+    console.log(password[0]);
+    if (psConfirm[0] === "•" || password[0] === "•") {
+      message += " Please re-enter your password, do not copy and past it!";
+    }
     // console.log(password);
     // console.log(psConfirm);
   } else if (!ValidateEmail(email)) {
     message = "Please provide a valid email address!!";
-  } else if (result.data.bad_words_total != 0) {
-    message = "Please do not put any inappropriate words as your username.";
   } else {
     const result = await axios({
-      method: "get",
-      url: `https://us-central1-comp426-firebase.cloudfunctions.net/users`,
+      url: "https://api.promptapi.com/bad_words",
+      method: "post",
+      params: { censor_character: "*" },
+      headers: { apikey: "aBn2ki5q7DHZ7xo4qRAk3Yj6V9aKmybs" },
+      data: userName,
     });
-    let data = result.data;
-    let searchUserName = data.filter((user) => user.userName === userName);
-    let searchEmail = data.filter((user) => user.email === email);
-    if (searchUserName.length !== 0) {
-      message = "This userName has already been taken! Try another one!";
-    } else if (searchEmail.length !== 0) {
-      message = "This email has already been registered!";
+    if (result.data.bad_words_total != 0) {
+      message = "Please do not put any inappropriate words as your username.";
     } else {
-      message = "please wait, we are creating your account!";
-      $message.empty();
-      $message.append(
-        `<p style="font-weight: bold; color:green">${message}</p>`
-      );
-      const result2 = await axios({
-        method: "post",
-        url: "https://us-central1-comp426-firebase.cloudfunctions.net/users",
-        data: {
-          userName: userName,
-          email: email,
-          password: password,
-        },
+      const result = await axios({
+        method: "get",
+        url: `https://us-central1-comp426-firebase.cloudfunctions.net/users`,
       });
-      // This should jump to the personality test page, and it would be loged in already.
-      createCookie("info", `${result2.data}, ${userName}, ${email}`);
-      problem = false;
-      window.location.href = "../questionnaire/index.html";
+      let data = result.data;
+      let searchUserName = data.filter((user) => user.userName === userName);
+      let searchEmail = data.filter((user) => user.email === email);
+      if (searchUserName.length !== 0) {
+        message = "This userName has already been taken! Try another one!";
+      } else if (searchEmail.length !== 0) {
+        message = "This email has already been registered!";
+      } else {
+        message = "please wait, we are creating your account!";
+        $message.empty();
+        $message.append(
+          `<p style="font-weight: bold; color:green">${message}</p>`
+        );
+        const result2 = await axios({
+          method: "post",
+          url: "https://us-central1-comp426-firebase.cloudfunctions.net/users",
+          data: {
+            userName: userName,
+            email: email,
+            password: password,
+          },
+        });
+        // This should jump to the personality test page, and it would be loged in already.
+        createCookie("info", `${result2.data}, ${userName}, ${email}`);
+        problem = false;
+        window.location.href = "../questionnaire/index.html";
+      }
     }
   }
   if (problem) {
