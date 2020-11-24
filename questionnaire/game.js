@@ -31,7 +31,6 @@ let clicked = new Array(50).fill(false);
 let finalScore
 
 document.addEventListener("DOMContentLoaded",async function(){
-    
     user = await getUser()
 
     // final scores

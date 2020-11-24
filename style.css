@@ -17,6 +17,7 @@ body {
   margin-left: 2%;
   border-radius: 25px;
   animation: 1s ease-out 0s 1 slideInFromRight;
+  overflow: scroll;
 }
 
 .infoSection {
@@ -26,6 +27,7 @@ body {
   margin-left: 1.5vh;
   border-radius: 25px;
   animation: 1s ease-out 0s 1 slideInFromLeft;
+  overflow: scroll;
 }
 
 h1 {
@@ -71,7 +73,6 @@ h3:hover {
 .my-footer {
   text-align: center;
   background-color: rgba(169, 201, 250, 0.699) !important;
-  height: 25vh;
 }
 
 .botLink {
