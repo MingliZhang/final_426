@@ -29,7 +29,7 @@ body {
 }
 
 h1 {
-  font-size: 15vh !important;
+  font-size: 7vw !important;
   font-family: Impact, Charcoal, sans-serif;
   color: rgba(255, 255, 255, 0.849) !important;
 }
@@ -74,7 +74,7 @@ h3:hover {
   height: 25vh;
 }
 
-.botLink{
+.botLink {
   background-color: white !important;
 }
 
@@ -89,20 +89,20 @@ strong {
   color: rgba(26, 11, 68, 0.849) !important;
 }
 
-.pic{
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    margin-left: 1vw;
-    margin-right: 1vw;
-    mix-blend-mode: normal;
+.pic {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  mix-blend-mode: normal;
 }
 
-.logo{
-    width: 10vw;
-    position: absolute;
-    margin-left: 40vw;
-    margin-top: 2vh;
-    mix-blend-mode: multiply;
+.logo {
+  width: 10vw;
+  position: absolute;
+  margin-left: 42vw;
+  margin-top: 2vh;
+  mix-blend-mode: multiply;
 }
 
 @keyframes slideInFromLeft {
