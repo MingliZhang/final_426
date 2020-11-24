@@ -107,6 +107,7 @@ async function showFollow() {
 
 async function confirmFollow() {
   if (!$("#follow_input").val()) return;
+  if (!localUsers.includes($("#follow_input").val())) return;
   if (IF.includes($("#follow_input").val())) {
     $("#search_res").empty();
 
@@ -149,16 +150,19 @@ async function confirmFollow() {
   leave2();
 }
 
-
-function render(username, msg, time){
-  $('#chat-ul').append(`<li class = "me"><div style="font-size: 15px;float: right">${username} UTC ${time}</div><br>${msg}</li>`);
-  let chat_ul = document.getElementById('chat-ul')
+function render(username, msg, time) {
+  $("#chat-ul").append(
+    `<li class = "me"><div style="font-size: 15px;float: right">${username} UTC ${time}</div><br>${msg}</li>`
+  );
+  let chat_ul = document.getElementById("chat-ul");
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
 
-function renderOthers(username, msg, time){
-  $('#chat-ul').append(`<li class = "him"><div style="font-size: 15px" >${username} UTC ${time}</div>${msg}</li>`);
-  let chat_ul = document.getElementById('chat-ul')
+function renderOthers(username, msg, time) {
+  $("#chat-ul").append(
+    `<li class = "him"><div style="font-size: 15px" >${username} UTC ${time}</div>${msg}</li>`
+  );
+  let chat_ul = document.getElementById("chat-ul");
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
 
