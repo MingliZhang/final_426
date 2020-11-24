@@ -28,9 +28,9 @@ const handelSignupButtonPress = async function (event) {
     psConfirm.length === 0
   ) {
     message = "Please provide all the needed fields above!!";
-  } else if (password.length <= 8) {
+  } else if (password.length < 8) {
     console.log(password.length);
-    message = "Your password must be longer than 8 characters!!";
+    message = "Your password must be at least 8 characters!!";
   } else if (password != psConfirm) {
     message = "The two password provided does not match each other!";
     console.log(psConfirm[0]);
