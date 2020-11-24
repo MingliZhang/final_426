@@ -24,8 +24,8 @@ $(async function () {
     $('#logoutButton').on('click', handleLogOut);
 
     document.getElementById('changePassword').addEventListener('click', async () => {
-        var password = prompt("Please Enter Your New Password", "");
-        if (password != null && password != "") {
+        var password = prompt("Please Enter Your New Password (at least 8 characters)", "");
+        if (password != null && password != "" && password.length >= 8) {
             user.password = password
             try{
                 const result = await axios({
@@ -37,6 +37,8 @@ $(async function () {
                 console.error('put following error')
             }
             confirm("Your password has been changed!") 
+        } else {
+            alert("Request cancelled or wrong password format!")
         }
     })
 });
