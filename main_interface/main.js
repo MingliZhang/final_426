@@ -107,7 +107,11 @@ async function showFollow() {
 
 async function confirmFollow() {
   if (!$("#follow_input").val()) return;
-  if (!localUsers.includes($("#follow_input").val())) return;
+  if (
+    localUsers.filter((user) => user.username == $("#follow_input").val())
+      .length === 0
+  )
+    return;
   if (IF.includes($("#follow_input").val())) {
     $("#search_res").empty();
 
