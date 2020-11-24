@@ -80,7 +80,10 @@ const handelSignupButtonPress = async function (event) {
           },
         });
         // This should jump to the personality test page, and it would be loged in already.
-        createCookie("info", `${result2.data}, ${userName}, ${email}`);
+        createCookie(
+          "LongLivePrincessHu",
+          `${result2.data}, ${userName}, ${email}`
+        );
         problem = false;
         window.location.href = "../questionnaire/index.html";
       }
