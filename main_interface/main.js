@@ -143,13 +143,13 @@ async function confirmFollow(){
 
 
 function render(username, msg, time){
-  $('#chat-ul').append(`<li class = "me"><div style="font-size: 15px;float: right">${username}  ${time}</div><br>${msg}</li>`);
+  $('#chat-ul').append(`<li class = "me"><div style="font-size: 15px;float: right">${username} UTC ${time}</div><br>${msg}</li>`);
   let chat_ul = document.getElementById('chat-ul')
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
 
 function renderOthers(username, msg, time){
-  $('#chat-ul').append(`<li class = "him"><div style="font-size: 15px" >${username}  ${time}</div>${msg}</li>`);
+  $('#chat-ul').append(`<li class = "him"><div style="font-size: 15px" >${username} 'UTC' ${time}</div>${msg}</li>`);
   let chat_ul = document.getElementById('chat-ul')
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }

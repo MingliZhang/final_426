@@ -33,6 +33,7 @@ io.on('connection', socket=>{
     })
 
     socket.on('chatMessage', (username, msg)=>{
+        moment().format('LTS');
         let time = moment().format('h:mm a');
         socket.broadcast.emit('chatMessage', username, msg, time);
         socket.emit('myMsg', username, msg, time)
