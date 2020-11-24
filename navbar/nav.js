@@ -1,9 +1,9 @@
 $(function () {
   loadNavIntoDom();
   $("body").css("display", "flex");
-  $("#navbar").css({ "padding-left": "1vw", "padding-right": "1vw" });
-  $("#topicons").css("margin-top", "30%");
-  $(".icons a").css({ "font-size": "3vw", "color": "#0c3327" });
+  $("#navbar").css({ "padding-left": "1vw", "padding-right": "1vw", "min-height":"100vh"});
+  $("#topicons").css("margin-top", "10vh");
+  $(".icons a").css({ "font-size": "2.5vw", "color": "#0c3327" });
   $(".icons span").css({ "font-size": "2vw", "color": "#f3ECDB", "padding-left": "1vw" });
   $("#usericon").css("margin-top", "60%");
   // loadContent();
@@ -19,9 +19,11 @@ const loadNavIntoDom = function () {
             <div class = "icons" id = "inboxicon"><a href = "#"><i class="fas fa-envelope-open-text"></i><span>Inbox</span></a></div>
             <div class = "icons" id = "chaticon"><a href = "#"><i class="fas fa-box-open"></i><span>Post Box</span></a></div>
             <div class = "icons" id = "questionicon"><a href = "#"><i class="far fa-map"></i><span>Questionnaire</span></a></div>
+            <div class = "icons" id = "welcomeicon"><a href = "#"><i class="fas fa-landmark"></i><span>Welcome</span></a></div>
         </div>
+
         <div class = "icons" id = "usericon">
-            <a href = "#"><i class="fas fa-user-circle"></i><span>User</span></a>
+            <a href = "#"><i class="fas fa-user-circle"></i><span>Setting</span></a>
         </div>
     </div>`;
 
