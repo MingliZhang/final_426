@@ -149,7 +149,7 @@ function render(username, msg, time){
 }
 
 function renderOthers(username, msg, time){
-  $('#chat-ul').append(`<li class = "him"><div style="font-size: 15px" >${username} 'UTC' ${time}</div>${msg}</li>`);
+  $('#chat-ul').append(`<li class = "him"><div style="font-size: 15px" >${username} UTC ${time}</div>${msg}</li>`);
   let chat_ul = document.getElementById('chat-ul')
   chat_ul.scrollTop = chat_ul.scrollHeight;
 }
